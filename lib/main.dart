@@ -11,7 +11,10 @@ import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
 List<Map<String, dynamic>> users = [];
-
+var gwf=0;
+var guf=0;
+var gwm=0;
+var gum=0;
 var Admin;
 var WorW;
 final List<String> servicesList = [];
@@ -83,7 +86,22 @@ class _MyHomePageState extends State<MyHomePage> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-
+  Future<void> getgw() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/worker/wgender'));
+    if (response.statusCode == 200) {
+     final data = json.decode(response.body);
+ 
+      setState(() {
+   gwm   = data['maleCount'];
+     gwf = data['femaleCount'];
+    
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+ 
   Future<void> getAlluserss() async {
  
     final response =
@@ -99,7 +117,21 @@ class _MyHomePageState extends State<MyHomePage> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-
+  Future<void> getgu() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/users/ugender'));
+    if (response.statusCode == 200) {
+     final data = json.decode(response.body);
+      setState(() {
+        gum   = data['maleCount'];
+     guf = data['femaleCount'];
+    
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+ 
   Future<void> getAdmin() async {
  
     final responseW =
@@ -141,6 +173,8 @@ Future<void> getAlltype() async {
     super.initState();
     getAllWorkers();
     getAlluserss();
+    getgw();
+    getgu(); 
     getAdmin();
     getAlltype();
   }
