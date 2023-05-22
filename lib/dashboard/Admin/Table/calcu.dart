@@ -21,67 +21,51 @@ import 'dart:convert';
   };
 List<BarChartModel> data1 = [
   BarChartModel(
-    year: "Jan",
-    financial: 10,
+    year: "Sun",
+    financial: dayor?['Sun']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.blueGrey),
   ),
   BarChartModel(
-    year: "Feb",
-    financial: 20,
+    year: "Mon",
+     financial: dayor?['Mon']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.red),
   ),
   BarChartModel(
-    year: "Mar",
-    financial: 30,
+    year: "Tue",
+     financial: dayor?['Tue']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.green),
   ),
   BarChartModel(
-    year: "Apr",
-    financial: 50,
+    year: "Wed",
+     financial: dayor?['Wed']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.yellow),
   ),
   BarChartModel(
-    year: "May",
-    financial: 40,
+    year: "Thu",
+     financial: dayor?['Thu']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.lightBlueAccent),
   ),
   BarChartModel(
-    year: "Jun",
-    financial: 5,
+    year: "Fri",
+     financial: dayor?['Fri']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.pink),
   ),
   BarChartModel(
-    year: "Jul",
-    financial: 0,
+    year: "Sat",
+    financial: dayor?['Sat']  ?? 0,
     color: charts.ColorUtil.fromDartColor(Colors.purple),
   ),
-  BarChartModel(
-    year: "Aug",
-    financial: 3, // Add your financial data for Aug here
-    color: charts.ColorUtil.fromDartColor(Colors.orange), // Add your desired color for Aug here
-  ),
-  BarChartModel(
-    year: "Sep",
-    financial: 1, // Add your financial data for Sep here
-    color: charts.ColorUtil.fromDartColor(Colors.teal), // Add your desired color for Sep here
-  ),
-  BarChartModel(
-    year: "Oct",
-    financial: 4, // Add your financial data for Oct here
-    color: charts.ColorUtil.fromDartColor(Colors.deepOrange), // Add your desired color for Oct here
-  ),
-  BarChartModel(
-    year: "Nov",
-    financial: 0, // Add your financial data for Nov here
-    color: charts.ColorUtil.fromDartColor(Colors.indigo), // Add your desired color for Nov here
-  ),
-  BarChartModel(
-    year: "Dec",
-    financial: 0, // Add your financial data for Dec here
-    color: charts.ColorUtil.fromDartColor(Colors.lime), // Add your desired color for Dec here
-  ),
+ 
 ];
 
+List<BarChartModel> data2 = ordserv.map((item) {
+
+  return BarChartModel(
+    year: item['_id'] as String,
+    financial:item['count'] as int,
+    color: charts.ColorUtil.fromDartColor(Colors.blueGrey),
+  );
+}).toList();
 
 
 class maths extends StatefulWidget {
@@ -148,7 +132,20 @@ class _mathsState extends State<maths> {
     }
   }
  
-  
+     Future<void> getorday() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         dayor = Map<String, int>.from(jsonResponse);
+    
+      });
+    } else {
+      print('Error fetching days data: ${response.statusCode}');
+    }
+  }
  
    @override
   void initState() {
@@ -157,6 +154,7 @@ class _mathsState extends State<maths> {
     getAlluserss();
     getgw();
     getgu();
+      getorday();
    
  
   }
@@ -171,6 +169,16 @@ class _mathsState extends State<maths> {
         colorFn: (BarChartModel series, _) => series.color,
       ),
     ];
+ List<charts.Series<BarChartModel, String>> series2 = [
+      charts.Series(
+        id: "financial",
+        data: data2,
+        domainFn: (BarChartModel series, _) => series.year,
+        measureFn: (BarChartModel series, _) => series.financial,
+        colorFn: (BarChartModel series, _) => series.color,
+      ),
+    ];
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -182,9 +190,9 @@ class _mathsState extends State<maths> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
            SizedBox(height: 10,),
-          Center(child:Text("statistics",style: TextStyle(fontSize:25,fontWeight: FontWeight.bold ),)),
-         SizedBox(height: 10,),
-          Center(child:Text(" نسبة المُستخدمين و العُمال الفَنيين لهذا التطبيق ",style: TextStyle(fontSize: 18),)),
+          Center(child:Text("statistics",style: TextStyle(fontSize:25,fontWeight: FontWeight.bold))),
+         SizedBox(height:20,),
+          Center(child:Text(" نسبة المُستخدمين و العُمال الفَنيين لهذا التطبيق ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'Times New Roman'),)),
         
          Center(
           child: PieChart(
@@ -204,7 +212,7 @@ class _mathsState extends State<maths> {
           )
          ),
              SizedBox(height: 45,),
-          Center(child:Text("عـدد الطَـلـبـات بـالـشـهـر ",style: TextStyle(fontSize: 18),)),
+          Center(child:Text("عدد الطلبات خلال الأيام",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'Times New Roman'),)),
       
          Center(
           child:
@@ -218,27 +226,20 @@ class _mathsState extends State<maths> {
           )
          ),
              SizedBox(height: 35,),
-          Center(child:Text("  الـخـدَمـات الـمـطـلـوبـة ",style: TextStyle(fontSize: 18),)),
+          Center(child:Text("  الـخـدَمـات الـمـطـلـوبـة ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'Times New Roman'),)),
   
          Center(
-          child: PieChart(
-            dataMap: dataMap1,
-             colorList: [dy, db],
-            chartRadius: 450,
-            
-            legendOptions: LegendOptions(
-              legendPosition: LegendPosition.top,
-              legendShape: BoxShape.rectangle,
-              showLegendsInRow: true
-          
-            ),
-            chartValuesOptions: ChartValuesOptions(
-              showChartValuesInPercentage: true,
-            ),
+          child:SizedBox(
+            height: 500,
+            width: 650,
+            child:charts.BarChart(
+          series2,
+          animate: true,
+               ) ,
           )
          ),
            SizedBox(height: 35,),
-          Center(child:Text("   نسبة العُمال من الذكور والإناث ",style: TextStyle(fontSize: 18),)),
+          Center(child:Text("   نسبة العُمال من الذكور والإناث ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'Times New Roman'),)),
          
          Center(
           child: PieChart(
@@ -258,7 +259,7 @@ class _mathsState extends State<maths> {
           )
          ),
          SizedBox(height: 35,),
-          Center(child:Text("   نسبة المُستخدمين من الذكور والإناث ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
+          Center(child:Text("   نسبة المُستخدمين من الذكور والإناث ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'Times New Roman'),)),
         
          Center(
           child: PieChart(

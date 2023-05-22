@@ -10,7 +10,9 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
+Map<String, int> ?dayor;
 List<Map<String, dynamic>> users = [];
+List<Map<String, dynamic>> ordserv = [];
 var gwf=0;
 var guf=0;
 var gwm=0;
@@ -72,6 +74,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<void> getorday() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         dayor = Map<String, int>.from(jsonResponse);
+    
+      });
+    } else {
+      print('Error fetching days data: ${response.statusCode}');
+    }
+  }
   Future<void> getAllWorkers() async {
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/worker/'));
@@ -147,6 +163,21 @@ class _MyHomePageState extends State<MyHomePage> {
       print("not exsist");
     }
   }
+ Future<void> ordservcount() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         ordserv = List<Map<String, dynamic>>.from(jsonResponse);
+    
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+  
 Future<void> getAlltype() async {
    
     servicesList.clear();
@@ -177,6 +208,8 @@ Future<void> getAlltype() async {
     getgu(); 
     getAdmin();
     getAlltype();
+    getorday();
+    ordservcount();
   }
 
   @override
