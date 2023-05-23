@@ -55,8 +55,8 @@ class _AsUState extends State<AsU> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: dy,
-            width: 3.0,
+            color: Colors.white,
+            width: 1.5,
           ),
           image: DecorationImage(
             image: imag,
@@ -68,7 +68,7 @@ class _AsUState extends State<AsU> {
 
     Widget builcon() {
       return Container(
-        height: 200,
+        height: 300,
         // width: 300,
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.all(10),
@@ -79,6 +79,9 @@ class _AsUState extends State<AsU> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+             SizedBox(
+                      height: 20,
+                    ),
             Text('معلومات الإتصال ',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
@@ -154,7 +157,7 @@ class _AsUState extends State<AsU> {
 
     Widget builinfo() {
       return Container(
-        height: 200,
+        height: 300,
         // width: 300,
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.all(10),
@@ -165,6 +168,9 @@ class _AsUState extends State<AsU> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+             SizedBox(
+                      height: 20,
+                    ),
             Text('معلومات شخصية ',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             Row(
@@ -239,6 +245,46 @@ class _AsUState extends State<AsU> {
         ),
       );
     }
+  Widget orders() {
+      return Container(
+        height: 300,
+        // width: 300,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+           color: Color.fromARGB(255, 228, 228, 226),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+             SizedBox(
+                      height: 20,
+                    ),
+            Text('الخدمات التي قام ${user['name']} بطلبها',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          
+              
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 228, 228, 226),)
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
 
 Widget yourContentWidget()
 {
@@ -247,9 +293,9 @@ return     SingleChildScrollView(
             // crossAxisAlignment: CrossAxisAlignment.center,
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 20),
+               SizedBox(height: 10),
               builimg(),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               Text(
                 " المستخدم ${user['name']} ",
                 style: TextStyle(
@@ -264,7 +310,10 @@ return     SingleChildScrollView(
                 builinfo(),
                 SizedBox(height: 20),
                 
-                builcon(),
+              
+                  orders(),
+                SizedBox(height: 20),
+                  builcon(),
                 SizedBox(height: 20),
               
               } else ...{
@@ -273,7 +322,9 @@ return     SingleChildScrollView(
                   children: [
                       SizedBox(height: 20),
                     builinfo(),
+                     orders(),
                     builcon(),
+                   
                   ],
                 ),
               

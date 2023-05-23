@@ -41,12 +41,27 @@ class _ProfileState extends State<Profile> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-  
+   Future<void> ordservcount() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         ordserv = List<Map<String, dynamic>>.from(jsonResponse);
+    
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+ 
    @override
   void initState() {
     super.initState();
     getAllWorkers();
        getAlluserss();
+       ordservcount();
  
   }
   @override

@@ -235,58 +235,61 @@ Future<void> getAlltype() async {
           ],
         ),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Navbar(),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.0),
-                child: Image.asset(
-                  "images/aa.png",
-                )),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.local_florist_outlined,
-                  size: 30.0,
-                  color: Colors.black,
-                ),
-                const Text("     خَـــدَمَـــاتُـــنـــا  ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: Colors.black)),
-              ],
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.0),
-                child: Image.asset(
-                  "images/c.png",
-                )),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.local_florist_outlined,
-                  size: 30.0,
-                  color: Colors.black,
-                ),
-                const Text("     مــن نــحــن  ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: Colors.black)),
-              ],
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 0.0),
-                child: Image.asset(
-                  "images/aa.png",
-                )),
-          ],
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Navbar(),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0.0),
+                  child: Image.asset(
+                    "images/aa.png",
+                  )),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.local_florist_outlined,
+                    size: 30.0,
+                    color: Colors.black,
+                  ),
+                  const Text("     خَـــدَمَـــاتُـــنـــا  ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35.0,
+                          color: Colors.black)),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0.0),
+                  child: Image.asset(
+                    "images/c.png",
+                  )),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.local_florist_outlined,
+                    size: 30.0,
+                    color: Colors.black,
+                  ),
+                  const Text("     مــن نــحــن  ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35.0,
+                          color: Colors.black)),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0.0),
+                  child: Image.asset(
+                    "images/aa.png",
+                  )),
+            ],
+          ),
         ),
       ),
     );
