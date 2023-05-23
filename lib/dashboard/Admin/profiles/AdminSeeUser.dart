@@ -48,14 +48,14 @@ class _AsUState extends State<AsU> {
 
   @override
   Widget build(BuildContext context) {
-    Widget builimg() {
+        Widget builimg() {
       return Container(
         width: 130,
         height: 130,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: Colors.white,
+            color: Colors.black,
             width: 1.5,
           ),
           image: DecorationImage(
@@ -74,7 +74,7 @@ class _AsUState extends State<AsU> {
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color.fromARGB(255, 247, 192, 89),
+          color: Color.fromARGB(255, 255, 238, 127),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -130,7 +130,7 @@ class _AsUState extends State<AsU> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 247, 192, 89)),
+                      color:Color.fromARGB(255, 255, 238, 127),)
                 ),
               ],
             ),
@@ -146,7 +146,7 @@ class _AsUState extends State<AsU> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 247, 192, 89)),
+                      color: Color.fromARGB(255, 255, 238, 127)),
                 ),
               ],
             ),
@@ -261,7 +261,7 @@ class _AsUState extends State<AsU> {
              SizedBox(
                       height: 20,
                     ),
-            Text('الخدمات التي قام ${user['name']} بطلبها',
+            Text('الخدمات التي قام ${user['name']}  بطلبها مني',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           
               
@@ -285,6 +285,7 @@ class _AsUState extends State<AsU> {
         ),
       );
     }
+
 
 Widget yourContentWidget()
 {
@@ -318,12 +319,13 @@ return     SingleChildScrollView(
               
               } else ...{
                 Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                       SizedBox(height: 20),
                     builinfo(),
                      orders(),
                     builcon(),
+                     SizedBox(height: 20),
                    
                   ],
                 ),
