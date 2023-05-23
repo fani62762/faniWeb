@@ -100,7 +100,7 @@ class _ProfileState extends State<Profile> {
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
           employeeTasks(
               Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", "5"),
+          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",dayor?.length ?? 0),
         ],
       ),
     );
