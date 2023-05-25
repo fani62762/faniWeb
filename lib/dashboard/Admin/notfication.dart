@@ -18,36 +18,57 @@ class _NotficationState extends State<Notfication> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text.rich(TextSpan(
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                  children: [
-                    TextSpan(text: "Hello World"),
-                    TextSpan(
-                        text: "New Web site",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ])),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                  " An example of the Lorem ipsum placeholder\n text on a green ans white webpage. \nUsing Lorem ipsum to focus attention on graphic \n elements in a webpage design proposal ",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                  )),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Read More..",
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline),
-              )
-            ],
+                children: [
+                Text.rich(TextSpan(
+                 style: TextStyle( color: Colors.black, fontFamily: 'Arial'),
+                    children: [
+                      TextSpan(
+                          text: "تـطـبـيـق فَّـنّـي",
+                                             style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+fontSize: 25,
+color: Colors.black,
+fontFamily: 'Montserrat',
+),)
+                    ])),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                    "تطبيق يساعد على ربط المستخدمين بالعُمال الفَّنين",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+fontSize: 14,
+color: Colors.black,
+fontFamily: 'Noto Kufi Arabic',
+),),
+  SizedBox(
+                  height: 5,
+                ),
+ Text(
+                    " مما يسهل على المستخدمين الحصول على خدمات صيانة المنزل بسهولة ومرونة",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+fontSize: 14,
+color: Colors.black,
+fontFamily: 'Noto Kufi Arabic',
+),),
+  SizedBox(
+                  height: 5,
+                ),
+ Text(
+                    "وفي نفس الوقت توفير العديد من فرص العمل للشباب والعمال الفنين الفلسطينين",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+fontSize: 14,
+color: Colors.black,
+fontFamily: 'Noto Kufi Arabic',
+),),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+          
           ),
           if (MediaQuery.of(context).size.width >= 673) ...{
             Spacer(),

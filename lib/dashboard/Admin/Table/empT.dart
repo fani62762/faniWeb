@@ -145,26 +145,26 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
             dividerThickness: 1,
         columns: [
               DataColumn(
-                label: Text('الإسم',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الإسم',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
               ),
               DataColumn(label: _verticalDivider),
               DataColumn(
-                label: Text('الإيميل',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الإيميل',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 numeric: true,
               ),
               DataColumn(label: _verticalDivider),
               DataColumn(
-                label: Text('الهاتف',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الهاتف',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 numeric: true,
               ),
               if (AppResponsive.isDesktop(context)) ...{
                 DataColumn(label: _verticalDivider),
                 DataColumn(
-                  label: Text('الجنس',style: TextStyle(fontFamily: 'Times New Roman')),
+                  label: Text('الجنس',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 ),
                 DataColumn(label: _verticalDivider),
                 DataColumn(
-                  label: Text('الأعمال',style: TextStyle(fontFamily: 'Times New Roman')),
+                  label: Text('الأعمال',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 ),
                 DataColumn(label: _verticalDivider),
                 DataColumn(

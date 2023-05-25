@@ -86,26 +86,26 @@ class _TableOfUserDataState extends State<TableOfUserData> {
             dividerThickness: 1,
             columns: [
               DataColumn(
-                label: Text('الاسم',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الاسم',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
               ),
               DataColumn(label: _verticalDivider),
               DataColumn(
-                label: Text('الايميل',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الايميل',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 numeric: true,
               ),
               DataColumn(label: _verticalDivider),
               DataColumn(
-                label: Text('الهاتف',style: TextStyle(fontFamily: 'Times New Roman')),
+                label: Text('الهاتف',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 numeric: true,
               ),
               if (AppResponsive.isDesktop(context)) ...{
                 DataColumn(label: _verticalDivider),
                 DataColumn(
-                  label: Text('الجنس',style: TextStyle(fontFamily: 'Times New Roman')),
+                  label: Text('الجنس',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 ),
                 DataColumn(label: _verticalDivider),
                 DataColumn(
-                  label: Text('الاعمال',style: TextStyle(fontFamily: 'Times New Roman')),
+                  label: Text('الاعمال',style: TextStyle(fontFamily: 'Noto Kufi Arabic',)),
                 ),
                 DataColumn(label: _verticalDivider),
                 DataColumn(

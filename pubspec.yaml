@@ -149,12 +149,12 @@ flutter:
   fonts:
     - family: Noto Kufi Arabic
       fonts:
-        #- asset: images/fonts/Cairo-VariableFont_wght.ttf
-        - asset: images/fonts/NotoKufiArabic-Regular.ttf
+        - asset: fonts/Cairo-VariableFont_wght.ttf
+        - asset: fonts/NotoKufiArabic-Regular.ttf
     - family: Montserrat
       fonts:
-        - asset: images/fonts/Montserrat-Bold.ttf
-        - asset: images/fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-Bold.ttf
+        - asset: fonts/Montserrat-Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
