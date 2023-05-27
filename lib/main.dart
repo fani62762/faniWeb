@@ -244,6 +244,7 @@ Future<void> getAlltype() async {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Image.asset(
+                    
                     "images/aa.png",
                   )),
               Row(
@@ -276,7 +277,7 @@ Future<void> getAlltype() async {
                     size: 30.0,
                     color: Colors.black,
                   ),
-                  const Text("     مــن نــحــن  ",
+                  const Text("      تواصل معنا  ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 35.0,
@@ -286,7 +287,7 @@ Future<void> getAlltype() async {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Image.asset(
-                    "images/aa.png",
+                    "images/c.jpg",
                   )),
             ],
           ),
