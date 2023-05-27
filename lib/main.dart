@@ -228,10 +228,12 @@ Future<void> getAlltype() async {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
+          
             Color.fromARGB(255, 166, 199, 227),
             Colors.white,
+               ly,
             Color.fromARGB(255, 250, 240, 154),
-            ly
+           
           ],
         ),
       ),
@@ -251,11 +253,7 @@ Future<void> getAlltype() async {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.local_florist_outlined,
-                    size: 30.0,
-                    color: Colors.black,
-                  ),
+                  
                   const Text("     خَـــدَمَـــاتُـــنـــا  ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -272,11 +270,7 @@ Future<void> getAlltype() async {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.local_florist_outlined,
-                    size: 30.0,
-                    color: Colors.black,
-                  ),
+                
                   const Text("      تواصل معنا  ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
