@@ -115,7 +115,7 @@ class _SideBarTState extends State<SideBarT> {
               SizedBox(
                 height: 35,
               ),
-              ListTile(
+               ListTile(
                 selected: i == 4,
                 leading: Icon(Icons.bar_chart),
                 title: Text(

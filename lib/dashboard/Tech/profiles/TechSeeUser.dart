@@ -48,15 +48,15 @@ class _TsUState extends State<TsU> {
 
   @override
   Widget build(BuildContext context) {
-    Widget builimg() {
+     Widget builimg() {
       return Container(
         width: 130,
         height: 130,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(
-            color: dy,
-            width: 3.0,
+            color: Colors.black,
+            width: 1.5,
           ),
           image: DecorationImage(
             image: imag,
@@ -68,17 +68,20 @@ class _TsUState extends State<TsU> {
 
     Widget builcon() {
       return Container(
-        height: 200,
+        height: 300,
         // width: 300,
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color.fromARGB(255, 247, 192, 89),
+          color: Color.fromARGB(255, 255, 238, 127),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+             SizedBox(
+                      height: 20,
+                    ),
             Text('معلومات الإتصال ',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
@@ -127,7 +130,7 @@ class _TsUState extends State<TsU> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 247, 192, 89)),
+                      color:Color.fromARGB(255, 255, 238, 127),)
                 ),
               ],
             ),
@@ -143,7 +146,7 @@ class _TsUState extends State<TsU> {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 247, 192, 89)),
+                      color: Color.fromARGB(255, 255, 238, 127)),
                 ),
               ],
             ),
@@ -154,7 +157,7 @@ class _TsUState extends State<TsU> {
 
     Widget builinfo() {
       return Container(
-        height: 200,
+        height: 300,
         // width: 300,
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.all(10),
@@ -165,6 +168,9 @@ class _TsUState extends State<TsU> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+             SizedBox(
+                      height: 20,
+                    ),
             Text('معلومات شخصية ',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             Row(
@@ -239,6 +245,47 @@ class _TsUState extends State<TsU> {
         ),
       );
     }
+  Widget orders() {
+      return Container(
+        height: 300,
+        // width: 300,
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+           color: Color.fromARGB(255, 228, 228, 226),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+             SizedBox(
+                      height: 20,
+                    ),
+            Text('الخدمات التي قام ${user['name']}  بطلبها مني',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          
+              
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 228, 228, 226),)
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
+
 
 Widget yourContentWidget()
 {
@@ -247,9 +294,9 @@ return     SingleChildScrollView(
             // crossAxisAlignment: CrossAxisAlignment.center,
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               builimg(),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               Text(
                 " المستخدم ${user['name']} ",
                 style: TextStyle(
@@ -263,17 +310,20 @@ return     SingleChildScrollView(
                   SizedBox(height: 20),
                 builinfo(),
                 SizedBox(height: 20),
-                
+                 orders(),
+                SizedBox(height: 20),
                 builcon(),
                 SizedBox(height: 20),
               
               } else ...{
                 Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                      SizedBox(height: 20),
-                    builinfo(),
+                    SizedBox(height: 20),
+                     builinfo(),
+                     orders(),
                     builcon(),
+                     SizedBox(height: 20),
                   ],
                 ),
               

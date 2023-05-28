@@ -1,4 +1,5 @@
 import 'package:faniweb/app_responsive.dart';
+import 'package:faniweb/dashboard/Tech/Table/calcu.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgsTA.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgsTW.dart';
 import 'package:faniweb/dashboard/calender_widget.dart';
@@ -105,8 +106,8 @@ class _DashbordTState extends State<DashbordT> {
         return Text("خدمات");
       case 3:
         return Text("طلبات");
-      case 4:
-        return Text("إحصائيات");
+       case 4:
+        return maths();
       case 5:
         return Text("تقارير");
       case 6:

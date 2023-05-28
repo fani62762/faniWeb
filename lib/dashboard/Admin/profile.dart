@@ -41,12 +41,27 @@ class _ProfileState extends State<Profile> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-  
+   Future<void> ordservcount() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         ordserv = List<Map<String, dynamic>>.from(jsonResponse);
+    
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+ 
    @override
   void initState() {
     super.initState();
     getAllWorkers();
        getAlluserss();
+       ordservcount();
  
   }
   @override
@@ -100,7 +115,7 @@ class _ProfileState extends State<Profile> {
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
           employeeTasks(
               Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", "5"),
+          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",dayor?.length ?? 0),
         ],
       ),
     );
