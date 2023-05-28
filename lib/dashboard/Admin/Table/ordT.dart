@@ -43,11 +43,11 @@ class _TableOfordDataState extends State<TableOfordData> {
               label: Text('حالة الطلب'),
               numeric: true,
             ),
-            DataColumn(label: _verticalDivider),
-            if (AppResponsive.isDesktop(context))
-              DataColumn(
-                label: Text('التقييم'),
-              ),
+            // DataColumn(label: _verticalDivider),
+            // if (AppResponsive.isDesktop(context))
+            //   DataColumn(
+            //     label: Text('التقييم'),
+            //   ),
             if (AppResponsive.isDesktop(context))
               DataColumn(label: _verticalDivider),
             DataColumn(
