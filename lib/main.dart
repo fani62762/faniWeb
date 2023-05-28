@@ -127,6 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         users = List<Map<String, dynamic>>.from(jsonResponse);
       });
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      print(allord);
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
@@ -140,10 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         allord = List<Map<String, dynamic>>.from(jsonResponse);
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        print(allord);
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
       });
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      print(allord);
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     } else {
       print('Error fetching orders data: ${response.statusCode}');
     }
