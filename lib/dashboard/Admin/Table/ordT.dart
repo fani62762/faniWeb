@@ -14,6 +14,13 @@ List<String> columnNames = [
   'اسم العميل',
   'اسم العامل',
   'حالة الطلب',
+  'نوع الخدمة',
+  'السعر',
+  'الوقت',
+  'الخدمات',
+  'التاريخ',
+  'خدمات اضافية',
+  'التكرار',
   // Add other column names as needed
 ];
 String? chosenColumnName = columnNames.first;
@@ -27,8 +34,42 @@ class _TableOfordDataState extends State<TableOfordData> {
     // print(workers);
   }
 
+  void showOrderDetails(Map<String, dynamic> order) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('تفاصيل الطلب'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('نوع الخدمة: ${order['TypeServ']}'),
+                Text('السعر: ${order['Price']}'),
+                Text('الوقت: ${order['Hour']}'),
+                Text('الخدمات: ${order['serv'].join(", ")}'),
+                Text('التاريخ: ${order['date']}'),
+                Text('خدمات اضافية: ${order['add'].join(", ")}'),
+                Text('التكرار: ${order['isrepeated']}'),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('اغلاق'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void searchOrders(String? columnName, String query) {
     String columnNameeng = "";
+    int stat;
     if (columnName == columnNames[0]) {
       columnNameeng = "uname";
     }
@@ -37,13 +78,46 @@ class _TableOfordDataState extends State<TableOfordData> {
     }
     if (columnName == columnNames[2]) {
       columnNameeng = "acc";
+      if (query == "مكتمل") query = "2";
+      if (query == "قيد التنفيذ") query = "1";
+      if (query == "بانتظار موافقة العامل") query = "0";
+      if (query == "رفض من قبل العامل") query = "-1";
+      if (query == "الغاء من قبل العميل") query = "-2";
+    }
+    if (columnName == columnNames[3]) {
+      columnNameeng = "TypeServ";
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[4]) {
+      columnNameeng = "Price";
+
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[5]) {
+      columnNameeng = "Hour";
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[6]) {
+      columnNameeng = "serv";
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[7]) {
+      columnNameeng = "date";
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[8]) {
+      columnNameeng = "add";
+      //if (query == "مكتمل") query = 2.toString();
+    }
+    if (columnName == columnNames[9]) {
+      columnNameeng = "isrepeated";
       //if (query == "مكتمل") query = 2.toString();
     }
     setState(() {
       orders = allord.where((order) {
         // Replace 'columnName' with the actual property name of the chosen column
         // in the 'order' object.
-        final value = order[columnNameeng];
+        final value = order[columnNameeng].toString();
         return value.toLowerCase().contains(query.toLowerCase());
       }).toList();
     });
@@ -229,7 +303,9 @@ class _TableOfordDataState extends State<TableOfordData> {
 
                         DataCell(IconButton(
                           icon: Icon(Icons.info_outline),
-                          onPressed: () {},
+                          onPressed: () {
+                            showOrderDetails(order);
+                          },
                         )),
                         DataCell(_verticalDivider),
                         // // if (!AppResponsive.isMobile(context))
