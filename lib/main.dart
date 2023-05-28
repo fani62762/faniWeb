@@ -120,12 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> getAlluserss() async {
     final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/users/'));
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
 
       setState(() {
-        users = List<Map<String, dynamic>>.from(jsonResponse);
+        allord = List<Map<String, dynamic>>.from(jsonResponse);
       });
       print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
       print(allord);
@@ -218,13 +218,13 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     getAllWorkers();
     getAlluserss();
-    getAllord();
     getgw();
     getgu();
     getAdmin();
     getAlltype();
     getorday();
     ordservcount();
+    getAllord();
   }
 
   @override
