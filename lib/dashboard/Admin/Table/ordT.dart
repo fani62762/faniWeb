@@ -144,6 +144,7 @@ class _TableOfordDataState extends State<TableOfordData> {
                                         ),
                                       )
                                     : DataCell(Text("")),
+                DataCell(_verticalDivider),
 
                 // if (AppResponsive.isDesktop(context))
                 //   DataCell(Text(worker['gender'])),
