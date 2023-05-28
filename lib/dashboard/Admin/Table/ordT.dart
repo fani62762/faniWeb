@@ -40,39 +40,42 @@ class _TableOfordDataState extends State<TableOfordData> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('تفاصيل الطلب'),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'نوع الخدمة: ${order['TypeServ']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'السعر: ${order['Price']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'الوقت: ${order['Hour']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'الخدمات: ${order['serv'].join(", ")}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'التاريخ: ${order['date']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'خدمات اضافية: ${order['add'].join(", ")}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'التكرار: ${order['isrepeated']}',
-                  textAlign: TextAlign.right,
-                ),
-              ],
+          content: Container(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'نوع الخدمة: ${order['TypeServ']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'السعر: ${order['Price']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'الوقت: ${order['Hour']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'الخدمات: ${order['serv'].join(", ")}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'التاريخ: ${order['date']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'خدمات اضافية: ${order['add'].join(", ")}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'التكرار: ${order['isrepeated']}',
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
             ),
           ),
           actions: [
