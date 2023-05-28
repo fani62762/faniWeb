@@ -5,6 +5,7 @@ import 'package:faniweb/dashboard/Admin/headbar.dart';
 import 'package:faniweb/dashboard/Admin/notfication.dart';
 import 'package:faniweb/dashboard/Admin/profile.dart';
 import 'package:faniweb/dashboard/Admin/Table/empT.dart';
+import 'package:faniweb/dashboard/Admin/Table/ordT.dart';
 import 'package:faniweb/dashboard/Admin/Table/userT.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgAU.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgsAW.dart';
@@ -105,7 +106,7 @@ class _DashbordState extends State<Dashbord> {
       case 2:
         return Text("خدمات");
       case 3:
-        return TableOfEmpData();
+        return TableOfordData();
       case 4:
         return maths();
       case 5:
