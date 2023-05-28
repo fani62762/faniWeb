@@ -39,11 +39,11 @@ class _TableOfordDataState extends State<TableOfordData> {
               numeric: true,
             ),
             DataColumn(label: _verticalDivider),
-            // DataColumn(
-            //   label: Text('حالة الطلب'),
-            //   numeric: true,
-            // ),
-            // DataColumn(label: _verticalDivider),
+            DataColumn(
+              label: Text('حالة الطلب'),
+              numeric: true,
+            ),
+            DataColumn(label: _verticalDivider),
             // // DataColumn(label: _verticalDivider),
             // // if (AppResponsive.isDesktop(context))
             // //   DataColumn(
@@ -83,68 +83,68 @@ class _TableOfordDataState extends State<TableOfordData> {
                 DataCell(Text(order['Wname'])),
                 DataCell(_verticalDivider),
 
-                // order['acc'] == 0
-                //     ? DataCell(
-                //         Container(
-                //           child: Text(
-                //             "بانتظار موافقة العامل",
-                //             style: TextStyle(
-                //               color: Colors
-                //                   .orange, // Set the desired text color here
-                //             ),
-                //           ),
-                //         ),
-                //       )
-                //     : order['acc'] == 1
-                //         ? DataCell(
-                //             Container(
-                //               child: Text(
-                //                 "قيد التنفيذ  ",
-                //                 style: TextStyle(
-                //                   color: Colors
-                //                       .blue, // Set the desired text color here
-                //                 ),
-                //               ),
-                //             ),
-                //           )
-                //         : order['acc'] == 2
-                //             ? DataCell(
-                //                 Container(
-                //                   child: Text(
-                //                     "  مكتمل",
-                //                     style: TextStyle(
-                //                       color: Colors
-                //                           .green, // Set the desired text color here
-                //                     ),
-                //                   ),
-                //                 ),
-                //               )
-                //             : order['acc'] == -1
-                //                 ? DataCell(
-                //                     Container(
-                //                       child: Text(
-                //                         "  رفض من قبل العامل",
-                //                         style: TextStyle(
-                //                           color: Colors
-                //                               .red, // Set the desired text color here
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   )
-                //                 : order['acc'] == -2
-                //                     ? DataCell(
-                //                         Container(
-                //                           child: Text(
-                //                             "  الغاء من قبل العميل",
-                //                             style: TextStyle(
-                //                               color: Colors
-                //                                   .red, // Set the desired text color here
-                //                             ),
-                //                           ),
-                //                         ),
-                //                       )
-                //                     : DataCell(Text("")),
-                // DataCell(_verticalDivider),
+                order['acc'] == 0
+                    ? DataCell(
+                        Container(
+                          child: Text(
+                            "بانتظار موافقة العامل",
+                            style: TextStyle(
+                              color: Colors
+                                  .orange, // Set the desired text color here
+                            ),
+                          ),
+                        ),
+                      )
+                    : order['acc'] == 1
+                        ? DataCell(
+                            Container(
+                              child: Text(
+                                "قيد التنفيذ  ",
+                                style: TextStyle(
+                                  color: Colors
+                                      .blue, // Set the desired text color here
+                                ),
+                              ),
+                            ),
+                          )
+                        : order['acc'] == 2
+                            ? DataCell(
+                                Container(
+                                  child: Text(
+                                    "  مكتمل",
+                                    style: TextStyle(
+                                      color: Colors
+                                          .green, // Set the desired text color here
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : order['acc'] == -1
+                                ? DataCell(
+                                    Container(
+                                      child: Text(
+                                        "  رفض من قبل العامل",
+                                        style: TextStyle(
+                                          color: Colors
+                                              .red, // Set the desired text color here
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : order['acc'] == -2
+                                    ? DataCell(
+                                        Container(
+                                          child: Text(
+                                            "  الغاء من قبل العميل",
+                                            style: TextStyle(
+                                              color: Colors
+                                                  .red, // Set the desired text color here
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : DataCell(Text("")),
+                DataCell(_verticalDivider),
 
                 // // if (AppResponsive.isDesktop(context))
                 // //   DataCell(Text(worker['gender'])),
