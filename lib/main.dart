@@ -140,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         allord = List<Map<String, dynamic>>.from(jsonResponse);
+        print(allord);
       });
     } else {
       print('Error fetching orders data: ${response.statusCode}');
@@ -236,12 +237,10 @@ class _MyHomePageState extends State<MyHomePage> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-          
             Color.fromARGB(255, 166, 199, 227),
             Colors.white,
-               ly,
+            ly,
             Color.fromARGB(255, 250, 240, 154),
-           
           ],
         ),
       ),
@@ -254,14 +253,12 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Image.asset(
-                    
                     "images/aa.png",
                   )),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
                   const Text("     خَـــدَمَـــاتُـــنـــا  ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -278,7 +275,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                
                   const Text("      تواصل معنا  ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
