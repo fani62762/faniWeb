@@ -16,6 +16,7 @@ class _TableOfordDataState extends State<TableOfordData> {
   void initState() {
     super.initState();
     orders = allord;
+    columnNames = columnNames.toSet().toList();
     // print(workers);
   }
 
@@ -68,7 +69,7 @@ class _TableOfordDataState extends State<TableOfordData> {
                 ),
                 onChanged: (String? value) {
                   setState(() {
-                    chosenColumnName = value;
+                    chosenColumnName = value ?? '';
                   });
                 },
                 items: columnNames.map((String columnName) {
