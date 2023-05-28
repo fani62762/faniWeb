@@ -10,13 +10,14 @@ import 'dart:convert';
 import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
-Map<String, int> ?dayor;
+Map<String, int>? dayor;
 List<Map<String, dynamic>> users = [];
+List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> ordserv = [];
-var gwf=0;
-var guf=0;
-var gwm=0;
-var gum=0;
+var gwf = 0;
+var guf = 0;
+var gwm = 0;
+var gum = 0;
 var Admin;
 var WorW;
 final List<String> servicesList = [];
@@ -75,111 +76,118 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future<void> getorday() async {
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-     
+
       setState(() {
-         dayor = Map<String, int>.from(jsonResponse);
-    
+        dayor = Map<String, int>.from(jsonResponse);
       });
     } else {
       print('Error fetching days data: ${response.statusCode}');
     }
   }
+
   Future<void> getAllWorkers() async {
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/worker/'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-     
+
       setState(() {
-         workers = List<Map<String, dynamic>>.from(jsonResponse);
-    
+        workers = List<Map<String, dynamic>>.from(jsonResponse);
       });
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
+
   Future<void> getgw() async {
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/worker/wgender'));
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/worker/wgender'));
     if (response.statusCode == 200) {
-     final data = json.decode(response.body);
- 
+      final data = json.decode(response.body);
+
       setState(() {
-   gwm   = data['maleCount'];
-     gwf = data['femaleCount'];
-    
+        gwm = data['maleCount'];
+        gwf = data['femaleCount'];
       });
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
- 
+
   Future<void> getAlluserss() async {
- 
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/users/'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-     
-      setState(() { 
-        users = List<Map<String, dynamic>>.from(jsonResponse);
-     
-      });
-    } else {
-      print('Error fetching workers data: ${response.statusCode}');
-    }
-  }
-  Future<void> getgu() async {
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/users/ugender'));
-    if (response.statusCode == 200) {
-     final data = json.decode(response.body);
+
       setState(() {
-        gum   = data['maleCount'];
-     guf = data['femaleCount'];
-    
+        users = List<Map<String, dynamic>>.from(jsonResponse);
       });
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
- 
+
+  Future<void> getAllord() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        allord = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+    } else {
+      print('Error fetching orders data: ${response.statusCode}');
+    }
+  }
+
+  Future<void> getgu() async {
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/users/ugender'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      setState(() {
+        gum = data['maleCount'];
+        guf = data['femaleCount'];
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+
   Future<void> getAdmin() async {
- 
     final responseW =
         await http.get(Uri.parse('https://fani-service.onrender.com/admin/'));
     if (responseW.statusCode == 200) {
-      
       setState(() {
         final ad = jsonDecode(responseW.body);
         Admin = ad;
-      
       });
     } else {
       print("not exsist");
     }
   }
- Future<void> ordservcount() async {
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+
+  Future<void> ordservcount() async {
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-     
+
       setState(() {
-         ordserv = List<Map<String, dynamic>>.from(jsonResponse);
-    
+        ordserv = List<Map<String, dynamic>>.from(jsonResponse);
       });
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-  
-Future<void> getAlltype() async {
-   
+
+  Future<void> getAlltype() async {
     servicesList.clear();
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/type/3'));
@@ -187,7 +195,7 @@ Future<void> getAlltype() async {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
- 
+
       types = data;
 
       for (int i = 0; i < types.length; i++) {
@@ -205,7 +213,7 @@ Future<void> getAlltype() async {
     getAllWorkers();
     getAlluserss();
     getgw();
-    getgu(); 
+    getgu();
     getAdmin();
     getAlltype();
     getorday();
@@ -216,7 +224,7 @@ Future<void> getAlltype() async {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:yourContentWidget(),
+        child: yourContentWidget(),
       ),
     );
   }
