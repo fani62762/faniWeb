@@ -213,6 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     getAllWorkers();
     getAlluserss();
+    getAllord();
     getgw();
     getgu();
     getAdmin();
