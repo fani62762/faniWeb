@@ -10,6 +10,13 @@ class TableOfordData extends StatefulWidget {
 
 TextEditingController _searchController = TextEditingController();
 List<Map<String, dynamic>> orders = [];
+List<String> columnNames = [
+  'اسم العميل',
+  'اسم العامل',
+  'حالة الطلب',
+  // Add other column names as needed
+];
+String? chosenColumnName = columnNames.first;
 
 class _TableOfordDataState extends State<TableOfordData> {
   @override
@@ -41,15 +48,6 @@ class _TableOfordDataState extends State<TableOfordData> {
       }).toList();
     });
   }
-
-  List<String> columnNames = [
-    'اسم العميل',
-    'اسم العامل',
-    'حالة الطلب',
-    // Add other column names as needed
-  ];
-
-  String? chosenColumnName = "";
 
   @override
   Widget build(BuildContext context) {
