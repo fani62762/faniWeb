@@ -51,10 +51,10 @@ class _TableOfordDataState extends State<TableOfordData> {
             // //   ),
             // if (AppResponsive.isDesktop(context))
             //   DataColumn(label: _verticalDivider),
-            // DataColumn(
-            //   label: Text('تفاصيل'),
-            // ),
-            // DataColumn(label: _verticalDivider),
+            DataColumn(
+              label: Text('تفاصيل'),
+            ),
+            DataColumn(label: _verticalDivider),
             // //if (!AppResponsive.isMobile(context))
             // DataColumn(
             //   label: SizedBox(),
@@ -151,11 +151,11 @@ class _TableOfordDataState extends State<TableOfordData> {
                 // if (AppResponsive.isDesktop(context))
                 //   DataCell(_verticalDivider),
 
-                // DataCell(IconButton(
-                //   icon: Icon(Icons.info_outline),
-                //   onPressed: () {},
-                // )),
-                // DataCell(_verticalDivider),
+                DataCell(IconButton(
+                  icon: Icon(Icons.info_outline),
+                  onPressed: () {},
+                )),
+                DataCell(_verticalDivider),
                 // // if (!AppResponsive.isMobile(context))
                 // DataCell(IconButton(
                 //   icon: Icon(Icons.delete),
