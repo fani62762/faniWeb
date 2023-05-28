@@ -43,6 +43,7 @@ class _TableOfordDataState extends State<TableOfordData> {
               label: Text('حالة الطلب'),
               numeric: true,
             ),
+            DataColumn(label: _verticalDivider),
             // DataColumn(label: _verticalDivider),
             // if (AppResponsive.isDesktop(context))
             //   DataColumn(
@@ -63,20 +64,20 @@ class _TableOfordDataState extends State<TableOfordData> {
           rows: allord.map((order) {
             return DataRow(
               cells: [
-                if (AppResponsive.isDesktop(context))
-                  DataCell(
-                    Row(
-                      children: [
-                        // CircleAvatar(
-                        //   backgroundImage: NetworkImage(worker['image']),
-                        // ),
-                        // SizedBox(width: 10),
-                        Text(order['uname']),
-                      ],
-                    ),
-                  ),
-                if (!AppResponsive.isDesktop(context))
-                  DataCell(Text(order['uname'])),
+                // if (AppResponsive.isDesktop(context))
+                //   DataCell(
+                //     Row(
+                //       // children: [
+                //       //   // CircleAvatar(
+                //       //   //   backgroundImage: NetworkImage(worker['image']),
+                //       //   // ),
+                //       //   // SizedBox(width: 10),
+                //       //   Text(order['uname']),
+                //       // ],
+                //     ),
+                //   ),
+                //if (!AppResponsive.isDesktop(context))
+                DataCell(Text(order['uname'])),
                 DataCell(_verticalDivider),
 
                 DataCell(Text(order['Wname'])),
@@ -143,7 +144,6 @@ class _TableOfordDataState extends State<TableOfordData> {
                                         ),
                                       )
                                     : DataCell(Text("")),
-                DataCell(_verticalDivider),
 
                 // if (AppResponsive.isDesktop(context))
                 //   DataCell(Text(worker['gender'])),
