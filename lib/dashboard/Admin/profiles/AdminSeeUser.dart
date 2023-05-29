@@ -267,32 +267,33 @@ class _AsUState extends State<AsU> {
     }
 
     Widget orders() {
-      return SizedBox(
+      return Container(
         height: 300,
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color.fromARGB(255, 228, 228, 226),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(height: 20),
-              Text(
-                'الخدمات التي قام ${user['name']} بطلبها مني',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'ArabicFont',
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Color.fromARGB(255, 228, 228, 226),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: 20),
+                Text(
+                  'الخدمات التي قام ${user['name']} بطلبها مني',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'ArabicFont',
+                  ),
+                  textDirection: TextDirection.rtl,
                 ),
-                textDirection: TextDirection.rtl,
-              ),
-              SizedBox(height: 10),
-              Expanded(
-                child: ListView.builder(
+                SizedBox(height: 10),
+                ListView.builder(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: userord.length,
                   itemBuilder: (context, index) {
                     final order = userord[index];
@@ -324,40 +325,40 @@ class _AsUState extends State<AsU> {
                     );
                   },
                 ),
-              ),
-              // Add additional information here (hidden by default)
-              if (showAdditionalInfo) ...[
-                SizedBox(height: 10),
-                for (final order in userord)
-                  Column(
-                    children: [
-                      Text(
-                        "الساعة: ${order['Hour']}",
-                        style: TextStyle(
-                          fontFamily: 'ArabicFont',
+                // Add additional information here (hidden by default)
+                if (showAdditionalInfo) ...[
+                  SizedBox(height: 10),
+                  for (final order in userord)
+                    Column(
+                      children: [
+                        Text(
+                          "الساعة: ${order['Hour']}",
+                          style: TextStyle(
+                            fontFamily: 'ArabicFont',
+                          ),
+                          textDirection: TextDirection.rtl,
                         ),
-                        textDirection: TextDirection.rtl,
-                      ),
-                      Text(
-                        "السعر: ${order['Price']}",
-                        style: TextStyle(
-                          fontFamily: 'ArabicFont',
+                        Text(
+                          "السعر: ${order['Price']}",
+                          style: TextStyle(
+                            fontFamily: 'ArabicFont',
+                          ),
+                          textDirection: TextDirection.rtl,
                         ),
-                        textDirection: TextDirection.rtl,
-                      ),
-                      Text(
-                        "التاريخ: ${order['date']}",
-                        style: TextStyle(
-                          fontFamily: 'ArabicFont',
+                        Text(
+                          "التاريخ: ${order['date']}",
+                          style: TextStyle(
+                            fontFamily: 'ArabicFont',
+                          ),
+                          textDirection: TextDirection.rtl,
                         ),
-                        textDirection: TextDirection.rtl,
-                      ),
-                      // Display additional service details here
-                      // Display repeated order information here
-                    ],
-                  ),
+                        // Display additional service details here
+                        // Display repeated order information here
+                      ],
+                    ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       );
