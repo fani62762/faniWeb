@@ -484,111 +484,103 @@ class _AsUState extends State<AsU> {
               ),
               SizedBox(height: 10),
               Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
-                  itemCount: userord.length,
-                  itemBuilder: (context, index) {
-                    final order = userord[index];
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        height: 250, // Set the desired height for the table
-                        child: DataTable(
-                          columnSpacing: 12,
-                          dataRowHeight: 60,
-                          dividerThickness: 1,
-                          columns: [
-                            DataColumn(
-                              label: Text('اسم العميل'),
-                            ),
-                            DataColumn(label: _verticalDivider),
-                            DataColumn(
-                              label: Text('حالة الطلب'),
-                              numeric: true,
-                            ),
-                            DataColumn(label: _verticalDivider),
-                            DataColumn(
-                              label: Text('تفاصيل'),
-                            ),
-                            DataColumn(label: _verticalDivider),
-                          ],
-                          rows: userord.map((order) {
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(order['uname'])),
-                                DataCell(_verticalDivider),
-                                order['acc'] == 0
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
+                    height: 250, // Set the desired height for the table
+                    child: DataTable(
+                      columnSpacing: 12,
+                      dataRowHeight: 60,
+                      dividerThickness: 1,
+                      columns: [
+                        DataColumn(
+                          label: Text('اسم العميل'),
+                        ),
+                        DataColumn(label: _verticalDivider),
+                        DataColumn(
+                          label: Text('حالة الطلب'),
+                          numeric: true,
+                        ),
+                        DataColumn(label: _verticalDivider),
+                        DataColumn(
+                          label: Text('تفاصيل'),
+                        ),
+                        DataColumn(label: _verticalDivider),
+                      ],
+                      rows: userord.map((order) {
+                        return DataRow(
+                          cells: [
+                            DataCell(Text(order['uname'])),
+                            DataCell(_verticalDivider),
+                            order['acc'] == 0
+                                ? DataCell(
+                                    Container(
+                                      child: Text(
+                                        "بانتظار موافقة العامل",
+                                        style: TextStyle(
+                                          color: Colors.orange,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : order['acc'] == 1
                                     ? DataCell(
                                         Container(
                                           child: Text(
-                                            "بانتظار موافقة العامل",
+                                            "قيد التنفيذ",
                                             style: TextStyle(
-                                              color: Colors.orange,
+                                              color: Colors.blue,
                                             ),
                                           ),
                                         ),
                                       )
-                                    : order['acc'] == 1
+                                    : order['acc'] == 2
                                         ? DataCell(
                                             Container(
                                               child: Text(
-                                                "قيد التنفيذ",
+                                                "مكتمل",
                                                 style: TextStyle(
-                                                  color: Colors.blue,
+                                                  color: Colors.green,
                                                 ),
                                               ),
                                             ),
                                           )
-                                        : order['acc'] == 2
+                                        : order['acc'] == -1
                                             ? DataCell(
                                                 Container(
                                                   child: Text(
-                                                    "مكتمل",
+                                                    "رفض من قبل العامل",
                                                     style: TextStyle(
-                                                      color: Colors.green,
+                                                      color: Colors.red,
                                                     ),
                                                   ),
                                                 ),
                                               )
-                                            : order['acc'] == -1
+                                            : order['acc'] == -2
                                                 ? DataCell(
                                                     Container(
                                                       child: Text(
-                                                        "رفض من قبل العامل",
+                                                        "الغاء من قبل العميل",
                                                         style: TextStyle(
                                                           color: Colors.red,
                                                         ),
                                                       ),
                                                     ),
                                                   )
-                                                : order['acc'] == -2
-                                                    ? DataCell(
-                                                        Container(
-                                                          child: Text(
-                                                            "الغاء من قبل العميل",
-                                                            style: TextStyle(
-                                                              color: Colors.red,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : DataCell(Text("")),
-                                DataCell(_verticalDivider),
-                                DataCell(IconButton(
-                                  icon: Icon(Icons.info_outline),
-                                  onPressed: () {
-                                    showOrderDetails(order);
-                                  },
-                                )),
-                                DataCell(_verticalDivider),
-                              ],
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
+                                                : DataCell(Text("")),
+                            DataCell(_verticalDivider),
+                            DataCell(IconButton(
+                              icon: Icon(Icons.info_outline),
+                              onPressed: () {
+                                showOrderDetails(order);
+                              },
+                            )),
+                            DataCell(_verticalDivider),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ),
               ),
             ],
