@@ -266,6 +266,64 @@ class _AsUState extends State<AsU> {
       );
     }
 
+    Widget _verticalDivider = const VerticalDivider(
+      color: Colors.grey,
+      thickness: .5,
+    );
+    void showOrderDetails(Map<String, dynamic> order) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('تفاصيل الطلب'),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'نوع الخدمة: ${order['TypeServ']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'السعر: ${order['Price']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'الوقت: ${order['Hour']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'الخدمات: ${order['serv'].join(", ")}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'التاريخ: ${order['date']}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'خدمات اضافية: ${order['add'].join(", ")}',
+                    textAlign: TextAlign.right,
+                  ),
+                  Text(
+                    'التكرار: ${order['isrepeated']}',
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('اغلاق'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     Widget orders() {
       return Expanded(
           child: Container(
@@ -296,42 +354,184 @@ class _AsUState extends State<AsU> {
               itemCount: userord.length,
               itemBuilder: (context, index) {
                 final order = userord[index];
-
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 10),
-                    Text(
-                      "الخدمة: ${order['Wname']}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 228, 228, 226),
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
+                return DataTable(
+                  columnSpacing: 12,
+                  dataRowHeight: 60,
+                  dividerThickness: 1,
+                  columns: [
+                    DataColumn(
+                      label: Text('اسم العميل'),
                     ),
-                    Text(
-                      "الخدمة: ${order['TypeServ']}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 228, 228, 226),
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
+                    DataColumn(label: _verticalDivider),
+                    DataColumn(
+                      label: Text('اسم العامل'),
+                      numeric: true,
                     ),
-                    IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {
-                        // Handle showing/hiding additional information for this order
-                        setState(() {
-                          showAdditionalInfo = !showAdditionalInfo;
-                        });
-                      },
+                    DataColumn(label: _verticalDivider),
+                    DataColumn(
+                      label: Text('حالة الطلب'),
+                      numeric: true,
                     ),
+                    DataColumn(label: _verticalDivider),
+                    // // DataColumn(label: _verticalDivider),
+                    // // if (AppResponsive.isDesktop(context))
+                    // //   DataColumn(
+                    // //     label: Text('التقييم'),
+                    // //   ),
+                    // if (AppResponsive.isDesktop(context))
+                    //   DataColumn(label: _verticalDivider),
+                    DataColumn(
+                      label: Text('تفاصيل'),
+                    ),
+                    DataColumn(label: _verticalDivider),
+                    // //if (!AppResponsive.isMobile(context))
+                    // DataColumn(
+                    //   label: SizedBox(),
+                    //   numeric: true,
+                    // ),
                   ],
+                  rows: userord.map((order) {
+                    return DataRow(
+                      cells: [
+                        // if (AppResponsive.isDesktop(context))
+                        //   DataCell(
+                        //     Row(
+                        //       // children: [
+                        //       //   // CircleAvatar(
+                        //       //   //   backgroundImage: NetworkImage(worker['image']),
+                        //       //   // ),
+                        //       //   // SizedBox(width: 10),
+                        //       //   Text(order['uname']),
+                        //       // ],
+                        //     ),
+                        //   ),
+                        //if (!AppResponsive.isDesktop(context))
+                        DataCell(Text(order['uname'])),
+                        DataCell(_verticalDivider),
+
+                        DataCell(Text(order['Wname'])),
+                        DataCell(_verticalDivider),
+
+                        order['acc'] == 0
+                            ? DataCell(
+                                Container(
+                                  child: Text(
+                                    "بانتظار موافقة العامل",
+                                    style: TextStyle(
+                                      color: Colors
+                                          .orange, // Set the desired text color here
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : order['acc'] == 1
+                                ? DataCell(
+                                    Container(
+                                      child: Text(
+                                        "قيد التنفيذ  ",
+                                        style: TextStyle(
+                                          color: Colors
+                                              .blue, // Set the desired text color here
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : order['acc'] == 2
+                                    ? DataCell(
+                                        Container(
+                                          child: Text(
+                                            "  مكتمل",
+                                            style: TextStyle(
+                                              color: Colors
+                                                  .green, // Set the desired text color here
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : order['acc'] == -1
+                                        ? DataCell(
+                                            Container(
+                                              child: Text(
+                                                "  رفض من قبل العامل",
+                                                style: TextStyle(
+                                                  color: Colors
+                                                      .red, // Set the desired text color here
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : order['acc'] == -2
+                                            ? DataCell(
+                                                Container(
+                                                  child: Text(
+                                                    "  الغاء من قبل العميل",
+                                                    style: TextStyle(
+                                                      color: Colors
+                                                          .red, // Set the desired text color here
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            : DataCell(Text("")),
+                        DataCell(_verticalDivider),
+
+                        // // if (AppResponsive.isDesktop(context))
+                        // //   DataCell(Text(worker['gender'])),
+                        // if (AppResponsive.isDesktop(context))
+                        //   DataCell(_verticalDivider),
+
+                        DataCell(IconButton(
+                          icon: Icon(Icons.info_outline),
+                          onPressed: () {
+                            showOrderDetails(order);
+                          },
+                        )),
+                        DataCell(_verticalDivider),
+                        // // if (!AppResponsive.isMobile(context))
+                        // DataCell(IconButton(
+                        //   icon: Icon(Icons.delete),
+                        //   onPressed: () {},
+                        // )),
+                      ],
+                    );
+                  }).toList(),
                 );
+
+                // return Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     SizedBox(width: 10),
+                //     Text(
+                //       "الخدمة: ${order['Wname']}",
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Color.fromARGB(255, 228, 228, 226),
+                //         fontFamily: 'ArabicFont',
+                //       ),
+                //       textDirection: TextDirection.rtl,
+                //     ),
+                //     Text(
+                //       "الخدمة: ${order['TypeServ']}",
+                //       style: TextStyle(
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold,
+                //         color: Color.fromARGB(255, 228, 228, 226),
+                //         fontFamily: 'ArabicFont',
+                //       ),
+                //       textDirection: TextDirection.rtl,
+                //     ),
+                //     IconButton(
+                //       icon: Icon(Icons.info),
+                //       onPressed: () {
+                //         // Handle showing/hiding additional information for this order
+                //         setState(() {
+                //           showAdditionalInfo = !showAdditionalInfo;
+                //         });
+                //       },
+                //     ),
+                //   ],
+                // );
               },
             ),
             // Add additional information here (hidden by default)
@@ -369,121 +569,121 @@ class _AsUState extends State<AsU> {
           ],
         ),
       ));
-      //     return Container(
-      //       height: 300,
-      //       // width: 300,
-      //       margin: EdgeInsets.symmetric(horizontal: 20),
-      //       padding: EdgeInsets.all(10),
-      //       decoration: BoxDecoration(
-      //         borderRadius: BorderRadius.circular(10),
-      //          color: Color.fromARGB(255, 228, 228, 226),
-      //       ),
-      //       child: Column(
-      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //          children: [
-      //   SizedBox(height: 20),
-      //   Text(
-      //     'الخدمات التي قام ${user['name']} بطلبها مني',
-      //     style: TextStyle(
-      //       fontSize: 20,
-      //       fontWeight: FontWeight.bold,
-      //       fontFamily: 'ArabicFont', // Replace with your Arabic font
-      //     ),
-      //     textDirection: TextDirection.rtl,
-      //   ),
-      //   SizedBox(height: 10),
-      //   ListView.builder(
-      //     shrinkWrap: true,
-      //     physics: NeverScrollableScrollPhysics(),
-      //     itemCount: userord.length,
-      //     itemBuilder: (context, index) {
-      //       final order = userord[index];
-
-      //       return Row(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         children: [
-      //           SizedBox(width: 10),
-      //           Text(
-      //             "الخدمة: ${order['TypeServ']}",
-      //             style: TextStyle(
-      //               fontSize: 16,
-      //               fontWeight: FontWeight.bold,
-      //               color: Color.fromARGB(255, 228, 228, 226),
-      //               fontFamily: 'ArabicFont', // Replace with your Arabic font
-      //             ),
-      //             textDirection: TextDirection.rtl,
-      //           ),
-      //           IconButton(
-      //             icon: Icon(Icons.info),
-      //             onPressed: () {
-      //               // Handle showing/hiding additional information for this order
-      //               showAdditionalInfo=!showAdditionalInfo;
-      //             },
-      //           ),
-      //         ],
-      //       );
-      //     },
-      //   ),
-      // ],
-      //   ),
-      //   // Add additional information here (hidden by default)
-      //   if (showAdditionalInfo)
-      //     Column(
-      //       children: [
-      //         SizedBox(height: 10),
-      //         Text(
-      //           "الساعة: ${userord['hour']}",
-      //           style: TextStyle(
-      //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-      //           ),
-      //           textDirection: TextDirection.rtl,
-      //         ),
-      //         Text(
-      //           "السعر: ${userord['price']}",
-      //           style: TextStyle(
-      //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-      //           ),
-      //           textDirection: TextDirection.rtl,
-      //         ),
-      //         Text(
-      //           "التاريخ: ${userord['date']}",
-      //           style: TextStyle(
-      //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-      //           ),
-      //           textDirection: TextDirection.rtl,
-      //         ),
-      //         // Display additional service details here
-      //         // Display repeated order information here
-      //       ],
-      //     ),
-      //],
-      // children: [
-      //    SizedBox(
-      //             height: 20,
-      //           ),
-      //   Text('الخدمات التي قام ${user['name']}  بطلبها مني',
-      //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-
-      //   SizedBox(height: 10),
-      //   Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       SizedBox(
-      //         width: 10,
-      //       ),
-      //       Text(
-      //         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      //         style: TextStyle(
-      //             fontSize: 16,
-      //             fontWeight: FontWeight.bold,
-      //               color: Color.fromARGB(255, 228, 228, 226),)
-      //       ),
-      //     ],
-      //   ),
-      // ],
-      //   ),
-      // );
     }
+    //     return Container(
+    //       height: 300,
+    //       // width: 300,
+    //       margin: EdgeInsets.symmetric(horizontal: 20),
+    //       padding: EdgeInsets.all(10),
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(10),
+    //          color: Color.fromARGB(255, 228, 228, 226),
+    //       ),
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //          children: [
+    //   SizedBox(height: 20),
+    //   Text(
+    //     'الخدمات التي قام ${user['name']} بطلبها مني',
+    //     style: TextStyle(
+    //       fontSize: 20,
+    //       fontWeight: FontWeight.bold,
+    //       fontFamily: 'ArabicFont', // Replace with your Arabic font
+    //     ),
+    //     textDirection: TextDirection.rtl,
+    //   ),
+    //   SizedBox(height: 10),
+    //   ListView.builder(
+    //     shrinkWrap: true,
+    //     physics: NeverScrollableScrollPhysics(),
+    //     itemCount: userord.length,
+    //     itemBuilder: (context, index) {
+    //       final order = userord[index];
+
+    //       return Row(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           SizedBox(width: 10),
+    //           Text(
+    //             "الخدمة: ${order['TypeServ']}",
+    //             style: TextStyle(
+    //               fontSize: 16,
+    //               fontWeight: FontWeight.bold,
+    //               color: Color.fromARGB(255, 228, 228, 226),
+    //               fontFamily: 'ArabicFont', // Replace with your Arabic font
+    //             ),
+    //             textDirection: TextDirection.rtl,
+    //           ),
+    //           IconButton(
+    //             icon: Icon(Icons.info),
+    //             onPressed: () {
+    //               // Handle showing/hiding additional information for this order
+    //               showAdditionalInfo=!showAdditionalInfo;
+    //             },
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   ),
+    // ],
+    //   ),
+    //   // Add additional information here (hidden by default)
+    //   if (showAdditionalInfo)
+    //     Column(
+    //       children: [
+    //         SizedBox(height: 10),
+    //         Text(
+    //           "الساعة: ${userord['hour']}",
+    //           style: TextStyle(
+    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
+    //           ),
+    //           textDirection: TextDirection.rtl,
+    //         ),
+    //         Text(
+    //           "السعر: ${userord['price']}",
+    //           style: TextStyle(
+    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
+    //           ),
+    //           textDirection: TextDirection.rtl,
+    //         ),
+    //         Text(
+    //           "التاريخ: ${userord['date']}",
+    //           style: TextStyle(
+    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
+    //           ),
+    //           textDirection: TextDirection.rtl,
+    //         ),
+    //         // Display additional service details here
+    //         // Display repeated order information here
+    //       ],
+    //     ),
+    //],
+    // children: [
+    //    SizedBox(
+    //             height: 20,
+    //           ),
+    //   Text('الخدمات التي قام ${user['name']}  بطلبها مني',
+    //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+
+    //   SizedBox(height: 10),
+    //   Row(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       SizedBox(
+    //         width: 10,
+    //       ),
+    //       Text(
+    //         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    //         style: TextStyle(
+    //             fontSize: 16,
+    //             fontWeight: FontWeight.bold,
+    //               color: Color.fromARGB(255, 228, 228, 226),)
+    //       ),
+    //     ],
+    //   ),
+    // ],
+    //   ),
+    // );
 
     Widget yourContentWidget() {
       return Container(
