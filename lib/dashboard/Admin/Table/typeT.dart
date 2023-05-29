@@ -116,36 +116,23 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                           },
                         ),
                       ),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          return SingleChildScrollView(
-                            child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                  minHeight: constraints.maxHeight),
-                              child: DataTable(
-                                columns: [
-                                  DataColumn(label: Text('Service')),
-                                  DataColumn(label: SizedBox()),
-                                ],
-                                rows: services.map((service) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(Text(service.name)),
-                                      DataCell(
-                                        IconButton(
-                                          icon: Icon(Icons.delete),
-                                          onPressed: () {
-                                            deleteService(service, type);
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }).toList(),
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: services.length,
+                          itemBuilder: (context, serviceIndex) {
+                            final service = services[serviceIndex];
+                            return ListTile(
+                              title: Text(service.name),
+                              trailing: IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () {
+                                  deleteService(service, type);
+                                },
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),

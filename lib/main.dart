@@ -13,6 +13,7 @@ List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
+List<Map<String, dynamic>> alltype = [];
 //List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> ordserv = [];
 
@@ -154,6 +155,23 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> getAlltypes() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/type/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        alltype = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      print("aaaaaaaaaaaaaaaaaaaaaaatttttttttttttttt");
+      print(alltype);
+      print("aaaaaaaaaaaaaaaaaaaaaaaaattttttttttt");
+    } else {
+      print('Error fetching types data: ${response.statusCode}');
+    }
+  }
+
   // Future<void> getAllordw(String Wname) async {
   //   final response = await http
   //       .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
@@ -261,6 +279,7 @@ class _MyHomePageState extends State<MyHomePage> {
     getorday();
     ordservcount();
     getAllord();
+    getAlltypes();
     //getAllordw() ;
   }
 
