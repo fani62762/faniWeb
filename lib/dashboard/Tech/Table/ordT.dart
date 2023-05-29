@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 List<Map<String, dynamic>> allordw = [];
+List<Map<String, dynamic>> orders = [];
 
 class TableOfordDataw extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class TableOfordDataw extends StatefulWidget {
 }
 
 TextEditingController _searchController = TextEditingController();
-List<Map<String, dynamic>> orders = [];
+
 List<String> columnNames = [
   'اسم العميل',
   'اسم العامل',
@@ -39,9 +40,11 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
       setState(() {
         allordw = List<Map<String, dynamic>>.from(jsonResponse);
       });
+      orders = allordw;
       print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbb");
       print(allordw);
       print("aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb");
+      print(orders);
     } else {
       print('Error fetching orders data: ${response.statusCode}');
     }
@@ -54,6 +57,8 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
     print(WorW['name']);
     getAllordw(WorW['name']);
     orders = allordw;
+    print("hiiiiiiiiiiiiiiiiii");
+    print(orders);
     columnNames = columnNames.toSet().toList();
     // print(workers);
   }
