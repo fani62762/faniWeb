@@ -350,7 +350,8 @@ class _AsUState extends State<AsU> {
               SizedBox(height: 10),
               Expanded(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
+                  //scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   child: DataTable(
                     columnSpacing: 12,
                     dataRowHeight: 60,
