@@ -326,359 +326,306 @@ class _AsUState extends State<AsU> {
 
     Widget orders() {
       return Expanded(
-          child: Container(
-        height: MediaQuery.of(context).size.height,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Color.fromARGB(255, 228, 228, 226),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'الخدمات التي قام ${user['name']} بطلبها مني',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'ArabicFont',
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(255, 228, 228, 226),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'الخدمات التي قام ${user['name']} بطلبها مني',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'ArabicFont',
+                ),
+                textDirection: TextDirection.rtl,
               ),
-              textDirection: TextDirection.rtl,
-            ),
-            SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: userord.length,
-              itemBuilder: (context, index) {
-                final order = userord[index];
-                return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      columnSpacing: 12,
-                      dataRowHeight: 60,
-                      dividerThickness: 1,
-                      columns: [
-                        DataColumn(
-                          label: Text('اسم العميل'),
-                        ),
-                        DataColumn(label: _verticalDivider),
-
-                        DataColumn(
-                          label: Text('حالة الطلب'),
-                          numeric: true,
-                        ),
-                        DataColumn(label: _verticalDivider),
-                        // // DataColumn(label: _verticalDivider),
-                        // // if (AppResponsive.isDesktop(context))
-                        // //   DataColumn(
-                        // //     label: Text('التقييم'),
-                        // //   ),
-                        // if (AppResponsive.isDesktop(context))
-                        //   DataColumn(label: _verticalDivider),
-                        DataColumn(
-                          label: Text('تفاصيل'),
-                        ),
-                        DataColumn(label: _verticalDivider),
-                        // //if (!AppResponsive.isMobile(context))
-                        // DataColumn(
-                        //   label: SizedBox(),
-                        //   numeric: true,
-                        // ),
-                      ],
-                      rows: userord.map((order) {
-                        return DataRow(
-                          cells: [
-                            // if (AppResponsive.isDesktop(context))
-                            //   DataCell(
-                            //     Row(
-                            //       // children: [
-                            //       //   // CircleAvatar(
-                            //       //   //   backgroundImage: NetworkImage(worker['image']),
-                            //       //   // ),
-                            //       //   // SizedBox(width: 10),
-                            //       //   Text(order['uname']),
-                            //       // ],
-                            //     ),
-                            //   ),
-                            //if (!AppResponsive.isDesktop(context))
-                            DataCell(Text(order['uname'])),
-                            DataCell(_verticalDivider),
-
-                            order['acc'] == 0
-                                ? DataCell(
-                                    Container(
-                                      child: Text(
-                                        "بانتظار موافقة العامل",
-                                        style: TextStyle(
-                                          color: Colors
-                                              .orange, // Set the desired text color here
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : order['acc'] == 1
-                                    ? DataCell(
-                                        Container(
-                                          child: Text(
-                                            "قيد التنفيذ  ",
-                                            style: TextStyle(
-                                              color: Colors
-                                                  .blue, // Set the desired text color here
-                                            ),
+              SizedBox(height: 10),
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: userord.length,
+                  itemBuilder: (context, index) {
+                    final order = userord[index];
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        columnSpacing: 12,
+                        dataRowHeight: 60,
+                        dividerThickness: 1,
+                        columns: [
+                          DataColumn(
+                            label: Text('اسم العميل'),
+                          ),
+                          DataColumn(label: _verticalDivider),
+                          DataColumn(
+                            label: Text('حالة الطلب'),
+                            numeric: true,
+                          ),
+                          DataColumn(label: _verticalDivider),
+                          DataColumn(
+                            label: Text('تفاصيل'),
+                          ),
+                          DataColumn(label: _verticalDivider),
+                        ],
+                        rows: userord.map((order) {
+                          return DataRow(
+                            cells: [
+                              DataCell(Text(order['uname'])),
+                              DataCell(_verticalDivider),
+                              order['acc'] == 0
+                                  ? DataCell(
+                                      Container(
+                                        child: Text(
+                                          "بانتظار موافقة العامل",
+                                          style: TextStyle(
+                                            color: Colors.orange,
                                           ),
                                         ),
-                                      )
-                                    : order['acc'] == 2
-                                        ? DataCell(
-                                            Container(
-                                              child: Text(
-                                                "  مكتمل",
-                                                style: TextStyle(
-                                                  color: Colors
-                                                      .green, // Set the desired text color here
-                                                ),
+                                      ),
+                                    )
+                                  : order['acc'] == 1
+                                      ? DataCell(
+                                          Container(
+                                            child: Text(
+                                              "قيد التنفيذ",
+                                              style: TextStyle(
+                                                color: Colors.blue,
                                               ),
                                             ),
-                                          )
-                                        : order['acc'] == -1
-                                            ? DataCell(
-                                                Container(
-                                                  child: Text(
-                                                    "  رفض من قبل العامل",
-                                                    style: TextStyle(
-                                                      color: Colors
-                                                          .red, // Set the desired text color here
-                                                    ),
+                                          ),
+                                        )
+                                      : order['acc'] == 2
+                                          ? DataCell(
+                                              Container(
+                                                child: Text(
+                                                  "مكتمل",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
                                                   ),
                                                 ),
-                                              )
-                                            : order['acc'] == -2
-                                                ? DataCell(
-                                                    Container(
-                                                      child: Text(
-                                                        "  الغاء من قبل العميل",
-                                                        style: TextStyle(
-                                                          color: Colors
-                                                              .red, // Set the desired text color here
-                                                        ),
+                                              ),
+                                            )
+                                          : order['acc'] == -1
+                                              ? DataCell(
+                                                  Container(
+                                                    child: Text(
+                                                      "رفض من قبل العامل",
+                                                      style: TextStyle(
+                                                        color: Colors.red,
                                                       ),
                                                     ),
-                                                  )
-                                                : DataCell(Text("")),
-                            DataCell(_verticalDivider),
-
-                            // // if (AppResponsive.isDesktop(context))
-                            // //   DataCell(Text(worker['gender'])),
-                            // if (AppResponsive.isDesktop(context))
-                            //   DataCell(_verticalDivider),
-
-                            DataCell(IconButton(
-                              icon: Icon(Icons.info_outline),
-                              onPressed: () {
-                                showOrderDetails(order);
-                              },
-                            )),
-                            DataCell(_verticalDivider),
-                            // // if (!AppResponsive.isMobile(context))
-                            // DataCell(IconButton(
-                            //   icon: Icon(Icons.delete),
-                            //   onPressed: () {},
-                            // )),
-                          ],
-                        );
-                      }).toList(),
-                    ));
-
-                // return Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     SizedBox(width: 10),
-                //     Text(
-                //       "الخدمة: ${order['Wname']}",
-                //       style: TextStyle(
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.bold,
-                //         color: Color.fromARGB(255, 228, 228, 226),
-                //         fontFamily: 'ArabicFont',
-                //       ),
-                //       textDirection: TextDirection.rtl,
-                //     ),
-                //     Text(
-                //       "الخدمة: ${order['TypeServ']}",
-                //       style: TextStyle(
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.bold,
-                //         color: Color.fromARGB(255, 228, 228, 226),
-                //         fontFamily: 'ArabicFont',
-                //       ),
-                //       textDirection: TextDirection.rtl,
-                //     ),
-                //     IconButton(
-                //       icon: Icon(Icons.info),
-                //       onPressed: () {
-                //         // Handle showing/hiding additional information for this order
-                //         setState(() {
-                //           showAdditionalInfo = !showAdditionalInfo;
-                //         });
-                //       },
-                //     ),
-                //   ],
-                // );
-              },
-            ),
-            // Add additional information here (hidden by default)
-            if (showAdditionalInfo) ...[
-              SizedBox(height: 10),
-              for (final order in userord)
-                Column(
-                  children: [
-                    Text(
-                      "الساعة: ${order['Hour']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
+                                                  ),
+                                                )
+                                              : order['acc'] == -2
+                                                  ? DataCell(
+                                                      Container(
+                                                        child: Text(
+                                                          "الغاء من قبل العميل",
+                                                          style: TextStyle(
+                                                            color: Colors.red,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : DataCell(Text("")),
+                              DataCell(_verticalDivider),
+                              DataCell(IconButton(
+                                icon: Icon(Icons.info_outline),
+                                onPressed: () {
+                                  showOrderDetails(order);
+                                },
+                              )),
+                              DataCell(_verticalDivider),
+                            ],
+                          );
+                        }).toList(),
                       ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      "السعر: ${order['Price']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      "التاريخ: ${order['date']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    // Display additional service details here
-                    // Display repeated order information here
-                  ],
+                    );
+                  },
                 ),
+              ),
             ],
-          ],
+          ),
         ),
-      ));
+      );
     }
-    //     return Container(
-    //       height: 300,
-    //       // width: 300,
-    //       margin: EdgeInsets.symmetric(horizontal: 20),
-    //       padding: EdgeInsets.all(10),
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.circular(10),
-    //          color: Color.fromARGB(255, 228, 228, 226),
-    //       ),
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //          children: [
-    //   SizedBox(height: 20),
-    //   Text(
-    //     'الخدمات التي قام ${user['name']} بطلبها مني',
-    //     style: TextStyle(
-    //       fontSize: 20,
-    //       fontWeight: FontWeight.bold,
-    //       fontFamily: 'ArabicFont', // Replace with your Arabic font
-    //     ),
-    //     textDirection: TextDirection.rtl,
-    //   ),
-    //   SizedBox(height: 10),
-    //   ListView.builder(
-    //     shrinkWrap: true,
-    //     physics: NeverScrollableScrollPhysics(),
-    //     itemCount: userord.length,
-    //     itemBuilder: (context, index) {
-    //       final order = userord[index];
 
-    //       return Row(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: [
-    //           SizedBox(width: 10),
-    //           Text(
-    //             "الخدمة: ${order['TypeServ']}",
-    //             style: TextStyle(
-    //               fontSize: 16,
-    //               fontWeight: FontWeight.bold,
-    //               color: Color.fromARGB(255, 228, 228, 226),
-    //               fontFamily: 'ArabicFont', // Replace with your Arabic font
-    //             ),
-    //             textDirection: TextDirection.rtl,
-    //           ),
-    //           IconButton(
-    //             icon: Icon(Icons.info),
-    //             onPressed: () {
-    //               // Handle showing/hiding additional information for this order
-    //               showAdditionalInfo=!showAdditionalInfo;
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   ),
-    // ],
-    //   ),
-    //   // Add additional information here (hidden by default)
-    //   if (showAdditionalInfo)
-    //     Column(
+    // Widget orders() {
+    //   return Expanded(
+    //       child: Container(
+    //     height: MediaQuery.of(context).size.height,
+    //     margin: EdgeInsets.symmetric(horizontal: 20),
+    //     padding: EdgeInsets.all(10),
+    //     decoration: BoxDecoration(
+    //       borderRadius: BorderRadius.circular(10),
+    //       color: Color.fromARGB(255, 228, 228, 226),
+    //     ),
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
     //       children: [
+    //         SizedBox(height: 20),
+    //         Text(
+    //           'الخدمات التي قام ${user['name']} بطلبها مني',
+    //           style: TextStyle(
+    //             fontSize: 20,
+    //             fontWeight: FontWeight.bold,
+    //             fontFamily: 'ArabicFont',
+    //           ),
+    //           textDirection: TextDirection.rtl,
+    //         ),
     //         SizedBox(height: 10),
-    //         Text(
-    //           "الساعة: ${userord['hour']}",
-    //           style: TextStyle(
-    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-    //           ),
-    //           textDirection: TextDirection.rtl,
+    //         ListView.builder(
+    //           shrinkWrap: true,
+    //           physics: NeverScrollableScrollPhysics(),
+    //           itemCount: userord.length,
+    //           itemBuilder: (context, index) {
+    //             final order = userord[index];
+    //             return SingleChildScrollView(
+    //                 scrollDirection: Axis.horizontal,
+    //                 child: DataTable(
+    //                   columnSpacing: 12,
+    //                   dataRowHeight: 60,
+    //                   dividerThickness: 1,
+    //                   columns: [
+    //                     DataColumn(
+    //                       label: Text('اسم العميل'),
+    //                     ),
+    //                     DataColumn(label: _verticalDivider),
+
+    //                     DataColumn(
+    //                       label: Text('حالة الطلب'),
+    //                       numeric: true,
+    //                     ),
+    //                     DataColumn(label: _verticalDivider),
+    //                     // // DataColumn(label: _verticalDivider),
+    //                     // // if (AppResponsive.isDesktop(context))
+    //                     // //   DataColumn(
+    //                     // //     label: Text('التقييم'),
+    //                     // //   ),
+    //                     // if (AppResponsive.isDesktop(context))
+    //                     //   DataColumn(label: _verticalDivider),
+    //                     DataColumn(
+    //                       label: Text('تفاصيل'),
+    //                     ),
+    //                     DataColumn(label: _verticalDivider),
+    //                     // //if (!AppResponsive.isMobile(context))
+    //                     // DataColumn(
+    //                     //   label: SizedBox(),
+    //                     //   numeric: true,
+    //                     // ),
+    //                   ],
+    //                   rows: userord.map((order) {
+    //                     return DataRow(
+    //                       cells: [
+    //                         // if (AppResponsive.isDesktop(context))
+    //                         //   DataCell(
+    //                         //     Row(
+    //                         //       // children: [
+    //                         //       //   // CircleAvatar(
+    //                         //       //   //   backgroundImage: NetworkImage(worker['image']),
+    //                         //       //   // ),
+    //                         //       //   // SizedBox(width: 10),
+    //                         //       //   Text(order['uname']),
+    //                         //       // ],
+    //                         //     ),
+    //                         //   ),
+    //                         //if (!AppResponsive.isDesktop(context))
+    //                         DataCell(Text(order['uname'])),
+    //                         DataCell(_verticalDivider),
+
+    //                         order['acc'] == 0
+    //                             ? DataCell(
+    //                                 Container(
+    //                                   child: Text(
+    //                                     "بانتظار موافقة العامل",
+    //                                     style: TextStyle(
+    //                                       color: Colors
+    //                                           .orange, // Set the desired text color here
+    //                                     ),
+    //                                   ),
+    //                                 ),
+    //                               )
+    //                             : order['acc'] == 1
+    //                                 ? DataCell(
+    //                                     Container(
+    //                                       child: Text(
+    //                                         "قيد التنفيذ  ",
+    //                                         style: TextStyle(
+    //                                           color: Colors
+    //                                               .blue, // Set the desired text color here
+    //                                         ),
+    //                                       ),
+    //                                     ),
+    //                                   )
+    //                                 : order['acc'] == 2
+    //                                     ? DataCell(
+    //                                         Container(
+    //                                           child: Text(
+    //                                             "  مكتمل",
+    //                                             style: TextStyle(
+    //                                               color: Colors
+    //                                                   .green, // Set the desired text color here
+    //                                             ),
+    //                                           ),
+    //                                         ),
+    //                                       )
+    //                                     : order['acc'] == -1
+    //                                         ? DataCell(
+    //                                             Container(
+    //                                               child: Text(
+    //                                                 "  رفض من قبل العامل",
+    //                                                 style: TextStyle(
+    //                                                   color: Colors
+    //                                                       .red, // Set the desired text color here
+    //                                                 ),
+    //                                               ),
+    //                                             ),
+    //                                           )
+    //                                         : order['acc'] == -2
+    //                                             ? DataCell(
+    //                                                 Container(
+    //                                                   child: Text(
+    //                                                     "  الغاء من قبل العميل",
+    //                                                     style: TextStyle(
+    //                                                       color: Colors
+    //                                                           .red, // Set the desired text color here
+    //                                                     ),
+    //                                                   ),
+    //                                                 ),
+    //                                               )
+    //                                             : DataCell(Text("")),
+    //                         DataCell(_verticalDivider),
+
+    //                         DataCell(IconButton(
+    //                           icon: Icon(Icons.info_outline),
+    //                           onPressed: () {
+    //                             showOrderDetails(order);
+    //                           },
+    //                         )),
+    //                         DataCell(_verticalDivider),
+
+    //                       ],
+    //                     );
+    //                   }).toList(),
+    //                 ));
+
+    //           },
     //         ),
-    //         Text(
-    //           "السعر: ${userord['price']}",
-    //           style: TextStyle(
-    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-    //           ),
-    //           textDirection: TextDirection.rtl,
-    //         ),
-    //         Text(
-    //           "التاريخ: ${userord['date']}",
-    //           style: TextStyle(
-    //             fontFamily: 'ArabicFont', // Replace with your Arabic font
-    //           ),
-    //           textDirection: TextDirection.rtl,
-    //         ),
-    //         // Display additional service details here
-    //         // Display repeated order information here
+    //         // Add additional information here (hidden by default)
+
     //       ],
     //     ),
-    //],
-    // children: [
-    //    SizedBox(
-    //             height: 20,
-    //           ),
-    //   Text('الخدمات التي قام ${user['name']}  بطلبها مني',
-    //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-
-    //   SizedBox(height: 10),
-    //   Row(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       SizedBox(
-    //         width: 10,
-    //       ),
-    //       Text(
-    //         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    //         style: TextStyle(
-    //             fontSize: 16,
-    //             fontWeight: FontWeight.bold,
-    //               color: Color.fromARGB(255, 228, 228, 226),)
-    //       ),
-    //     ],
-    //   ),
-    // ],
-    //   ),
-    // );
+    //   ));
+    // }
 
     Widget yourContentWidget() {
       return Container(
