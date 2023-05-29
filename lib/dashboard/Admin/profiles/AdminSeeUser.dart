@@ -267,7 +267,8 @@ class _AsUState extends State<AsU> {
     }
 
     Widget orders() {
-      return Flexible(
+      return SizedBox(
+        height: 300,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
           padding: EdgeInsets.all(10),
