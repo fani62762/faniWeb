@@ -284,56 +284,58 @@ class _AsUState extends State<AsU> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'ArabicFont', // Replace with your Arabic font
+                fontFamily: 'ArabicFont',
               ),
               textDirection: TextDirection.rtl,
             ),
             SizedBox(height: 10),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: userord.length,
-              itemBuilder: (context, index) {
-                final order = userord[index];
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: userord.length,
+                itemBuilder: (context, index) {
+                  final order = userord[index];
 
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 10),
-                    Text(
-                      "الخدمة: ${order['Wname']}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 228, 228, 226),
-                        fontFamily:
-                            'ArabicFont', // Replace with your Arabic font
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        "الخدمة: ${order['TypeServ']}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 228, 228, 226),
+                          fontFamily:
+                              'ArabicFont', // Replace with your Arabic font
+                        ),
+                        textDirection: TextDirection.rtl,
                       ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      "الخدمة: ${order['TypeServ']}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 228, 228, 226),
-                        fontFamily:
-                            'ArabicFont', // Replace with your Arabic font
+                      Text(
+                        "الخدمة: ${order['TypeServ']}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 228, 228, 226),
+                          fontFamily:
+                              'ArabicFont', // Replace with your Arabic font
+                        ),
+                        textDirection: TextDirection.rtl,
                       ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {
-                        // Handle showing/hiding additional information for this order
-                        setState(() {
-                          showAdditionalInfo = !showAdditionalInfo;
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
+                      IconButton(
+                        icon: Icon(Icons.info),
+                        onPressed: () {
+                          // Handle showing/hiding additional information for this order
+                          setState(() {
+                            showAdditionalInfo = !showAdditionalInfo;
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
             // Add additional information here (hidden by default)
             if (showAdditionalInfo) ...[
