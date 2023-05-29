@@ -1,6 +1,9 @@
-2023/05/29-22:46:23.200 390 Reusing MANIFEST C:\Users\fanan\AppData\Local\Temp\flutter_tools.e4d4f70f\flutter_tools_chrome_device.2a63a30c\Default\shared_proto_db/MANIFEST-000001
-2023/05/29-22:46:23.201 390 Recovering log #10
-2023/05/29-22:46:23.203 390 Reusing old log C:\Users\fanan\AppData\Local\Temp\flutter_tools.e4d4f70f\flutter_tools_chrome_device.2a63a30c\Default\shared_proto_db/000010.log 
-2023/05/29-22:46:23.204 390 Delete type=0 #3
-2023/05/29-22:46:23.204 390 Delete type=0 #4
-2023/05/29-22:46:23.204 390 Delete type=0 #7
+2023/05/29-22:57:04.740 4778 Reusing MANIFEST C:\Users\fanan\AppData\Local\Temp\flutter_tools.ee602df1\flutter_tools_chrome_device.695fc2f8\Default\shared_proto_db/MANIFEST-000001
+2023/05/29-22:57:04.740 4778 Recovering log #10
+2023/05/29-22:57:04.743 4778 Reusing old log C:\Users\fanan\AppData\Local\Temp\flutter_tools.ee602df1\flutter_tools_chrome_device.695fc2f8\Default\shared_proto_db/000010.log 
+2023/05/29-22:57:04.744 4778 Delete type=0 #3
+2023/05/29-22:57:04.744 4778 Delete type=0 #4
+2023/05/29-22:57:04.744 4778 Delete type=0 #7
+2023/05/29-22:57:35.794 5968 Level-0 table #14: started
+2023/05/29-22:57:35.800 5968 Level-0 table #14: 133768 bytes OK
+2023/05/29-22:57:35.802 5968 Delete type=0 #10

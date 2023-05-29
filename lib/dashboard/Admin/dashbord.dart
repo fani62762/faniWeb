@@ -7,6 +7,7 @@ import 'package:faniweb/dashboard/Admin/profile.dart';
 import 'package:faniweb/dashboard/Admin/Table/empT.dart';
 import 'package:faniweb/dashboard/Admin/Table/ordT.dart';
 import 'package:faniweb/dashboard/Admin/Table/userT.dart';
+import 'package:faniweb/dashboard/Admin/Table/typeT.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgAU.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgsAW.dart';
 import 'package:faniweb/main.dart';
@@ -104,7 +105,7 @@ class _DashbordState extends State<Dashbord> {
       case 1:
         return TableOfUserData();
       case 2:
-        return Text("خدمات");
+        return ServiceManagementScreen();
       case 3:
         return TableOfordData();
       case 4:
