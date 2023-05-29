@@ -307,19 +307,7 @@ class _AsUState extends State<AsU> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 228, 228, 226),
-                          fontFamily:
-                              'ArabicFont', // Replace with your Arabic font
-                        ),
-                        textDirection: TextDirection.rtl,
-                      ),
-                      Text(
-                        "الخدمة: ${order['TypeServ']}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 228, 228, 226),
-                          fontFamily:
-                              'ArabicFont', // Replace with your Arabic font
+                          fontFamily: 'ArabicFont',
                         ),
                         textDirection: TextDirection.rtl,
                       ),
@@ -346,24 +334,21 @@ class _AsUState extends State<AsU> {
                     Text(
                       "الساعة: ${order['Hour']}",
                       style: TextStyle(
-                        fontFamily:
-                            'ArabicFont', // Replace with your Arabic font
+                        fontFamily: 'ArabicFont',
                       ),
                       textDirection: TextDirection.rtl,
                     ),
                     Text(
                       "السعر: ${order['Price']}",
                       style: TextStyle(
-                        fontFamily:
-                            'ArabicFont', // Replace with your Arabic font
+                        fontFamily: 'ArabicFont',
                       ),
                       textDirection: TextDirection.rtl,
                     ),
                     Text(
                       "التاريخ: ${order['date']}",
                       style: TextStyle(
-                        fontFamily:
-                            'ArabicFont', // Replace with your Arabic font
+                        fontFamily: 'ArabicFont',
                       ),
                       textDirection: TextDirection.rtl,
                     ),
