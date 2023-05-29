@@ -513,7 +513,7 @@ class _AsUState extends State<AsU> {
               SizedBox(height: 20),
               builinfo(),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 height: 500, // Adjust the height as needed
                 child: orders(),
               ),
@@ -526,7 +526,7 @@ class _AsUState extends State<AsU> {
                 children: [
                   SizedBox(height: 20),
                   builinfo(),
-                  Container(
+                  SizedBox(
                     height: 500, // Adjust the height as needed
                     child: orders(),
                   ),
