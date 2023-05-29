@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2023/05/27-19:04:07.463 2d40 Reusing MANIFEST C:\Users\shahd\AppData\Local\Temp\flutter_tools.434e2a78\flutter_tools_chrome_device.84f9f906\Default\Extension Rules/MANIFEST-000001
 2023/05/27-19:04:07.463 2d40 Recovering log #3
 2023/05/27-19:04:07.464 2d40 Reusing old log C:\Users\shahd\AppData\Local\Temp\flutter_tools.434e2a78\flutter_tools_chrome_device.84f9f906\Default\Extension Rules/000003.log 
+=======
+2023/05/28-21:05:29.127 ce4 Reusing MANIFEST C:\Users\fanan\AppData\Local\Temp\flutter_tools.1cc0c1a3\flutter_tools_chrome_device.dee1e49a\Default\Extension Rules/MANIFEST-000001
+2023/05/28-21:05:29.127 ce4 Recovering log #3
+2023/05/28-21:05:29.128 ce4 Reusing old log C:\Users\fanan\AppData\Local\Temp\flutter_tools.1cc0c1a3\flutter_tools_chrome_device.dee1e49a\Default\Extension Rules/000003.log 
+>>>>>>> 2918cc8df1a1584c8679481b50082585d373cd05

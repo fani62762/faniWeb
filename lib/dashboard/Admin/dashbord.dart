@@ -5,7 +5,9 @@ import 'package:faniweb/dashboard/Admin/headbar.dart';
 import 'package:faniweb/dashboard/Admin/notfication.dart';
 import 'package:faniweb/dashboard/Admin/profile.dart';
 import 'package:faniweb/dashboard/Admin/Table/empT.dart';
+import 'package:faniweb/dashboard/Admin/Table/ordT.dart';
 import 'package:faniweb/dashboard/Admin/Table/userT.dart';
+import 'package:faniweb/dashboard/Admin/Table/typeT.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgAU.dart';
 import 'package:faniweb/dashboard/Admin/msgs/viewmsgsAW.dart';
 import 'package:faniweb/main.dart';
@@ -48,10 +50,11 @@ class _DashbordState extends State<Dashbord> {
                   child: Container(
                     child: Column(
                       children: [
-                     if (i!=4)   Notfication(),
-                     if (i!=4)     SizedBox(
-                          height: 20,
-                        ),
+                        if (i != 4) Notfication(),
+                        if (i != 4)
+                          SizedBox(
+                            height: 20,
+                          ),
                         if (AppResponsive.isMobile(context)) ...{
                           CalenderWidget(),
                           SizedBox(
@@ -102,9 +105,9 @@ class _DashbordState extends State<Dashbord> {
       case 1:
         return TableOfUserData();
       case 2:
-        return Text("خدمات");
+        return ServiceManagementScreen();
       case 3:
-        return Text("طلبات");
+        return TableOfordData();
       case 4:
         return maths();
       case 5:

@@ -7,6 +7,7 @@ import 'package:faniweb/dashboard/Tech/headbarT.dart';
 import 'package:faniweb/dashboard/Tech/notficationT.dart';
 import 'package:faniweb/dashboard/Tech/profileT.dart';
 import 'package:faniweb/dashboard/Tech/Table/empT.dart';
+import 'package:faniweb/dashboard/Tech/Table/ordT.dart';
 import 'package:faniweb/dashboard/Tech/Table/userT.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgTU.dart';
 import 'package:faniweb/main.dart';
@@ -105,8 +106,8 @@ class _DashbordTState extends State<DashbordT> {
       case 2:
         return Text("خدمات");
       case 3:
-        return Text("طلبات");
-       case 4:
+        return TableOfordDataw();
+      case 4:
         return maths();
       case 5:
         return Text("تقارير");
