@@ -492,53 +492,51 @@ class _AsUState extends State<AsU> {
     }
 
     Widget yourContentWidget() {
-      return SingleChildScrollView(
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 10),
-            builimg(),
-            SizedBox(height: 5),
-            Text(
-              " المستخدم ${user['name']} ",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 70),
-            if (!AppResponsive.isDesktop(context)) ...{
-              SizedBox(height: 20),
-              builinfo(),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 500, // Adjust the height as needed
-                child: orders(),
-              ),
-              SizedBox(height: 20),
-              builcon(),
-              SizedBox(height: 20),
-            } else ...{
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+      return Container(
+          height: 600,
+          child: SingleChildScrollView(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: 10),
+                builimg(),
+                SizedBox(height: 5),
+                Text(
+                  " المستخدم ${user['name']} ",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 70),
+                if (!AppResponsive.isDesktop(context)) ...{
                   SizedBox(height: 20),
                   builinfo(),
-                  SizedBox(
-                    height: 500, // Adjust the height as needed
-                    child: orders(),
-                  ),
+                  SizedBox(height: 20),
+                  // Adjust the height as needed
+                  orders(),
+
+                  SizedBox(height: 20),
                   builcon(),
                   SizedBox(height: 20),
-                ],
-              ),
-              SizedBox(height: 70),
-            }
-          ],
-        ),
-      );
+                } else ...{
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(height: 20),
+                      builinfo(),
+                      orders(),
+                      builcon(),
+                      SizedBox(height: 20),
+                    ],
+                  ),
+                  SizedBox(height: 70),
+                }
+              ],
+            ),
+          ));
     }
 
     return Directionality(
