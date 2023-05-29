@@ -107,11 +107,7 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
                 DataColumn(
                   label: Text('الأعمال',style: TextStyle(fontFamily: 'Times New Roman')),
                 ),
-                DataColumn(label: _verticalDivider),
-                DataColumn(
-                  label: SizedBox(),
-                  numeric: true,
-                ),
+               
               }
             ],
             rows: filteredWorkers.map((worker) {
@@ -156,11 +152,7 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
                         );
                       },
                     )),
-                    DataCell(_verticalDivider),
-                    DataCell(IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {},
-                    )),
+                    
                   }
                 ],
               );

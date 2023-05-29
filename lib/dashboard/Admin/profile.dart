@@ -25,7 +25,6 @@ class _ProfileState extends State<Profile> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-  
    Future<void> getAlluserss() async {
    
     final response =
@@ -52,7 +51,7 @@ class _ProfileState extends State<Profile> {
     
       });
     } else {
-      print('Error fetching workers data: ${response.statusCode}');
+      print('Error fetching ordservcount data: ${response.statusCode}');
     }
   }
  
@@ -113,8 +112,7 @@ class _ProfileState extends State<Profile> {
           Divider(thickness: 0.5, color: Colors.grey),
           employeeTasks(Icons.miscellaneous_services, "عددالخدمات", "10"),
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
-          employeeTasks(
-              Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
+          employeeTasks(Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
           employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",dayor?.length ?? 0),
         ],
       ),

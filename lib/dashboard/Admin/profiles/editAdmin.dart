@@ -18,7 +18,7 @@ class editAdmin extends StatefulWidget {
   final String AdminName;
   State<editAdmin> createState() => _editAdminState();
 }
-var gg,dat;
+var gg,dat,xm;
 DateTime ?selectedDate;
 
 // File? imageFile;
@@ -38,6 +38,7 @@ class _editAdminState extends State<editAdmin> {
       mobbC = TextEditingController(text: Admin['phone']);
       pssCon = TextEditingController(text: Admin['password']);
      gg= Admin['gender'];
+     xm= Admin['image'];
       dttCon = TextEditingController(text: Admin['date']);
     });
   }
@@ -361,7 +362,7 @@ class _editAdminState extends State<editAdmin> {
                         width: 3.0,
                       ),
                       image: DecorationImage(
-                        image: NetworkImage(Admin['image']),
+                        image: NetworkImage(xm),
                         fit: BoxFit.cover,
                       ),
                     ),

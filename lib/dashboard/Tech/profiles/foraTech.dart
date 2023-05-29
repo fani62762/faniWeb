@@ -29,7 +29,7 @@ class _TechPageState extends State<TechPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (AppResponsive.isDesktop(context)) Expanded(child: SideBarT()),
-              Expanded(flex: 4, child: DashbordT())
+              Expanded(flex: 5, child: DashbordT())
             ],
           ),
         ),

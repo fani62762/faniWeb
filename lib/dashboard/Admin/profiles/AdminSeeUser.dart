@@ -298,7 +298,7 @@ return     SingleChildScrollView(
               builimg(),
               SizedBox(height: 5),
               Text(
-                " المستخدم ${user['name']} ",
+                "  ${user['name']} ",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

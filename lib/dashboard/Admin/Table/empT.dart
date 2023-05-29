@@ -19,7 +19,43 @@ class TableOfEmpData extends StatefulWidget {
 class _TableOfEmpDataState extends State<TableOfEmpData> {
   List<Map<String, dynamic>> filteredWorkers = [...workers];
   TextEditingController searchController = TextEditingController();
+   var serverToken="AAAAfAZYhAo:APA91bH4KtyI1wyJVnYjT6FU60RLY2Vfu0U0mXlMCa-Hq_2lYuZtL5imkfVrAw8Yb2xWvbf0X5GSUjSd8K2-Wo4W4au8jhl_oqT2d7DTBHXJh5nu8JXbBnJy1A3c1RnD9zh0R_fekvdI";
+Future<void> sendNotificationToAll(String title, String body,String name) async {
+  final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
 
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'key=$serverToken',
+  };
+
+  final notification = {
+    'body': body,
+    'title': title,
+  };
+
+  final message = {
+    'notification': notification,
+    'priority': 'high',
+    'to': '/topics/all',
+    'data': <String, dynamic>{
+'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+
+"name":name
+},
+  };
+
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: jsonEncode(message),
+  );
+
+  if (response.statusCode == 200) {
+    print('Notification sent successfully');
+  } else {
+    print('Failed to send notification. Status code: ${response.statusCode}');
+  }
+}
   void filterWorkers(String query) {
     setState(() {
       filteredWorkers = workers
@@ -30,7 +66,82 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
     });
   }
 
+Future<void> delservworks(String wname) async {
+  final url = Uri.parse('https://fani-service.onrender.com/servwork/delse/$wname');
+  final response = await http.delete(url);
+  if (response.statusCode == 200) {
+    print('servworks deleted successfully');
+  } else {
+    print('Failed to delete servworks. Status code: ${response.statusCode}');
+  }
+
+}
+ 
+Future<void> deleteOrders(String wname) async {
+   final url = Uri.parse('https://fani-service.onrender.com/ord/delse/$wname');
+  final response = await http.delete(url);
+  if (response.statusCode == 200) {
+    print('Orders deleted successfully');
+  } else {
+    print('Failed to delete orders. Status code: ${response.statusCode}');
+  }
+}
   static const String signupUrlW = 'https://fani-service.onrender.com/worker';
+  Future<void> dellworkemail(String name) async {
+    print(name);
+    final response = await http.post(
+      Uri.parse('https://fani-service.onrender.com/worker/delworkemail'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'name': name,
+      }),
+    );
+      await retrieveUnamesByWorker(name);
+     await deleteWorker(name);
+       await delservworks(name);
+        await deleteOrders(name);
+  }
+Future<void> deleteWorker(String name) async {
+  print(name);
+  try {
+    final response = await http.delete(Uri.parse('https://fani-service.onrender.com/worker/$name'));
+    if (response.statusCode == 200) {
+      final deletedWorker = jsonDecode(response.body);
+         await getAllWorkers();
+       Fluttertoast.showToast(
+                                          msg: "تمت حذف العامل وارسال ايميل له",
+                                          toastLength: Toast.LENGTH_LONG,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 3,
+                                          backgroundColor: Colors.green,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                      setState(() {
+                                        Navigator.pop(context);
+                                          i = 0;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => MenuControllerr())
+              ],
+              child: AdminPage(),
+            ),
+          ),
+        );
+   
+                                      });
+   
+   
+    } else {
+      print('Failed to delete worker. Status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error deleting worker: $e');
+  }
+}
+ 
   Future<void> createworker(String name,  String password,
       String phone, String gen) async {
     final body = jsonEncode({
@@ -50,7 +161,7 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
                                           msg: "تمت إضافة العامل",
                                           toastLength: Toast.LENGTH_LONG,
                                           gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
+                                          timeInSecForIosWeb: 2,
                                           backgroundColor: Colors.green,
                                           textColor: Colors.white,
                                           fontSize: 16.0);
@@ -105,7 +216,25 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
+    Future<void> retrieveUnamesByWorker(String wname) async {
+  final response = await http.get(Uri.parse('https://fani-service.onrender.com/ord/retrieveUnams/$wname'));
   
+  if (response.statusCode == 200) {
+    final jsonResponse = json.decode(response.body);
+    
+    for (var uname in jsonResponse) {
+      await sendNotificationToAll(
+        "حذف عامل",
+        "تم حذف العامل $wname للحفاظ على الجودة قم بإعادة حجز طلبك لدى عامل اخر",
+        uname,
+      );
+    }
+  } else {
+    print('Error fetching workers data: ${response.statusCode}');
+  }
+}
+
+ 
    @override
   void initState() {
     super.initState();
@@ -218,7 +347,13 @@ class _TableOfEmpDataState extends State<TableOfEmpData> {
                     DataCell(_verticalDivider),
                     DataCell(IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {},
+                      onPressed: () async {
+                   
+                        await dellworkemail(worker['name']);
+                       // await sendNotificationToAll("حذف عامل", "تم حذف العامل للحفاظ على الجودة قم بإعادة حجز طلبك لدى عامل اخر", "ff");
+                   
+                 
+                      },
                     )),
                   }
                 ],

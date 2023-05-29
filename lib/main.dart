@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:faniweb/menu_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +74,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
   Future<void> getorday() async {
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
@@ -243,12 +244,10 @@ Future<void> getAlltype() async {
           child: Column(
             children: <Widget>[
               Navbar(),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: Image.asset(
-                    
-                    "images/aa.png",
-                  )),
+             Image.asset(
+  "images/aa.png",
+),
+
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -261,11 +260,9 @@ Future<void> getAlltype() async {
                           color: Colors.black)),
                 ],
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: Image.asset(
-                    "images/c.png",
-                  )),
+              Image.asset(
+                "images/c.png",
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -278,11 +275,9 @@ Future<void> getAlltype() async {
                           color: Colors.black)),
                 ],
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: Image.asset(
-                    "images/c.jpg",
-                  )),
+              Image.asset(
+                "images/c.jpg",
+              ),
             ],
           ),
         ),

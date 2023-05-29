@@ -99,7 +99,7 @@ class _NavbarState extends State<Navbar> {
                     );
                   },
                   child: const Text(
-                    "من نحن",
+                    "  تواصل معنا ",
                     style: TextStyle(
                       color: Color.fromARGB(255, 16, 92, 154),
                       fontSize: 23,

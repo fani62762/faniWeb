@@ -19,7 +19,43 @@ class TableOfUserData extends StatefulWidget {
 class _TableOfUserDataState extends State<TableOfUserData> {
   List<Map<String, dynamic>> filteredWorkers = [...users];
   TextEditingController searchController = TextEditingController();
+var serverToken="AAAAfAZYhAo:APA91bH4KtyI1wyJVnYjT6FU60RLY2Vfu0U0mXlMCa-Hq_2lYuZtL5imkfVrAw8Yb2xWvbf0X5GSUjSd8K2-Wo4W4au8jhl_oqT2d7DTBHXJh5nu8JXbBnJy1A3c1RnD9zh0R_fekvdI";
+Future<void> sendNotificationToAll(String title, String body,String name) async {
+  final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
 
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'key=$serverToken',
+  };
+
+  final notification = {
+    'body': body,
+    'title': title,
+  };
+
+  final message = {
+    'notification': notification,
+    'priority': 'high',
+    'to': '/topics/all',
+    'data': <String, dynamic>{
+'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+
+"name":name
+},
+  };
+
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: jsonEncode(message),
+  );
+
+  if (response.statusCode == 200) {
+    print('Notification sent successfully');
+  } else {
+    print('Failed to send notification. Status code: ${response.statusCode}');
+  }
+}
   void filterWorkers(String query) {
     setState(() {
       filteredWorkers = users
@@ -29,7 +65,88 @@ class _TableOfUserDataState extends State<TableOfUserData> {
           .toList();
     });
   }
+  Future<void> deleteOrders(String uname) async {
+   final url = Uri.parse('https://fani-service.onrender.com/ord/delseordsuser/$uname');
+  final response = await http.delete(url);
+  if (response.statusCode == 200) {
+    print('Orders deleted successfully');
+  } else {
+    print('Failed to delete orders. Status code: ${response.statusCode}');
+  }
+}
+    Future<void> retrieveWorkerByUser(String uname) async {
+  final response = await http.get(Uri.parse('https://fani-service.onrender.com/ord/retrieveWnams/$uname'));
+  
+  if (response.statusCode == 200) {
+    final jsonResponse = json.decode(response.body);
+    
+    for (var Wname in jsonResponse) {
+      await sendNotificationToAll(
+        "حذف مستخدم",
+        "تم حذف العامل $uname للحفاظ على الجودة قم بإعادة حجز طلبك لدى عامل اخر",
+        Wname,
+      );
+    }
+  } else {
+    print('Error fetching workers data: ${response.statusCode}');
+  }
+}
+
+ 
   static const String signupUrl = 'https://fani-service.onrender.com/users';
+ Future<void> delluseremail(String name) async {
+    print(name);
+    final response = await http.post(
+      Uri.parse('https://fani-service.onrender.com/worker/deluseremail'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'name': name,
+      }),
+    );
+  
+      await retrieveWorkerByUser(name);
+      await deleteUser(name);
+      await deleteOrders(name);
+    
+  }
+  Future<void> deleteUser(String name) async {
+  print(name);
+    final response = await http.delete(Uri.parse('https://fani-service.onrender.com/users/$name'));
+    if (response.statusCode == 200) {
+      final deletedWorker = jsonDecode(response.body);
+      
+    await getAlluserss();
+        Fluttertoast.showToast(
+                                          msg: "تمت حذف المستخدم وارسال ايميل له",
+                                          toastLength: Toast.LENGTH_LONG,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 3,
+                                   
+                                          backgroundColor: Colors.green,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                      setState(() {
+                                        Navigator.pop(context);
+                                          i = 1;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => MenuControllerr())
+              ],
+              child: AdminPage(),
+            ),
+          ),
+        );
+   
+                                      });
+    
+    } else {
+      print('Failed to delete user. Status code: ${response.statusCode}');
+    }
+  
+}
   Future<void> createworker(String name,  String password,
       String phone, String gen) async {
     final body = jsonEncode({
@@ -49,7 +166,7 @@ class _TableOfUserDataState extends State<TableOfUserData> {
                                           msg: "تمت إضافة المستخدم",
                                           toastLength: Toast.LENGTH_LONG,
                                           gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
+                                          timeInSecForIosWeb: 2,
                                           backgroundColor: Colors.green,
                                           textColor: Colors.white,
                                           fontSize: 16.0);
@@ -218,7 +335,13 @@ class _TableOfUserDataState extends State<TableOfUserData> {
                     DataCell(_verticalDivider),
                     DataCell(IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {},
+                      onPressed: () async{
+                        
+                         await delluseremail(user['name']);
+                    
+                    
+                  
+                      },
                     )),
                   }
                 ],
