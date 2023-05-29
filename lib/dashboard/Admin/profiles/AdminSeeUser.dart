@@ -324,135 +324,6 @@ class _AsUState extends State<AsU> {
       );
     }
 
-    // Widget orders() {
-    //   return Expanded(
-    //     child: Container(
-    //       height: MediaQuery.of(context).size.height,
-    //       margin: EdgeInsets.symmetric(horizontal: 20),
-    //       padding: EdgeInsets.all(10),
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.circular(10),
-    //         color: Color.fromARGB(255, 228, 228, 226),
-    //       ),
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //         children: [
-    //           SizedBox(height: 20),
-    //           Text(
-    //             'الخدمات التي قام ${user['name']} بطلبها مني',
-    //             style: TextStyle(
-    //               fontSize: 20,
-    //               fontWeight: FontWeight.bold,
-    //               fontFamily: 'ArabicFont',
-    //             ),
-    //             textDirection: TextDirection.rtl,
-    //           ),
-    //           SizedBox(height: 10),
-    //           Flexible(
-    //             child: SingleChildScrollView(
-    //               scrollDirection: Axis.horizontal,
-    //               child: Container(
-    //                 height: 250, // Set the desired height for the table
-    //                 child: DataTable(
-    //                   columnSpacing: 12,
-    //                   dataRowHeight: 60,
-    //                   dividerThickness: 1,
-    //                   columns: [
-    //                     DataColumn(
-    //                       label: Text('اسم العميل'),
-    //                     ),
-    //                     DataColumn(label: _verticalDivider),
-    //                     DataColumn(
-    //                       label: Text('حالة الطلب'),
-    //                       numeric: true,
-    //                     ),
-    //                     DataColumn(label: _verticalDivider),
-    //                     DataColumn(
-    //                       label: Text('تفاصيل'),
-    //                     ),
-    //                     DataColumn(label: _verticalDivider),
-    //                   ],
-    //                   rows: userord.map((order) {
-    //                     return DataRow(
-    //                       cells: [
-    //                         DataCell(Text(order['uname'])),
-    //                         DataCell(_verticalDivider),
-    //                         order['acc'] == 0
-    //                             ? DataCell(
-    //                                 Container(
-    //                                   child: Text(
-    //                                     "بانتظار موافقة العامل",
-    //                                     style: TextStyle(
-    //                                       color: Colors.orange,
-    //                                     ),
-    //                                   ),
-    //                                 ),
-    //                               )
-    //                             : order['acc'] == 1
-    //                                 ? DataCell(
-    //                                     Container(
-    //                                       child: Text(
-    //                                         "قيد التنفيذ",
-    //                                         style: TextStyle(
-    //                                           color: Colors.blue,
-    //                                         ),
-    //                                       ),
-    //                                     ),
-    //                                   )
-    //                                 : order['acc'] == 2
-    //                                     ? DataCell(
-    //                                         Container(
-    //                                           child: Text(
-    //                                             "مكتمل",
-    //                                             style: TextStyle(
-    //                                               color: Colors.green,
-    //                                             ),
-    //                                           ),
-    //                                         ),
-    //                                       )
-    //                                     : order['acc'] == -1
-    //                                         ? DataCell(
-    //                                             Container(
-    //                                               child: Text(
-    //                                                 "رفض من قبل العامل",
-    //                                                 style: TextStyle(
-    //                                                   color: Colors.red,
-    //                                                 ),
-    //                                               ),
-    //                                             ),
-    //                                           )
-    //                                         : order['acc'] == -2
-    //                                             ? DataCell(
-    //                                                 Container(
-    //                                                   child: Text(
-    //                                                     "الغاء من قبل العميل",
-    //                                                     style: TextStyle(
-    //                                                       color: Colors.red,
-    //                                                     ),
-    //                                                   ),
-    //                                                 ),
-    //                                               )
-    //                                             : DataCell(Text("")),
-    //                         DataCell(_verticalDivider),
-    //                         DataCell(IconButton(
-    //                           icon: Icon(Icons.info_outline),
-    //                           onPressed: () {
-    //                             showOrderDetails(order);
-    //                           },
-    //                         )),
-    //                         DataCell(_verticalDivider),
-    //                       ],
-    //                     );
-    //                   }).toList(),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
-    // }
     Widget orders() {
       return Expanded(
         child: Container(
@@ -464,8 +335,7 @@ class _AsUState extends State<AsU> {
             color: Color.fromARGB(255, 228, 228, 226),
           ),
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Center the contents vertically
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20),
               Text(
@@ -478,13 +348,9 @@ class _AsUState extends State<AsU> {
                 textDirection: TextDirection.rtl,
               ),
               SizedBox(height: 10),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context)
-                          .size
-                          .width), // Limit the width to the screen width
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: DataTable(
                     columnSpacing: 12,
                     dataRowHeight: 60,
@@ -584,6 +450,137 @@ class _AsUState extends State<AsU> {
         ),
       );
     }
+    // Widget orders() {
+    //   return Expanded(
+    //     child: Container(
+    //       height: MediaQuery.of(context).size.height,
+    //       margin: EdgeInsets.symmetric(horizontal: 20),
+    //       padding: EdgeInsets.all(10),
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(10),
+    //         color: Color.fromARGB(255, 228, 228, 226),
+    //       ),
+    //       child: Column(
+    //         mainAxisAlignment:
+    //             MainAxisAlignment.center, // Center the contents vertically
+    //         children: [
+    //           SizedBox(height: 20),
+    //           Text(
+    //             'الخدمات التي قام ${user['name']} بطلبها مني',
+    //             style: TextStyle(
+    //               fontSize: 20,
+    //               fontWeight: FontWeight.bold,
+    //               fontFamily: 'ArabicFont',
+    //             ),
+    //             textDirection: TextDirection.rtl,
+    //           ),
+    //           SizedBox(height: 10),
+    //           SingleChildScrollView(
+    //             scrollDirection: Axis.horizontal,
+    //             child: Container(
+    //               constraints: BoxConstraints(
+    //                   maxWidth: MediaQuery.of(context)
+    //                       .size
+    //                       .width), // Limit the width to the screen width
+    //               child: DataTable(
+    //                 columnSpacing: 12,
+    //                 dataRowHeight: 60,
+    //                 dividerThickness: 1,
+    //                 columns: [
+    //                   DataColumn(
+    //                     label: Text('اسم العميل'),
+    //                   ),
+    //                   DataColumn(label: _verticalDivider),
+    //                   DataColumn(
+    //                     label: Text('حالة الطلب'),
+    //                     numeric: true,
+    //                   ),
+    //                   DataColumn(label: _verticalDivider),
+    //                   DataColumn(
+    //                     label: Text('تفاصيل'),
+    //                   ),
+    //                   DataColumn(label: _verticalDivider),
+    //                 ],
+    //                 rows: userord.map((order) {
+    //                   return DataRow(
+    //                     cells: [
+    //                       DataCell(Text(order['uname'])),
+    //                       DataCell(_verticalDivider),
+    //                       order['acc'] == 0
+    //                           ? DataCell(
+    //                               Container(
+    //                                 child: Text(
+    //                                   "بانتظار موافقة العامل",
+    //                                   style: TextStyle(
+    //                                     color: Colors.orange,
+    //                                   ),
+    //                                 ),
+    //                               ),
+    //                             )
+    //                           : order['acc'] == 1
+    //                               ? DataCell(
+    //                                   Container(
+    //                                     child: Text(
+    //                                       "قيد التنفيذ",
+    //                                       style: TextStyle(
+    //                                         color: Colors.blue,
+    //                                       ),
+    //                                     ),
+    //                                   ),
+    //                                 )
+    //                               : order['acc'] == 2
+    //                                   ? DataCell(
+    //                                       Container(
+    //                                         child: Text(
+    //                                           "مكتمل",
+    //                                           style: TextStyle(
+    //                                             color: Colors.green,
+    //                                           ),
+    //                                         ),
+    //                                       ),
+    //                                     )
+    //                                   : order['acc'] == -1
+    //                                       ? DataCell(
+    //                                           Container(
+    //                                             child: Text(
+    //                                               "رفض من قبل العامل",
+    //                                               style: TextStyle(
+    //                                                 color: Colors.red,
+    //                                               ),
+    //                                             ),
+    //                                           ),
+    //                                         )
+    //                                       : order['acc'] == -2
+    //                                           ? DataCell(
+    //                                               Container(
+    //                                                 child: Text(
+    //                                                   "الغاء من قبل العميل",
+    //                                                   style: TextStyle(
+    //                                                     color: Colors.red,
+    //                                                   ),
+    //                                                 ),
+    //                                               ),
+    //                                             )
+    //                                           : DataCell(Text("")),
+    //                       DataCell(_verticalDivider),
+    //                       DataCell(IconButton(
+    //                         icon: Icon(Icons.info_outline),
+    //                         onPressed: () {
+    //                           showOrderDetails(order);
+    //                         },
+    //                       )),
+    //                       DataCell(_verticalDivider),
+    //                     ],
+    //                   );
+    //                 }).toList(),
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    // }
 
     Widget yourContentWidget() {
       return Container(
