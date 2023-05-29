@@ -302,6 +302,16 @@ class _AsUState extends State<AsU> {
                   children: [
                     SizedBox(width: 10),
                     Text(
+                      "الخدمة: ${order['Wname']}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 228, 228, 226),
+                        fontFamily: 'ArabicFont',
+                      ),
+                      textDirection: TextDirection.rtl,
+                    ),
+                    Text(
                       "الخدمة: ${order['TypeServ']}",
                       style: TextStyle(
                         fontSize: 16,
