@@ -14,6 +14,7 @@ Map<String, int>? dayor;
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> alltype = [];
+List<Map<String, dynamic>> allserv = [];
 //List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> ordserv = [];
 
@@ -172,6 +173,23 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> getAlltypeserv() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/serv/4/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        allserv = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      print("aaaaaaaaaaaaaaaaaaaaaaasssssssssss");
+      print(allserv);
+      print("aaaaaaaaaaaaaaaaaaaaaaaaatttttttttttssssssssss");
+    } else {
+      print('Error fetching services data: ${response.statusCode}');
+    }
+  }
+
   // Future<void> getAllordw(String Wname) async {
   //   final response = await http
   //       .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
@@ -280,6 +298,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ordservcount();
     getAllord();
     getAlltypes();
+    getAlltypeserv();
     //getAllordw() ;
   }
 
