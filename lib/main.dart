@@ -13,6 +13,7 @@ List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
+//List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> ordserv = [];
 
 var gwf = 0;
@@ -153,6 +154,23 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // Future<void> getAllordw(String Wname) async {
+  //   final response = await http
+  //       .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
+  //   if (response.statusCode == 200) {
+  //     final jsonResponse = json.decode(response.body);
+
+  //     setState(() {
+  //       allordw = List<Map<String, dynamic>>.from(jsonResponse);
+  //     });
+  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  //     print(allordw);
+  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  //   } else {
+  //     print('Error fetching orders data: ${response.statusCode}');
+  //   }
+  // }
+
   // Future<void> getuserord(String uname) async {
   //   final response = await http
   //       .get(Uri.parse('https://fani-service.onrender.com/ord/11/$uname'));
@@ -243,6 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
     getorday();
     ordservcount();
     getAllord();
+    //getAllordw() ;
   }
 
   @override

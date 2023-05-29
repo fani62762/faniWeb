@@ -358,7 +358,8 @@ class _AsUState extends State<AsU> {
                     dividerThickness: 1,
                     columns: [
                       DataColumn(
-                        label: Text('اسم العميل'),
+                        label: Text('اسم العامل'),
+                        numeric: true,
                       ),
                       DataColumn(label: _verticalDivider),
                       DataColumn(
@@ -374,7 +375,7 @@ class _AsUState extends State<AsU> {
                     rows: userord.map((order) {
                       return DataRow(
                         cells: [
-                          DataCell(Text(order['uname'])),
+                          DataCell(Text(order['Wname'])),
                           DataCell(_verticalDivider),
                           order['acc'] == 0
                               ? DataCell(
