@@ -267,7 +267,8 @@ class _AsUState extends State<AsU> {
     }
 
     Widget orders() {
-      return Container(
+      return Expanded(
+          child: Container(
         height: MediaQuery.of(context).size.height,
         margin: EdgeInsets.symmetric(horizontal: 20),
         padding: EdgeInsets.all(10),
@@ -357,7 +358,7 @@ class _AsUState extends State<AsU> {
             ],
           ],
         ),
-      );
+      ));
       //     return Container(
       //       height: 300,
       //       // width: 300,
