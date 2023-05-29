@@ -14,6 +14,7 @@ Map<String, int>? dayor;
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> ordserv = [];
+
 var gwf = 0;
 var guf = 0;
 var gwm = 0;
@@ -151,6 +152,23 @@ class _MyHomePageState extends State<MyHomePage> {
       print('Error fetching orders data: ${response.statusCode}');
     }
   }
+
+  // Future<void> getuserord(String uname) async {
+  //   final response = await http
+  //       .get(Uri.parse('https://fani-service.onrender.com/ord/11/$uname'));
+  //   if (response.statusCode == 200) {
+  //     final jsonResponse = json.decode(response.body);
+
+  //     setState(() {
+  //       userord = List<Map<String, dynamic>>.from(jsonResponse);
+  //     });
+  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  //     print(userord);
+  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  //   } else {
+  //     print('Error fetching user orders data: ${response.statusCode}');
+  //   }
+  // }
 
   Future<void> getgu() async {
     final response = await http
