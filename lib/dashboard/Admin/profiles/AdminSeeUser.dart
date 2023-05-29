@@ -354,117 +354,100 @@ class _AsUState extends State<AsU> {
               itemCount: userord.length,
               itemBuilder: (context, index) {
                 final order = userord[index];
-                return DataTable(
-                  columnSpacing: 12,
-                  dataRowHeight: 60,
-                  dividerThickness: 1,
-                  columns: [
-                    DataColumn(
-                      label: Text('اسم العميل'),
-                    ),
-                    DataColumn(label: _verticalDivider),
-                    DataColumn(
-                      label: Text('اسم العامل'),
-                      numeric: true,
-                    ),
-                    DataColumn(label: _verticalDivider),
-                    DataColumn(
-                      label: Text('حالة الطلب'),
-                      numeric: true,
-                    ),
-                    DataColumn(label: _verticalDivider),
-                    // // DataColumn(label: _verticalDivider),
-                    // // if (AppResponsive.isDesktop(context))
-                    // //   DataColumn(
-                    // //     label: Text('التقييم'),
-                    // //   ),
-                    // if (AppResponsive.isDesktop(context))
-                    //   DataColumn(label: _verticalDivider),
-                    DataColumn(
-                      label: Text('تفاصيل'),
-                    ),
-                    DataColumn(label: _verticalDivider),
-                    // //if (!AppResponsive.isMobile(context))
-                    // DataColumn(
-                    //   label: SizedBox(),
-                    //   numeric: true,
-                    // ),
-                  ],
-                  rows: userord.map((order) {
-                    return DataRow(
-                      cells: [
+                return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columnSpacing: 12,
+                      dataRowHeight: 60,
+                      dividerThickness: 1,
+                      columns: [
+                        DataColumn(
+                          label: Text('اسم العميل'),
+                        ),
+                        DataColumn(label: _verticalDivider),
+
+                        DataColumn(
+                          label: Text('حالة الطلب'),
+                          numeric: true,
+                        ),
+                        DataColumn(label: _verticalDivider),
+                        // // DataColumn(label: _verticalDivider),
+                        // // if (AppResponsive.isDesktop(context))
+                        // //   DataColumn(
+                        // //     label: Text('التقييم'),
+                        // //   ),
                         // if (AppResponsive.isDesktop(context))
-                        //   DataCell(
-                        //     Row(
-                        //       // children: [
-                        //       //   // CircleAvatar(
-                        //       //   //   backgroundImage: NetworkImage(worker['image']),
-                        //       //   // ),
-                        //       //   // SizedBox(width: 10),
-                        //       //   Text(order['uname']),
-                        //       // ],
-                        //     ),
-                        //   ),
-                        //if (!AppResponsive.isDesktop(context))
-                        DataCell(Text(order['uname'])),
-                        DataCell(_verticalDivider),
+                        //   DataColumn(label: _verticalDivider),
+                        DataColumn(
+                          label: Text('تفاصيل'),
+                        ),
+                        DataColumn(label: _verticalDivider),
+                        // //if (!AppResponsive.isMobile(context))
+                        // DataColumn(
+                        //   label: SizedBox(),
+                        //   numeric: true,
+                        // ),
+                      ],
+                      rows: userord.map((order) {
+                        return DataRow(
+                          cells: [
+                            // if (AppResponsive.isDesktop(context))
+                            //   DataCell(
+                            //     Row(
+                            //       // children: [
+                            //       //   // CircleAvatar(
+                            //       //   //   backgroundImage: NetworkImage(worker['image']),
+                            //       //   // ),
+                            //       //   // SizedBox(width: 10),
+                            //       //   Text(order['uname']),
+                            //       // ],
+                            //     ),
+                            //   ),
+                            //if (!AppResponsive.isDesktop(context))
+                            DataCell(Text(order['uname'])),
+                            DataCell(_verticalDivider),
 
-                        DataCell(Text(order['Wname'])),
-                        DataCell(_verticalDivider),
-
-                        order['acc'] == 0
-                            ? DataCell(
-                                Container(
-                                  child: Text(
-                                    "بانتظار موافقة العامل",
-                                    style: TextStyle(
-                                      color: Colors
-                                          .orange, // Set the desired text color here
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : order['acc'] == 1
+                            order['acc'] == 0
                                 ? DataCell(
                                     Container(
                                       child: Text(
-                                        "قيد التنفيذ  ",
+                                        "بانتظار موافقة العامل",
                                         style: TextStyle(
                                           color: Colors
-                                              .blue, // Set the desired text color here
+                                              .orange, // Set the desired text color here
                                         ),
                                       ),
                                     ),
                                   )
-                                : order['acc'] == 2
+                                : order['acc'] == 1
                                     ? DataCell(
                                         Container(
                                           child: Text(
-                                            "  مكتمل",
+                                            "قيد التنفيذ  ",
                                             style: TextStyle(
                                               color: Colors
-                                                  .green, // Set the desired text color here
+                                                  .blue, // Set the desired text color here
                                             ),
                                           ),
                                         ),
                                       )
-                                    : order['acc'] == -1
+                                    : order['acc'] == 2
                                         ? DataCell(
                                             Container(
                                               child: Text(
-                                                "  رفض من قبل العامل",
+                                                "  مكتمل",
                                                 style: TextStyle(
                                                   color: Colors
-                                                      .red, // Set the desired text color here
+                                                      .green, // Set the desired text color here
                                                 ),
                                               ),
                                             ),
                                           )
-                                        : order['acc'] == -2
+                                        : order['acc'] == -1
                                             ? DataCell(
                                                 Container(
                                                   child: Text(
-                                                    "  الغاء من قبل العميل",
+                                                    "  رفض من قبل العامل",
                                                     style: TextStyle(
                                                       color: Colors
                                                           .red, // Set the desired text color here
@@ -472,30 +455,42 @@ class _AsUState extends State<AsU> {
                                                   ),
                                                 ),
                                               )
-                                            : DataCell(Text("")),
-                        DataCell(_verticalDivider),
+                                            : order['acc'] == -2
+                                                ? DataCell(
+                                                    Container(
+                                                      child: Text(
+                                                        "  الغاء من قبل العميل",
+                                                        style: TextStyle(
+                                                          color: Colors
+                                                              .red, // Set the desired text color here
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  )
+                                                : DataCell(Text("")),
+                            DataCell(_verticalDivider),
 
-                        // // if (AppResponsive.isDesktop(context))
-                        // //   DataCell(Text(worker['gender'])),
-                        // if (AppResponsive.isDesktop(context))
-                        //   DataCell(_verticalDivider),
+                            // // if (AppResponsive.isDesktop(context))
+                            // //   DataCell(Text(worker['gender'])),
+                            // if (AppResponsive.isDesktop(context))
+                            //   DataCell(_verticalDivider),
 
-                        DataCell(IconButton(
-                          icon: Icon(Icons.info_outline),
-                          onPressed: () {
-                            showOrderDetails(order);
-                          },
-                        )),
-                        DataCell(_verticalDivider),
-                        // // if (!AppResponsive.isMobile(context))
-                        // DataCell(IconButton(
-                        //   icon: Icon(Icons.delete),
-                        //   onPressed: () {},
-                        // )),
-                      ],
-                    );
-                  }).toList(),
-                );
+                            DataCell(IconButton(
+                              icon: Icon(Icons.info_outline),
+                              onPressed: () {
+                                showOrderDetails(order);
+                              },
+                            )),
+                            DataCell(_verticalDivider),
+                            // // if (!AppResponsive.isMobile(context))
+                            // DataCell(IconButton(
+                            //   icon: Icon(Icons.delete),
+                            //   onPressed: () {},
+                            // )),
+                          ],
+                        );
+                      }).toList(),
+                    ));
 
                 // return Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
