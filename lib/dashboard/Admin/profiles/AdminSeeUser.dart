@@ -325,7 +325,7 @@ class _AsUState extends State<AsU> {
     }
 
     Widget orders() {
-      return Expanded(
+      return SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           margin: EdgeInsets.symmetric(horizontal: 20),
