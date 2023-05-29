@@ -39,9 +39,9 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
       setState(() {
         allordw = List<Map<String, dynamic>>.from(jsonResponse);
       });
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbb");
       print(allordw);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      print("aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb");
     } else {
       print('Error fetching orders data: ${response.statusCode}');
     }
@@ -50,6 +50,8 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
   @override
   void initState() {
     super.initState();
+    print("worker name is ");
+    print(WorW['name']);
     getAllordw(WorW['name']);
     orders = allordw;
     columnNames = columnNames.toSet().toList();
@@ -227,11 +229,7 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
                       label: Text('اسم العميل'),
                     ),
                     DataColumn(label: _verticalDivider),
-                    DataColumn(
-                      label: Text('اسم العامل'),
-                      numeric: true,
-                    ),
-                    DataColumn(label: _verticalDivider),
+
                     DataColumn(
                       label: Text('حالة الطلب'),
                       numeric: true,
@@ -271,9 +269,6 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
                         //   ),
                         //if (!AppResponsive.isDesktop(context))
                         DataCell(Text(order['uname'])),
-                        DataCell(_verticalDivider),
-
-                        DataCell(Text(order['Wname'])),
                         DataCell(_verticalDivider),
 
                         order['acc'] == 0
