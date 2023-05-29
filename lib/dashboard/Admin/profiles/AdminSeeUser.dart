@@ -267,97 +267,97 @@ class _AsUState extends State<AsU> {
     }
 
     Widget orders() {
-      return Container(
-        height: 300,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Color.fromARGB(255, 228, 228, 226),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'الخدمات التي قام ${user['name']} بطلبها مني',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'ArabicFont',
+      return Flexible(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(255, 228, 228, 226),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'الخدمات التي قام ${user['name']} بطلبها مني',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'ArabicFont',
+                ),
+                textDirection: TextDirection.rtl,
               ),
-              textDirection: TextDirection.rtl,
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: userord.length,
-                itemBuilder: (context, index) {
-                  final order = userord[index];
+              SizedBox(height: 10),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: userord.length,
+                  itemBuilder: (context, index) {
+                    final order = userord[index];
 
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 10),
+                        Text(
+                          "الخدمة: ${order['TypeServ']}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 228, 228, 226),
+                            fontFamily: 'ArabicFont',
+                          ),
+                          textDirection: TextDirection.rtl,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.info),
+                          onPressed: () {
+                            // Handle showing/hiding additional information for this order
+                            setState(() {
+                              showAdditionalInfo = !showAdditionalInfo;
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              // Add additional information here (hidden by default)
+              if (showAdditionalInfo) ...[
+                SizedBox(height: 10),
+                for (final order in userord)
+                  Column(
                     children: [
-                      SizedBox(width: 10),
                       Text(
-                        "الخدمة: ${order['TypeServ']}",
+                        "الساعة: ${order['Hour']}",
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 228, 228, 226),
                           fontFamily: 'ArabicFont',
                         ),
                         textDirection: TextDirection.rtl,
                       ),
-                      IconButton(
-                        icon: Icon(Icons.info),
-                        onPressed: () {
-                          // Handle showing/hiding additional information for this order
-                          setState(() {
-                            showAdditionalInfo = !showAdditionalInfo;
-                          });
-                        },
+                      Text(
+                        "السعر: ${order['Price']}",
+                        style: TextStyle(
+                          fontFamily: 'ArabicFont',
+                        ),
+                        textDirection: TextDirection.rtl,
                       ),
+                      Text(
+                        "التاريخ: ${order['date']}",
+                        style: TextStyle(
+                          fontFamily: 'ArabicFont',
+                        ),
+                        textDirection: TextDirection.rtl,
+                      ),
+                      // Display additional service details here
+                      // Display repeated order information here
                     ],
-                  );
-                },
-              ),
-            ),
-            // Add additional information here (hidden by default)
-            if (showAdditionalInfo) ...[
-              SizedBox(height: 10),
-              for (final order in userord)
-                Column(
-                  children: [
-                    Text(
-                      "الساعة: ${order['Hour']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      "السعر: ${order['Price']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    Text(
-                      "التاريخ: ${order['date']}",
-                      style: TextStyle(
-                        fontFamily: 'ArabicFont',
-                      ),
-                      textDirection: TextDirection.rtl,
-                    ),
-                    // Display additional service details here
-                    // Display repeated order information here
-                  ],
-                ),
+                  ),
+              ],
             ],
-          ],
+          ),
         ),
       );
       //     return Container(
