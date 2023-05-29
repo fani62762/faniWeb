@@ -63,8 +63,8 @@ class _LoginState extends State<Login> {
       }),
     );
 
-    if (response.statusCode == 200) {
-  await getAdmin();
+  //   if (response.statusCode == 200) {
+  // await getAdmin();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -77,34 +77,34 @@ class _LoginState extends State<Login> {
       ),
     );
 
-    } else if (response.statusCode == 401) {
-      final message = jsonDecode(response.body)['message'];
-      if (message == 'Invalid nameAdmin') {
-        AwesomeDialog(
-          width: 350,
-          context: context,
-          dialogType: DialogType.info,
-          animType: AnimType.BOTTOMSLIDE,
-          desc: "اسم الادمين غير صحيح",
-        ).show();
-      } else if (message == 'Invalid passwordU') {
-        AwesomeDialog(
-          width: 350,
-          context: context,
-          dialogType: DialogType.info,
-          animType: AnimType.BOTTOMSLIDE,
-          desc: ' كلمة المرور خاطئة',
-        ).show();
-      } else {
-        AwesomeDialog(
-          width: 350,
-          context: context,
-          dialogType: DialogType.info,
-          animType: AnimType.BOTTOMSLIDE,
-           desc: 'الاسم أو كلمة المرورو غير صحيحات',
-        ).show();
-      }
-    }
+    // } else if (response.statusCode == 401) {
+    //   final message = jsonDecode(response.body)['message'];
+    //   if (message == 'Invalid nameAdmin') {
+    //     AwesomeDialog(
+    //       width: 350,
+    //       context: context,
+    //       dialogType: DialogType.info,
+    //       animType: AnimType.BOTTOMSLIDE,
+    //       desc: "اسم الادمين غير صحيح",
+    //     ).show();
+    //   } else if (message == 'Invalid passwordU') {
+    //     AwesomeDialog(
+    //       width: 350,
+    //       context: context,
+    //       dialogType: DialogType.info,
+    //       animType: AnimType.BOTTOMSLIDE,
+    //       desc: ' كلمة المرور خاطئة',
+    //     ).show();
+    //   } else {
+    //     AwesomeDialog(
+    //       width: 350,
+    //       context: context,
+    //       dialogType: DialogType.info,
+    //       animType: AnimType.BOTTOMSLIDE,
+    //        desc: 'الاسم أو كلمة المرورو غير صحيحات',
+    //     ).show();
+    //   }
+    // }
   }
 
   Future<void> submitCredentialsw(String name, String password) async {

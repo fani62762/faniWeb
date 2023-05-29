@@ -2,7 +2,8 @@ import 'package:faniweb/app_responsive.dart';
 import 'package:faniweb/main.dart';
 import 'package:flutter/material.dart';
 import 'package:data_table_2/data_table_2.dart';
-
+import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 class TableOfordData extends StatefulWidget {
   @override
   _TableOfordDataState createState() => _TableOfordDataState();
@@ -38,53 +39,133 @@ class _TableOfordDataState extends State<TableOfordData> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('تفاصيل الطلب'),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'نوع الخدمة: ${order['TypeServ']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'السعر: ${order['Price']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'الوقت: ${order['Hour']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'الخدمات: ${order['serv'].join(", ")}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'التاريخ: ${order['date']}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'خدمات اضافية: ${order['add'].join(", ")}',
-                  textAlign: TextAlign.right,
-                ),
-                Text(
-                  'التكرار: ${order['isrepeated']}',
-                  textAlign: TextAlign.right,
-                ),
-              ],
-            ),
+    return Directionality(
+      textDirection: ui.TextDirection.rtl,
+      child: AlertDialog(
+      title: Center(child: Text('تفاصيل الطلب', style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold))),
+      backgroundColor: Colors.white,
+      content: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'نوع الخدمة:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['TypeServ']}',
+                style: TextStyle(color: db),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('اغلاق'),
-            ),
-          ],
-        );
-      },
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'السعر:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['Price']}',
+                style: TextStyle(color: db),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'الوقت:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['Hour']}',
+                style: TextStyle(color:db),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'الخدمات:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['serv'].join(", ")}',
+                style: TextStyle(color:db),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'التاريخ:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${DateFormat('dd/MM/yyyy').format(DateTime.parse(order['date']))}',
+                style: TextStyle(color: db),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'خدمات اضافية:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['add'].join(", ")}',
+                style: TextStyle(color: db),
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'التكرار:',
+                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(width: 10),
+              Text(
+                '${order['isrepeated']}',
+                style: TextStyle(color: db),
+              ),
+            ],
+          ),
+        ],
+      ),
+      ),
+      actions: [
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Center(child: Text('اغلاق', style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold))),
+      ),
+      ],
+    ),
+    );
+  },
     );
   }
 
@@ -168,7 +249,7 @@ class _TableOfordDataState extends State<TableOfordData> {
                 items: columnNames.map((String columnName) {
                   return DropdownMenuItem<String>(
                     value: columnName,
-                    child: Text(columnName),
+                    child: Center(child: Text(columnName)),
                   );
                 }).toList(),
               ),
@@ -194,6 +275,7 @@ class _TableOfordDataState extends State<TableOfordData> {
                   });
                 },
               ),
+               SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
