@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:faniweb/main.dart';
+import 'package:uuid/uuid.dart';
+import 'dart:convert';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:faniweb/app_responsive.dart';
+import 'package:faniweb/main.dart';
+import 'package:faniweb/menu_controller.dart';
+import 'package:faniweb/dashboard/Admin/profiles/AdminSeeTech.dart';
+import 'package:faniweb/dashboard/Admin/profiles/foradmin.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class Type {
   String id;
@@ -34,6 +47,39 @@ List<String> columnNames = [
 String? chosenColumnName = columnNames.first;
 
 class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
+  Future<void> createserv(String name, String type) async {
+    final body = jsonEncode({
+      'name': name,
+      'type': type,
+    });
+    final response = await http.post(
+      Uri.parse('https://fani-service.onrender.com/serv/1/'),
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      //                               setState(() {
+      //                                 Navigator.pop(context);
+      //                                   i = 0;
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => MultiProvider(
+      //       providers: [
+      //         ChangeNotifierProvider(create: (context) => MenuControllerr())
+      //       ],
+      //       child: AdminPage(),
+      //     ),
+      //   ),
+      // );
+
+      //                               });
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+  }
+
   List<Type> types = [];
   List<Service> services = []; // List of services
 
@@ -150,22 +196,24 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                   },
                 ),
                 ListTile(
-                  title: Text('Add Service'),
+                  title: Text('اضافة خدمة'),
                   trailing: IconButton(
                     icon: Icon(Icons.add),
                     onPressed: () {
                       // Open a dialog to add a new service
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (context) => AddServiceDialog(
-                      //     onServiceAdded: (newService) {
-                      //       setState(() {
-                      //         // Add the new service
-                      //         services.add(newService);
-                      //       });
-                      //     },
-                      //   ),
-                      // );
+                      showDialog(
+                        context: context,
+                        builder: (context) => AddServiceDialog(
+                          onServiceAdded: (newService) {
+                            setState(() {
+                              createserv(
+                                  newService['name'], newService['type']);
+                              // Add the new service
+                              // services.add(newService);
+                            });
+                          },
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -174,6 +222,85 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
           );
         },
       ),
+    );
+  }
+}
+
+class AddServiceDialog extends StatefulWidget {
+  final Function(Map<String, dynamic>) onServiceAdded;
+
+  AddServiceDialog({required this.onServiceAdded});
+
+  @override
+  _AddServiceDialogState createState() => _AddServiceDialogState();
+}
+
+class _AddServiceDialogState extends State<AddServiceDialog> {
+  String serviceName = '';
+  String selectedType = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('اضافة خدمة'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            onChanged: (value) {
+              setState(() {
+                serviceName = value;
+              });
+            },
+            decoration: InputDecoration(
+              labelText: 'اسم الخدمة',
+            ),
+          ),
+          SizedBox(height: 16),
+          DropdownButtonFormField<String>(
+            value: selectedType,
+            onChanged: (value) {
+              setState(() {
+                selectedType = value!;
+              });
+            },
+            items: alltype.map((type) {
+              return DropdownMenuItem<String>(
+                value: type['type'],
+                child: Text(type['type']),
+              );
+            }).toList(),
+            decoration: InputDecoration(
+              labelText: 'النوع',
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('الغاء'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (serviceName.isNotEmpty && selectedType.isNotEmpty) {
+              // Service newService = Service(
+              //   id: Uuid().v4(), // Generate a unique ID
+              //   name: serviceName,
+              //   type: selectedType,
+              // );
+              Map<String, dynamic> newService = {};
+              newService['name'] = serviceName;
+              newService['type'] = selectedType;
+              widget.onServiceAdded(newService);
+              Navigator.pop(context);
+            }
+          },
+          child: Text('اضافة'),
+        ),
+      ],
     );
   }
 }
