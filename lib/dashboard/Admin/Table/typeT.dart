@@ -204,6 +204,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
             final serviceType = service['type'];
             final targetType = type['type'];
             print('Service Type: $serviceType, Target Type: $targetType');
+            print(serviceType == targetType);
             return serviceType == targetType;
           }).toList();
 
