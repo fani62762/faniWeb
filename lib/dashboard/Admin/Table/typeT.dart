@@ -105,7 +105,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
         ),
         child: Column(
           children: [
-            Expanded(
+            Flexible(
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: types.length,
