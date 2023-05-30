@@ -95,83 +95,80 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
       appBar: AppBar(
         title: Text('Service Management'),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Flexible(
-              child: ListView.builder(
-                itemCount: types.length,
-                itemBuilder: (context, index) {
-                  final type = types[index];
-                  final services = typeServices[index][type]!;
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: types.length,
+              itemBuilder: (context, index) {
+                final type = types[index];
+                final services = typeServices[index][type]!;
 
-                  return Card(
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(type.name),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () {
-                              deleteType(type);
-                            },
-                          ),
+                return Card(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(type.name),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            deleteType(type);
+                          },
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: services.length,
-                            itemBuilder: (context, serviceIndex) {
-                              final service = services[serviceIndex];
-                              return ListTile(
-                                title: Text(service.name),
-                                trailing: IconButton(
-                                  icon: Icon(Icons.delete),
-                                  onPressed: () {
-                                    deleteService(service, type);
-                                  },
-                                ),
-                              );
-                            },
-                          ),
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: services.length,
+                        itemBuilder: (context, serviceIndex) {
+                          final service = services[serviceIndex];
+                          return ListTile(
+                            title: Text(service.name),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                deleteService(service, type);
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            addService(serviceNameController.text, type);
+                            serviceNameController.clear();
+                          },
+                          child: Text('Add Service'),
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              addService(serviceNameController.text, type);
-                              serviceNameController.clear();
-                            },
-                            child: Text('Add Service'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: TextField(
+              controller: typeNameController,
+              decoration: InputDecoration(
+                labelText: 'Type Name',
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: TextField(
-                controller: typeNameController,
-                decoration: InputDecoration(
-                  labelText: 'Type Name',
-                ),
-              ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: ElevatedButton(
+              onPressed: () {
+                addType(typeNameController.text);
+                typeNameController.clear();
+              },
+              child: Text('Add Type'),
             ),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: ElevatedButton(
-                onPressed: () {
-                  addType(typeNameController.text);
-                  typeNameController.clear();
-                },
-                child: Text('Add Type'),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
