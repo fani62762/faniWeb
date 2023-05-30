@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-{"sts":[{"expiry":1716291428.67487,"host":"5EdUoB7YUY9zZV+2DkgVXgho8WUvp+D+6KpeUOhNQIM=","mode":"force-https","sts_include_subdomains":false,"sts_observed":1684755428.674875},{"expiry":1716932380.619475,"host":"8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685396380.619487}],"version":2}
-=======
-<<<<<<< HEAD
-{"sts":[{"expiry":1696089834.696279,"host":"LAZkYS46RVRcFiZAzmUJrz6TJHBd4nwE6VxPWfPLYHs=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685203434.696282},{"expiry":1716739433.779227,"host":"M4bfUnCmQAi4PNb3B8aI/2+SVJhHKsMfMMT7fzi6ij4=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685203433.779236},{"expiry":1696089834.10128,"host":"fJjUrPqhktMfiTHJX3Q0pJi/P12Q72DBgzzJqjlNC4o=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685203434.101292},{"expiry":1696089839.542258,"host":"2lkpJCeDA/iPFazSWca3N4hZCz/cVnuSdphlO2veD4Q=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685203439.542273},{"expiry":1716928014.218752,"host":"5EdUoB7YUY9zZV+2DkgVXgho8WUvp+D+6KpeUOhNQIM=","mode":"force-https","sts_include_subdomains":false,"sts_observed":1685392014.218759},{"expiry":1716888654.710514,"host":"8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685352654.710521}],"version":2}
-=======
-{"sts":[{"expiry":1716291428.67487,"host":"5EdUoB7YUY9zZV+2DkgVXgho8WUvp+D+6KpeUOhNQIM=","mode":"force-https","sts_include_subdomains":false,"sts_observed":1684755428.674875},{"expiry":1716931673.621632,"host":"8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685395673.621646}],"version":2}
->>>>>>> 2918cc8df1a1584c8679481b50082585d373cd05
->>>>>>> c15a398bf5bd5d2553e207e70032659b39af937e
+{"sts":[{"expiry":1716960170.577966,"host":"8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=","mode":"force-https","sts_include_subdomains":true,"sts_observed":1685424170.577978}],"version":2}
