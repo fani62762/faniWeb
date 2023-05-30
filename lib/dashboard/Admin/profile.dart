@@ -42,7 +42,7 @@ class _ProfileState extends State<Profile> {
   }
    
   Future<void> getorday() async {
-    couord=0;
+    int x=0;
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
@@ -51,7 +51,8 @@ class _ProfileState extends State<Profile> {
       setState(() {
         dayor = Map<String, int>.from(jsonResponse);
         dayor?.forEach((key, value) {
-couord+=value;
+x+=value;
+couord=x;
   });
       });
     } else {
