@@ -109,11 +109,11 @@ class _ProfileTState extends State<ProfileT> {
             ],
           ),
           Divider(thickness: 0.5, color: Colors.grey),
-          employeeTasks(Icons.miscellaneous_services, "عددالخدمات", "10"),
-          employeeTasks(Icons.people, "عددالعُمال", workers.length),
+          employeeTasks(Icons.miscellaneous_services, "عدد الخدمات بالتطبيق", "10"),
+          employeeTasks(Icons.people, "عدد العُمال بالتطبيق", workers.length),
           employeeTasks(
-              Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", allordw.length),
+              Icons.supervised_user_circle_sharp, "عدد الزبائن بالتطبيق", users.length),
+          employeeTasks(Icons.list_alt_sharp, " عدد الطلبات لدي", allordw.length),
         ],
       ),
     );
