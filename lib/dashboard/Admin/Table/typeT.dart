@@ -210,7 +210,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                 Characters(serviceType).string == Characters(targetType).string;
             print('Service Type: $serviceType, Target Type: $targetType');
             print(serviceType == targetType);
-            return serviceType == targetType;
+            return areEqual;
           }).toList();
 
           return Card(
