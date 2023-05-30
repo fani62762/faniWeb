@@ -185,9 +185,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                     for (Type type in types)
                       DataColumn(
                         label: Text(type.name),
-                        numeric: true,
                       ),
-                    DataColumn(label: _verticalDivider),
                   ],
                   rows: servs.map((serv) {
                     List<DataCell> cells = [
@@ -228,7 +226,6 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                           ),
                         ),
                       );
-                      cells.add(DataCell(_verticalDivider));
                     }
 
                     return DataRow(cells: cells);
