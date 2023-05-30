@@ -200,13 +200,12 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
         itemCount: alltype.length,
         itemBuilder: (context, index) {
           Map<String, dynamic> type = alltype[index];
-          List<Map<String, dynamic>> typeServices = allserv
-              .where((service) => service['type'] == type['type'])
-              .toList();
-          print(type['type']);
-          print(allserv);
-          print("this is type services");
-          print(typeServices);
+          List<Map<String, dynamic>> typeServices = allserv.where((service) {
+            final serviceType = service['type'];
+            final targetType = type['type'];
+            print('Service Type: $serviceType, Target Type: $targetType');
+            return serviceType == targetType;
+          }).toList();
 
           return Card(
             child: ExpansionTile(
