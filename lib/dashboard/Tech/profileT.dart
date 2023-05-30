@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:faniweb/main.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ProfileT extends StatefulWidget {
   @override
@@ -7,6 +9,59 @@ class ProfileT extends StatefulWidget {
 }
 
 class _ProfileTState extends State<ProfileT> {
+    Future<void> getAllWorkers() async {
+
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/worker/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+    
+       setState(() {
+          workers = List<Map<String, dynamic>>.from(jsonResponse);
+  
+  });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+   Future<void> getAlluserss() async {
+   
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/users/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() { 
+        users = List<Map<String, dynamic>>.from(jsonResponse);
+       
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+   Future<void> getAllordw(String Wname) async {
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        allordw = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      orders = allordw;
+    } else {
+      print('Error fetching orders data: ${response.statusCode}');
+    }
+  }
+   @override
+  void initState() {
+    super.initState();
+    getAllWorkers();
+       getAlluserss();
+       getAllordw(WorW['name']);
+
+ 
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,7 +113,7 @@ class _ProfileTState extends State<ProfileT> {
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
           employeeTasks(
               Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", "5"),
+          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", allordw.length),
         ],
       ),
     );

@@ -5,8 +5,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-List<Map<String, dynamic>> allordw = [];
-List<Map<String, dynamic>> orders = [];
+
 
 class TableOfordDataw extends StatefulWidget {
   @override
@@ -41,10 +40,6 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
         allordw = List<Map<String, dynamic>>.from(jsonResponse);
       });
       orders = allordw;
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbb");
-      print(allordw);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb");
-      print(orders);
     } else {
       print('Error fetching orders data: ${response.statusCode}');
     }
@@ -53,14 +48,9 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
   @override
   void initState() {
     super.initState();
-    print("worker name is ");
-    print(WorW['name']);
     getAllordw(WorW['name']);
     orders = allordw;
-    print("hiiiiiiiiiiiiiiiiii");
-    print(orders);
     columnNames = columnNames.toSet().toList();
-    // print(workers);
   }
 
   void showOrderDetails(Map<String, dynamic> order) {
@@ -197,7 +187,7 @@ class _TableOfordDatawState extends State<TableOfordDataw> {
                 items: columnNames.map((String columnName) {
                   return DropdownMenuItem<String>(
                     value: columnName,
-                    child: Text(columnName),
+                    child: Center(child: Text(columnName)),
                   );
                 }).toList(),
               ),

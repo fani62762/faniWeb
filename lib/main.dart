@@ -12,11 +12,12 @@ import 'package:provider/provider.dart';
 List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
 int couord=0;
+List<Map<String, dynamic>> allordw = [];
+List<Map<String, dynamic>> orders = [];
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> alltype = [];
 List<Map<String, dynamic>> allserv = [];
-//List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> ordserv = [];
 
 var gwf = 0;
@@ -196,40 +197,6 @@ couord+=value;
     }
   }
 
-  // Future<void> getAllordw(String Wname) async {
-  //   final response = await http
-  //       .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = json.decode(response.body);
-
-  //     setState(() {
-  //       allordw = List<Map<String, dynamic>>.from(jsonResponse);
-  //     });
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //     print(allordw);
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //   } else {
-  //     print('Error fetching orders data: ${response.statusCode}');
-  //   }
-  // }
-
-  // Future<void> getuserord(String uname) async {
-  //   final response = await http
-  //       .get(Uri.parse('https://fani-service.onrender.com/ord/11/$uname'));
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = json.decode(response.body);
-
-  //     setState(() {
-  //       userord = List<Map<String, dynamic>>.from(jsonResponse);
-  //     });
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //     print(userord);
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //   } else {
-  //     print('Error fetching user orders data: ${response.statusCode}');
-  //   }
-  // }
-
   Future<void> getgu() async {
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/users/ugender'));
@@ -305,7 +272,6 @@ couord+=value;
     getAllord();
     getAlltypes();
     getAlltypeserv();
-    //getAllordw() ;
   }
 
   @override
