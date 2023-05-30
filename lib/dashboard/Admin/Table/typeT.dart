@@ -22,6 +22,7 @@ class Type {
 }
 
 String globtype = "";
+String? newtype = "";
 
 class Service {
   String id;
@@ -56,6 +57,36 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
     });
     final response = await http.post(
       Uri.parse('https://fani-service.onrender.com/serv/1/'),
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+      //                               setState(() {
+      //                                 Navigator.pop(context);
+      //                                   i = 0;
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => MultiProvider(
+      //       providers: [
+      //         ChangeNotifierProvider(create: (context) => MenuControllerr())
+      //       ],
+      //       child: AdminPage(),
+      //     ),
+      //   ),
+      // );
+
+      //                               });
+    } else {
+      print('Error: ${response.statusCode}');
+    }
+  }
+
+  Future<void> createtype(String? type) async {
+    final body = jsonEncode({'type': type});
+    final response = await http.post(
+      Uri.parse('https://fani-service.onrender.com/type/1/'),
       headers: {'Content-Type': 'application/json'},
       body: body,
     );
@@ -165,66 +196,151 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
   Widget build(BuildContext context) {
     return Container(
       height: 500,
-      child: ListView.builder(
-        itemCount: alltype.length,
-        itemBuilder: (context, index) {
-          Map<String, dynamic> type = alltype[index];
-          List<Map<String, dynamic>> typeServices = allserv
-              .where((service) => service['type'] == type['type'])
-              .toList();
+      child: Row(children: [
+        ListView.builder(
+          itemCount: alltype.length,
+          itemBuilder: (context, index) {
+            Map<String, dynamic> type = alltype[index];
+            List<Map<String, dynamic>> typeServices = allserv
+                .where((service) => service['type'] == type['type'])
+                .toList();
+            print(type['type']);
+            print(allserv);
+            print("this is type services");
+            print(typeServices);
 
-          return Card(
-            child: ExpansionTile(
-              title: Text(type['type']),
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: typeServices.length,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic> service = typeServices[index];
-                    return ListTile(
-                      title: Text(service['name']),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          setState(() {
-                            // Delete the service
-                            // services.remove(service);
-                          });
-                        },
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: Text('اضافة خدمة'),
-                  trailing: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      globtype = type['type'];
-                      // Open a dialog to add a new service
-                      showDialog(
-                        context: context,
-                        builder: (context) => AddServiceDialog(
-                          onServiceAdded: (newService) {
+            return Card(
+              child: ExpansionTile(
+                title: Text(type['type']),
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: typeServices.length,
+                    itemBuilder: (context, index) {
+                      Map<String, dynamic> service = typeServices[index];
+                      return ListTile(
+                        title: Text(service['name']),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
                             setState(() {
-                              createserv(
-                                  newService['name'], newService['type']);
-                              // Add the new service
-                              // services.add(newService);
+                              // Delete the service
+                              // services.remove(service);
                             });
                           },
                         ),
                       );
                     },
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                  ListTile(
+                    title: Text('اضافة خدمة'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        globtype = type['type'];
+                        // Open a dialog to add a new service
+                        showDialog(
+                          context: context,
+                          builder: (context) => AddServiceDialog(
+                            onServiceAdded: (newService) {
+                              setState(() {
+                                createserv(
+                                    newService['name'], newService['type']);
+                                // Add the new service
+                                // services.add(newService);
+                              });
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        RawMaterialButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: AlertDialog(
+                    scrollable: true,
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Form(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Center(
+                              child: Text(
+                                'اضافة نوع جديد',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            //  SizedBox(height: 20),
+                            TextFormField(
+                              onChanged: (value) => newtype = value,
+                              decoration: const InputDecoration(
+                                labelText: 'النوع',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    actions: [
+                      Center(
+                        child: Column(
+                          children: [
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        dy), // Set the desired background color
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Set the desired border radius
+                                  ),
+                                ),
+                              ),
+                              child: Text("اضافة"),
+                              onPressed: () async {
+                                createtype(newtype);
+                              },
+                            ),
+                            SizedBox(
+                                height:
+                                    10), // Add space of 10 pixels after the button
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+          elevation: 2.0,
+          fillColor: lb,
+          padding: EdgeInsets.all(10.0),
+          shape: CircleBorder(),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 24.0,
+          ),
+        ),
+      ]),
     );
   }
 }
