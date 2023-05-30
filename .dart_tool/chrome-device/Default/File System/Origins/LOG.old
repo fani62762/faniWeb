@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 2023/05/30-12:00:01.891 28b0 Reusing MANIFEST C:\Users\fanan\AppData\Local\Temp\flutter_tools.fc59723d\flutter_tools_chrome_device.c13cc4bb\Default\File System\Origins/MANIFEST-000001
 2023/05/30-12:00:01.892 28b0 Recovering log #6
 2023/05/30-12:00:01.892 28b0 Reusing old log C:\Users\fanan\AppData\Local\Temp\flutter_tools.fc59723d\flutter_tools_chrome_device.c13cc4bb\Default\File System\Origins/000006.log 
 2023/05/30-12:00:01.893 28b0 Delete type=0 #3
+=======
+<<<<<<< HEAD
+2023/05/29-12:31:02.676 5008 Reusing MANIFEST C:\Users\shahd\AppData\Local\Temp\flutter_tools.2873c944\flutter_tools_chrome_device.3eb5ab8c\Default\File System\Origins/MANIFEST-000001
+2023/05/29-12:31:02.677 5008 Recovering log #3
+2023/05/29-12:31:02.677 5008 Reusing old log C:\Users\shahd\AppData\Local\Temp\flutter_tools.2873c944\flutter_tools_chrome_device.3eb5ab8c\Default\File System\Origins/000003.log 
+=======
+2023/05/30-11:48:58.454 f34 Reusing MANIFEST C:\Users\fanan\AppData\Local\Temp\flutter_tools.89568b2d\flutter_tools_chrome_device.b0c44bfe\Default\File System\Origins/MANIFEST-000001
+2023/05/30-11:48:58.455 f34 Recovering log #6
+2023/05/30-11:48:58.455 f34 Reusing old log C:\Users\fanan\AppData\Local\Temp\flutter_tools.89568b2d\flutter_tools_chrome_device.b0c44bfe\Default\File System\Origins/000006.log 
+2023/05/30-11:48:58.455 f34 Delete type=0 #3
+>>>>>>> 0634a29661e66d5ec0f5eff44304f9492d197e09
+>>>>>>> 63181efec1a6213da17d229fea5cf1f79856d7d4

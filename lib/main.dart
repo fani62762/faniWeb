@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
+Map<String, int>? dayorw;
 int couord=0;
 List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> orders = [];
@@ -19,6 +20,7 @@ List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> alltype = [];
 List<Map<String, dynamic>> allserv = [];
 List<Map<String, dynamic>> ordserv = [];
+List<Map<String, dynamic>> ordservw = [];
 
 var gwf = 0;
 var guf = 0;
@@ -257,7 +259,7 @@ couord+=value;
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-
+ 
   @override
   void initState() {
     super.initState();

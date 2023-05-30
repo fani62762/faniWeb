@@ -12,6 +12,8 @@ import 'package:faniweb/dashboard/Tech/Table/userT.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgTU.dart';
 import 'package:faniweb/main.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class DashbordT extends StatefulWidget {
   @override
@@ -19,11 +21,44 @@ class DashbordT extends StatefulWidget {
 }
 
 class _DashbordTState extends State<DashbordT> {
+  Future<void> ordservcountw(String wname) async {
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/getservordw/$wname'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        ordservw = List<Map<String, dynamic>>.from(jsonResponse);
+        print("----------------------------------------");
+        print(ordservw);
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+ 
+     Future<void> getordayw(String wname) async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getdayw/$wname'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+     
+      setState(() {
+         dayorw = Map<String, int>.from(jsonResponse);
+         
+    
+      });
+    } else {
+      print('Error fetching days data: ${response.statusCode}');
+    }
+  }
+ 
   Widget currentTable = TableOfEmpData();
   @override
   void initState() {
     super.initState();
-
+      getordayw(WorW['name']);
+      ordservcountw(WorW['name']);
     setState(() {
       currentTable = _getTableForValue(i);
     });
