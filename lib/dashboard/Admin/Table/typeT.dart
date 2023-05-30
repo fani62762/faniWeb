@@ -258,7 +258,7 @@ class _AddServiceDialogState extends State<AddServiceDialog> {
           ),
           SizedBox(height: 16),
           DropdownButtonFormField<String>(
-            value: "selectedType",
+            value: alltype[0]['type'],
             onChanged: (value) {
               setState(() {
                 selectedType = value!;
