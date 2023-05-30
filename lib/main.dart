@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
+int couord=0;
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> alltype = [];
@@ -81,6 +82,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   
   Future<void> getorday() async {
+    couord=0;
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
@@ -88,6 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         dayor = Map<String, int>.from(jsonResponse);
+        dayor?.forEach((key, value) {
+couord+=value;
+  });
       });
     } else {
       print('Error fetching days data: ${response.statusCode}');
