@@ -118,7 +118,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
     return Container(
       height: 500,
       child: ListView.builder(
-        itemCount: types.length,
+        itemCount: alltype.length,
         itemBuilder: (context, index) {
           Map<String, dynamic> type = alltype[index];
           List<Map<String, dynamic>> typeServices = allserv
