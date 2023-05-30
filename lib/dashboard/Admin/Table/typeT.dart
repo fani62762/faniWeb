@@ -207,30 +207,30 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                       // DataCell(_verticalDivider),
                     ];
 
-                    List<Service> services =
-                        typeServices[serv['type']][serv['type']] ?? [];
+                    // List<Service> services =
+                    //     typeServices[serv['type']][serv['type']] ?? [];
 
-                    for (Service service in services) {
-                      cells.add(
-                        DataCell(
-                          Container(
-                            child: Checkbox(
-                              value: serv['services'].contains(service),
-                              onChanged: (value) {
-                                setState(() {
-                                  if (value == true) {
-                                    serv['services'].add(service);
-                                  } else {
-                                    serv['services'].remove(service);
-                                  }
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      );
-                      cells.add(DataCell(_verticalDivider));
-                    }
+                    // for (Service service in services) {
+                    //   cells.add(
+                    //     DataCell(
+                    //       Container(
+                    //         child: Checkbox(
+                    //           value: serv['services'].contains(service),
+                    //           onChanged: (value) {
+                    //             setState(() {
+                    //               if (value == true) {
+                    //                 serv['services'].add(service);
+                    //               } else {
+                    //                 serv['services'].remove(service);
+                    //               }
+                    //             });
+                    //           },
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   );
+                    //   cells.add(DataCell(_verticalDivider));
+                    // }
 
                     // cells.addAll([
                     //   DataCell(IconButton(
