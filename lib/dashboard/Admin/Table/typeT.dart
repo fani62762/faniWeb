@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:faniweb/main.dart';
+import 'package:path/path.dart';
 
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
+import 'package:normalize/normalize.dart';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:faniweb/app_responsive.dart';
@@ -204,13 +206,12 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
         itemBuilder: (context, index) {
           Map<String, dynamic> type = alltype[index];
           List<Map<String, dynamic>> typeServices = allserv.where((service) {
-            final serviceType = utf8.encode(service['type']).toString();
-            final targetType = utf8.encode(type['type']).toString();
-            var areEqual;
+            final serviceType = service['type'];
+            final targetType = type['type'];
+            final normalizedServiceType = normalize(serviceType);
+            final normalizedTargetType = normalize(targetType);
+            final areEqual = normalizedServiceType == normalizedTargetType;
 
-            service['type'].compareTo(type['type']) == 0
-                ? areEqual = true
-                : areEqual = false;
             print('Service Type: $serviceType, Target Type: $targetType');
             print(serviceType == targetType);
             return areEqual;

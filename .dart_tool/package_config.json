@@ -494,6 +494,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "gql",
+      "rootUri": "file:///C:/Users/fanan/AppData/Local/Pub/Cache/hosted/pub.dev/gql-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///C:/Users/fanan/AppData/Local/Pub/Cache/hosted/pub.dev/graphs-2.3.1",
       "packageUri": "lib/",
@@ -658,6 +664,12 @@
     {
       "name": "nested",
       "rootUri": "file:///C:/Users/fanan/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "normalize",
+      "rootUri": "file:///C:/Users/fanan/AppData/Local/Pub/Cache/hosted/pub.dev/normalize-0.8.2+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1094,13 +1106,19 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "yaml",
+      "rootUri": "file:///C:/Users/fanan/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "faniweb",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-30T09:27:59.010960Z",
+  "generated": "2023-05-30T14:07:53.597022Z",
   "generator": "pub",
   "generatorVersion": "3.1.0-63.1.beta"
 }

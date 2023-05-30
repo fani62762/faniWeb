@@ -648,6 +648,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.0+1"
+  gql:
+    dependency: transitive
+    description:
+      name: gql
+      sha256: b05d544d709d276c0cced82d630518e92139b426b20d1b11e973e123d07fbf52
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   graphs:
     dependency: transitive
     description:
@@ -872,6 +880,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  normalize:
+    dependency: "direct main"
+    description:
+      name: normalize
+      sha256: "8a60e37de5b608eeaf9b839273370c71ebba445e9f73b08eee7725e0d92dbc43"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.2+1"
   octo_image:
     dependency: transitive
     description:
@@ -1445,6 +1461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.2"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
 sdks:
   dart: ">=3.0.0-0 <3.2.0"
   flutter: ">=3.7.0"
