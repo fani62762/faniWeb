@@ -204,8 +204,8 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
         itemBuilder: (context, index) {
           Map<String, dynamic> type = alltype[index];
           List<Map<String, dynamic>> typeServices = allserv.where((service) {
-            final serviceType = service['type'];
-            final targetType = type['type'];
+            final serviceType = utf8.encode(service['type']).toString();
+            final targetType = utf8.encode(type['type']).toString();
             final areEqual = serviceType.trim() == targetType.trim();
             print('Service Type: $serviceType, Target Type: $targetType');
             print(serviceType == targetType);
