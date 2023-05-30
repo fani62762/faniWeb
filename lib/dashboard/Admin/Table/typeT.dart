@@ -96,7 +96,9 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
         title: Text('Service Management'),
       ),
       body: Container(
-        height: 600,
+        height: MediaQuery.of(context)
+            .size
+            .height, // Set a fixed height for the container
         child: Column(
           children: [
             Expanded(
