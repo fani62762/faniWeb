@@ -120,22 +120,23 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
       child: ListView.builder(
         itemCount: types.length,
         itemBuilder: (context, index) {
-          Type type = types[index];
-          List<Service> typeServices =
-              services.where((service) => service.typeId == type.id).toList();
+          Map<String, dynamic> type = alltype[index];
+          List<Map<String, dynamic>> typeServices = allserv
+              .where((service) => service['type'] == type['type'])
+              .toList();
 
           return Card(
             child: ExpansionTile(
-              title: Text(type.name),
+              title: Text(type['type']),
               children: [
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemCount: typeServices.length,
                   itemBuilder: (context, index) {
-                    Service service = typeServices[index];
+                    Map<String, dynamic> service = typeServices[index];
                     return ListTile(
-                      title: Text(service.name),
+                      title: Text(service['name']),
                       trailing: IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
