@@ -73,6 +73,19 @@ class maths extends StatefulWidget {
   _mathsState createState() => _mathsState();
 }
 class _mathsState extends State<maths> {
+    Future<void> ordservcount() async {
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        ordserv = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
   Future<void> getAllWorkers() async {
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/worker/'));
@@ -155,6 +168,7 @@ class _mathsState extends State<maths> {
     getgw();
     getgu();
       getorday();
+      ordservcount();
    
  
   }
