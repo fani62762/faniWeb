@@ -21,6 +21,8 @@ class Type {
   Type({required this.id, required this.name});
 }
 
+String globtype = "";
+
 class Service {
   String id;
   String name;
@@ -200,6 +202,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                   trailing: IconButton(
                     icon: Icon(Icons.add),
                     onPressed: () {
+                      globtype = type['type'];
                       // Open a dialog to add a new service
                       showDialog(
                         context: context,
@@ -237,7 +240,7 @@ class AddServiceDialog extends StatefulWidget {
 
 class _AddServiceDialogState extends State<AddServiceDialog> {
   String serviceName = '';
-  String selectedType = '';
+  String selectedType = globtype;
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +261,7 @@ class _AddServiceDialogState extends State<AddServiceDialog> {
           ),
           SizedBox(height: 16),
           DropdownButtonFormField<String>(
-            value: alltype[0]['type'],
+            value: globtype,
             onChanged: (value) {
               setState(() {
                 selectedType = value!;
