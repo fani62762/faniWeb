@@ -162,6 +162,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
                 },
               ),
             ),
+            SizedBox(height: 16),
             Padding(
               padding: EdgeInsets.all(16),
               child: TextField(
