@@ -115,11 +115,9 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Types and Services'),
-      ),
-      body: ListView.builder(
+    return Container(
+      height: 500,
+      child: ListView.builder(
         itemCount: types.length,
         itemBuilder: (context, index) {
           Type type = types[index];
