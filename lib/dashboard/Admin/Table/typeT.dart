@@ -1,5 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:faniweb/main.dart';
+
 import 'package:uuid/uuid.dart';
 import 'dart:convert';
 
@@ -203,6 +206,8 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
           List<Map<String, dynamic>> typeServices = allserv.where((service) {
             final serviceType = service['type'];
             final targetType = type['type'];
+            final areEqual =
+                Characters(serviceType).string == Characters(targetType).string;
             print('Service Type: $serviceType, Target Type: $targetType');
             print(serviceType == targetType);
             return serviceType == targetType;
