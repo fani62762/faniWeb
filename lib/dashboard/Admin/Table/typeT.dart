@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:faniweb/main.dart';
 
 class Service {
   String name;
@@ -19,6 +20,16 @@ class ServiceManagementScreen extends StatefulWidget {
       _ServiceManagementScreenState();
 }
 
+List<Map<String, dynamic>> servs = [];
+TextEditingController _searchController = TextEditingController();
+List<String> columnNames = [
+  'الخدمة ',
+  'نوع الخدمة',
+
+  // Add other column names as needed
+];
+String? chosenColumnName = columnNames.first;
+
 class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
   List<Type> types = [];
   List<Map<Type, List<Service>>> typeServices = [];
@@ -29,6 +40,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
   @override
   void initState() {
     super.initState();
+    servs = allserv;
     // Initial data
     types = [
       Type(name: 'Type 1'),
@@ -89,97 +101,160 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
     }
   }
 
+  void searchOrders(String? columnName, String query) {
+    String columnNameeng = "";
+    int stat;
+    if (columnName == columnNames[0]) {
+      columnNameeng = "name";
+    }
+    if (columnName == columnNames[1]) {
+      columnNameeng = "type";
+    }
+
+    setState(() {
+      servs = allserv.where((serv) {
+        // Replace 'columnName' with the actual property name of the chosen column
+        // in the 'order' object.
+        final value = serv[columnNameeng].toString();
+        return value.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
+
   // Rest of the code...
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color.fromARGB(255, 228, 228, 226),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: types.length,
-              itemBuilder: (context, index) {
-                final type = types[index];
-                final services = typeServices[index][type]!;
+      padding: EdgeInsets.all(20),
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          return Column(
+            children: [
+              DropdownButtonFormField<String>(
+                value: chosenColumnName,
+                decoration: InputDecoration(
+                  labelText: '  بحث على حسب',
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    chosenColumnName = value ?? '';
+                  });
+                },
+                items: columnNames.map((String columnName) {
+                  return DropdownMenuItem<String>(
+                    value: columnName,
+                    child: Center(child: Text(columnName)),
+                  );
+                }).toList(),
+              ),
+              TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'بحث',
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.clear),
+                    onPressed: () {
+                      setState(() {
+                        _searchController.clear();
+                      });
+                    },
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    // Call the search function with the chosen column name and search query
+                    searchOrders(chosenColumnName, value);
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columnSpacing: 12,
+                  dataRowHeight: 60,
+                  dividerThickness: 1,
+                  columns: [
+                    DataColumn(
+                      label: Text('اسم الخدمة'),
+                    ),
+                    DataColumn(label: _verticalDivider),
+                    // DataColumn(
+                    //   label: Text('اسم العامل'),
+                    //   numeric: true,
+                    // ),
+                    // DataColumn(label: _verticalDivider),
+                    // DataColumn(
+                    //   label: Text('حالة الطلب'),
+                    //   numeric: true,
+                    // ),
+                    // DataColumn(label: _verticalDivider),
+                    // DataColumn(
+                    //   label: Text('تفاصيل'),
+                    // ),
+                    // DataColumn(label: _verticalDivider),
+                  ],
+                  rows: servs.map((serv) {
+                    List<DataCell> cells = [
+                      DataCell(Text(serv['name'])),
+                      DataCell(_verticalDivider),
+                      // DataCell(Text(serv['Wname'])),
+                      // DataCell(_verticalDivider),
+                    ];
 
-                return Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(type.name),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () {
-                            deleteType(type);
-                          },
-                        ),
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: services.length,
-                        itemBuilder: (context, serviceIndex) {
-                          final service = services[serviceIndex];
-                          return ListTile(
-                            title: Text(service.name),
-                            trailing: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () {
-                                deleteService(service, type);
+                    List<Service> services =
+                        typeServices[serv['type']][serv['type']] ?? [];
+
+                    for (Service service in services) {
+                      cells.add(
+                        DataCell(
+                          Container(
+                            child: Checkbox(
+                              value: serv['services'].contains(service),
+                              onChanged: (value) {
+                                setState(() {
+                                  if (value == true) {
+                                    serv['services'].add(service);
+                                  } else {
+                                    serv['services'].remove(service);
+                                  }
+                                });
                               },
                             ),
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            addService(
-                              serviceNameController.text,
-                              type,
-                            );
-                            serviceNameController.clear();
-                          },
-                          child: Text('Add Service'),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 16),
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: TextField(
-              controller: typeNameController,
-              decoration: InputDecoration(
-                labelText: 'Type Name',
+                      );
+                      cells.add(DataCell(_verticalDivider));
+                    }
+
+                    // cells.addAll([
+                    //   DataCell(IconButton(
+                    //     icon: Icon(Icons.info_outline),
+                    //     onPressed: () {
+                    //       showOrderDetails(serv);
+                    //     },
+                    //   )),
+                    //   DataCell(_verticalDivider),
+                    // ]);
+
+                    return DataRow(cells: cells);
+                  }).toList(),
+                ),
               ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: () {
-                addType(typeNameController.text);
-                typeNameController.clear();
-              },
-              child: Text('Add Type'),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
+
+  Widget _verticalDivider = const VerticalDivider(
+    color: Colors.grey,
+    thickness: .5,
+  );
 }
