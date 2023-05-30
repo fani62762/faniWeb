@@ -25,7 +25,6 @@ class _ProfileState extends State<Profile> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-  
    Future<void> getAlluserss() async {
    
     final response =
@@ -41,27 +40,32 @@ class _ProfileState extends State<Profile> {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-   Future<void> ordservcount() async {
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/ord/getservord'));
+   
+  Future<void> getorday() async {
+    int x=0;
+    final response = await http
+        .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-     
+
       setState(() {
-         ordserv = List<Map<String, dynamic>>.from(jsonResponse);
-    
+        dayor = Map<String, int>.from(jsonResponse);
+        dayor?.forEach((key, value) {
+x+=value;
+couord=x;
+  });
       });
     } else {
-      print('Error fetching workers data: ${response.statusCode}');
+      print('Error fetching days data: ${response.statusCode}');
     }
   }
- 
+
    @override
   void initState() {
     super.initState();
     getAllWorkers();
        getAlluserss();
-       ordservcount();
+       getorday();
  
   }
   @override
@@ -113,9 +117,8 @@ class _ProfileState extends State<Profile> {
           Divider(thickness: 0.5, color: Colors.grey),
           employeeTasks(Icons.miscellaneous_services, "عددالخدمات", "10"),
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
-          employeeTasks(
-              Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",dayor?.length ?? 0),
+          employeeTasks(Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
+          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",couord),
         ],
       ),
     );

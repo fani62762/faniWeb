@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:faniweb/menu_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,13 @@ import 'package:provider/provider.dart';
 
 List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
+int couord=0;
+List<Map<String, dynamic>> allordw = [];
+List<Map<String, dynamic>> orders = [];
 List<Map<String, dynamic>> users = [];
 List<Map<String, dynamic>> allord = [];
 List<Map<String, dynamic>> alltype = [];
 List<Map<String, dynamic>> allserv = [];
-//List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> ordserv = [];
 
 var gwf = 0;
@@ -79,7 +81,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
   Future<void> getorday() async {
+    couord=0;
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
@@ -87,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         dayor = Map<String, int>.from(jsonResponse);
+        dayor?.forEach((key, value) {
+couord+=value;
+  });
       });
     } else {
       print('Error fetching days data: ${response.statusCode}');
@@ -190,40 +197,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // Future<void> getAllordw(String Wname) async {
-  //   final response = await http
-  //       .get(Uri.parse('https://fani-service.onrender.com/ord/12/$Wname'));
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = json.decode(response.body);
-
-  //     setState(() {
-  //       allordw = List<Map<String, dynamic>>.from(jsonResponse);
-  //     });
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //     print(allordw);
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //   } else {
-  //     print('Error fetching orders data: ${response.statusCode}');
-  //   }
-  // }
-
-  // Future<void> getuserord(String uname) async {
-  //   final response = await http
-  //       .get(Uri.parse('https://fani-service.onrender.com/ord/11/$uname'));
-  //   if (response.statusCode == 200) {
-  //     final jsonResponse = json.decode(response.body);
-
-  //     setState(() {
-  //       userord = List<Map<String, dynamic>>.from(jsonResponse);
-  //     });
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //     print(userord);
-  //     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //   } else {
-  //     print('Error fetching user orders data: ${response.statusCode}');
-  //   }
-  // }
-
   Future<void> getgu() async {
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/users/ugender'));
@@ -299,7 +272,6 @@ class _MyHomePageState extends State<MyHomePage> {
     getAllord();
     getAlltypes();
     getAlltypeserv();
-    //getAllordw() ;
   }
 
   @override
@@ -334,6 +306,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Image.asset(
+                    
                     "images/aa.png",
                   )),
               Row(
@@ -347,11 +320,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Colors.black)),
                 ],
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: Image.asset(
-                    "images/c.png",
-                  )),
+              Image.asset(
+                "images/c.png",
+              ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -363,11 +334,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Colors.black)),
                 ],
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0),
-                  child: Image.asset(
-                    "images/c.jpg",
-                  )),
+              Image.asset(
+                "images/c.jpg",
+              ),
             ],
           ),
         ),

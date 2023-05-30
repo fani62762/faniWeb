@@ -107,11 +107,7 @@ class _TableOfUserDataState extends State<TableOfUserData> {
                 DataColumn(
                   label: Text('الاعمال',style: TextStyle(fontFamily: 'Times New Roman')),
                 ),
-                DataColumn(label: _verticalDivider),
-                DataColumn(
-                  label: SizedBox(),
-                  numeric: true,
-                ),
+               
               }
             ],
             rows: filteredWorkers.map((user) {
@@ -156,11 +152,7 @@ class _TableOfUserDataState extends State<TableOfUserData> {
                         );
                       },
                     )),
-                    DataCell(_verticalDivider),
-                    DataCell(IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {},
-                    )),
+                    
                   }
                 ],
               );

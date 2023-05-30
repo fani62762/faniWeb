@@ -91,6 +91,7 @@ class _ForgetState extends State<Forget> {
         data = jsonDecode(responseW.body);
       }
       showDialog(
+        
         context: context,
         builder: (BuildContext context) {
           return Directionality(
@@ -110,6 +111,7 @@ class _ForgetState extends State<Forget> {
       );
     } else {
       AwesomeDialog(
+        width: 350,
         context: context,
         dialogType: DialogType.info,
         animType: AnimType.BOTTOMSLIDE,

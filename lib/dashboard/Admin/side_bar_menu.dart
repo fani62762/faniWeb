@@ -132,20 +132,7 @@ class _SideBarState extends State<SideBar> {
               SizedBox(
                 height: 35,
               ),
-              ListTile(
-                selected: i == 5,
-                leading: Icon(Icons.receipt),
-                title: Text(
-                  'الـتـقـاريـر',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      fontFamily: 'El Messiri'),
-                ),
-                onTap: () {
-                  _onItemTapped(5);
-                },
-              ),
+             
             ],
           ),
         ),

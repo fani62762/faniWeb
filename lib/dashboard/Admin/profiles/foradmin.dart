@@ -29,7 +29,7 @@ class _AdminPageState extends State<AdminPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (AppResponsive.isDesktop(context)) Expanded(child: SideBar()),
-              Expanded(flex: 4, child: Dashbord())
+              Expanded(flex: 5, child: Dashbord())
             ],
           ),
         ),
