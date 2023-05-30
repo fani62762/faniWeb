@@ -103,12 +103,12 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen> {
               borderRadius: BorderRadius.circular(10),
               color: Color.fromARGB(255, 228, 228, 226),
             ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
+            child: Expanded(
               child: Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
+                      shrinkWrap: true,
                       itemCount: types.length,
                       itemBuilder: (context, index) {
                         final type = types[index];
