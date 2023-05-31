@@ -156,7 +156,7 @@ Future<void> uploadImagemongo(String image, String type,String name)async {
         body: body,
       );
       if (response.statusCode == 200) {
-       await getAlltypes();
+       await getAlltypeserv();
        Fluttertoast.showToast(
                                           msg: "تم تحديث الصورة",
                                           toastLength: Toast.LENGTH_LONG,
@@ -185,49 +185,7 @@ Future<void> uploadImagemongo(String image, String type,String name)async {
       }
     }
 
-  // Future<void> uploadImagemongo(String image, String type,String serv) async {
-  //     final body = jsonEncode({
-  //       'name':serv,
-  //        'type':type,
-  //       'avatar':image
-      
-  //     });
-  //     print(image);
-  //      print(serv);
-  //     final response = await http.put(
-  //       Uri.parse('https://fani-service.onrender.com/serv/img/'),
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: body,
-  //     );
-  //     if (response.statusCode == 200) {
-  //         await getAlltypes();
-  //      Fluttertoast.showToast(
-  //                                         msg: "تم تحديث الصورة",
-  //                                         toastLength: Toast.LENGTH_LONG,
-  //                                         gravity: ToastGravity.BOTTOM,
-  //                                         timeInSecForIosWeb: 2,
-  //                                         backgroundColor: Colors.green,
-  //                                         textColor: Colors.white,
-  //                                         fontSize: 16.0);
-  //                                     setState(() {
-  //                                       Navigator.pop(context);
-  //                                         i = 2;
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //           builder: (context) => MultiProvider(
-  //             providers: [
-  //               ChangeNotifierProvider(create: (context) => MenuControllerr())
-  //             ],
-  //             child: AdminPage(),
-  //           ),
-  //         ),
-  //       );
-  //                                     });
-  //     } else {
-  //       print('Failed to update worker image');
-  //     }
-  //   }
+
 
 Future<void> uploadImage(String type, String serv) async {
   FileUploadInputElement input = FileUploadInputElement()
@@ -247,6 +205,70 @@ Future<void> uploadImage(String type, String serv) async {
       var snapshot = await fs.ref().child('servi/$filename').putBlob(file);
       String downloadUrl = await snapshot.ref.getDownloadURL();
       uploadImagemongo(downloadUrl, type, serv);
+    });
+  });
+}
+
+ Future<void> uploadImagemongotype(String image, String type)async {
+      final body = jsonEncode({
+        'avatar': image,
+      });
+      final response = await http.put(
+        Uri.parse('https://fani-service.onrender.com/type/1/$type'),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+      if (response.statusCode == 200) {
+       await getAlltypes();
+       Fluttertoast.showToast(
+                                          msg: "تمت تحديث الصورة  ",
+                                          toastLength: Toast.LENGTH_LONG,
+                                          gravity: ToastGravity.BOTTOM,
+                                          timeInSecForIosWeb: 2,
+                                          backgroundColor: Colors.green,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                      setState(() {
+                                        Navigator.pop(context);
+                                          i = 2;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (context) => MenuControllerr())
+              ],
+              child: AdminPage(),
+            ),
+          ),
+        );
+   
+                                      });
+      } else {
+        print('Failed to update worker image');
+      }
+    }
+
+
+
+Future<void> uploadImagetype(String type) async {
+  FileUploadInputElement input = FileUploadInputElement()
+    ..accept = 'image/*';
+  InputElement inputElement = input as InputElement;
+  FirebaseStorage fs = FirebaseStorage.instance;
+  inputElement.click();
+  inputElement.onChange.listen((event) {
+    final file = inputElement.files!.first;
+    final reader = FileReader();
+    reader.readAsDataUrl(file);
+    reader.onLoadEnd.listen((event) async {
+      // Generate a unique filename for each uploaded image
+      String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+          '_' +
+          file.name;
+      var snapshot = await fs.ref().child('type/$filename').putBlob(file);
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+      uploadImagemongotype(downloadUrl,type);
     });
   });
 }
@@ -312,20 +334,21 @@ Future<void> uploadImage(String type, String serv) async {
   service['avatar'],
   width: 80,
   height: 90,
-),
+  ),
             ),
             actions: <Widget>[
+             
               TextButton(
-                child: Text('Change Image'),
+                child: Text('إغلاق'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+               TextButton(
+                child: Text('تغير'),
                 onPressed: () {
                  uploadImage(service['type'],service['name']);
                  
-                },
-              ),
-              TextButton(
-                child: Text('Close'),
-                onPressed: () {
-                  Navigator.of(context).pop();
                 },
               ),
             ],
@@ -339,7 +362,11 @@ Future<void> uploadImage(String type, String serv) async {
             }),
             
           ),
-              RawMaterialButton(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+             
+                  RawMaterialButton(
         onPressed: () {
 showDialog(
   context: context,
@@ -352,33 +379,33 @@ showDialog(
           padding: const EdgeInsets.all(8.0),
           child: Form(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'اضافة خدمة جديدة',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        'اضافة خدمة جديدة',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                TextFormField(
-                  onChanged: (value) => sub = value,
-                  decoration: const InputDecoration(
-                    labelText: 'اسم الخدمة',
-                    icon: Icon(Icons.miscellaneous_services_sharp),
-                  ),
-                ),
+                    TextFormField(
+                      onChanged: (value) => sub = value,
+                      decoration: const InputDecoration(
+                        labelText: 'اسم الخدمة',
+                        icon: Icon(Icons.miscellaneous_services_sharp),
+                      ),
+                    ),
         SizedBox(height: 16),
             Row(
-              children:[
-                SizedBox(width:3 ,),
-               Text("النوع  : ") ,
-               SizedBox(width: 5,),
-              Text(  type['type']),
-              ]
-              
+                  children:[
+                    SizedBox(width:3 ,),
+                   Text("النوع  : ") ,
+                   SizedBox(width: 5,),
+                  Text(  type['type']),
+                  ]
+                  
             ),
         ],
             ),
@@ -387,40 +414,40 @@ showDialog(
         actions: [
           Center(
             child: Column(
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(dy), // Set the desired background color
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // Set the desired border radius
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(dy), // Set the desired background color
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10), // Set the desired border radius
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  child: Text("اضافة"),
-                  onPressed: () async {
+                      child: Text("اضافة"),
+                      onPressed: () async {
              
-                    if (sub== null) {
-                      AwesomeDialog(
-                        width: 350,
-                        context: context,
-                        dialogType: DialogType.info,
-                        animType: AnimType.BOTTOMSLIDE,
-                        desc: 'الرجاءادخال المعلومات ',
-                      ).show();
-                    }
-                     else {
-                      await createserv(
-                        sub,  type['type']
-                         );
-              
-                       
-                    }
+                        if (sub== null) {
+                          AwesomeDialog(
+                            width: 350,
+                            context: context,
+                            dialogType: DialogType.info,
+                            animType: AnimType.BOTTOMSLIDE,
+                            desc: 'الرجاءادخال المعلومات ',
+                          ).show();
+                        }
+                         else {
+                          await createserv(
+                            sub,  type['type']
+                             );
                   
-                  },
-                ),
-                SizedBox(height: 10), 
-                        ],
+                           
+                        }
+                      
+                      },
+                    ),
+                    SizedBox(height: 10), 
+                            ],
             ),
           ),
         ],
@@ -431,15 +458,58 @@ showDialog(
 
 },
 
-                elevation: 2.0,
-                fillColor: dy,
-                padding: EdgeInsets.all(10.0),
-                shape: CircleBorder(),
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 24.0,
-                ),
+                    elevation: 2.0,
+                    fillColor: dy,
+                    padding: EdgeInsets.all(10.0),
+                    shape: CircleBorder(),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                  ),
+                    IconButton(
+                    
+                    
+                    icon: Icon(Icons.image),
+    onPressed: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Container(
+              width: 200,
+              height: 200,
+             child: Image.network(
+  type['avatar'],
+  width: 80,
+  height: 90,
+),
+            ),
+            actions: <Widget>[
+             
+              TextButton(
+                child: Text('إغلاق'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+               TextButton(
+                child: Text('تغير'),
+                onPressed: () {
+                 uploadImagetype(type['type']);
+                 
+                },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  
+                  ),
+                    SizedBox(width: 15,),
+                ],
               ),
       SizedBox(height: 10,),
         ],
