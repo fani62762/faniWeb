@@ -8,41 +8,39 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
+String scount = "";
 
 class _ProfileState extends State<Profile> {
   Future<void> getAllWorkers() async {
-
     final response =
         await http.get(Uri.parse('https://fani-service.onrender.com/worker/'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-    
-       setState(() {
-          workers = List<Map<String, dynamic>>.from(jsonResponse);
-  
-  });
-    } else {
-      print('Error fetching workers data: ${response.statusCode}');
-    }
-  }
-   Future<void> getAlluserss() async {
-   
-    final response =
-        await http.get(Uri.parse('https://fani-service.onrender.com/users/'));
-    if (response.statusCode == 200) {
-      final jsonResponse = json.decode(response.body);
-     
-      setState(() { 
-        users = List<Map<String, dynamic>>.from(jsonResponse);
-       
+
+      setState(() {
+        workers = List<Map<String, dynamic>>.from(jsonResponse);
       });
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
-   
+
+  Future<void> getAlluserss() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/users/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        users = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+    } else {
+      print('Error fetching workers data: ${response.statusCode}');
+    }
+  }
+
   Future<void> getorday() async {
-    int x=0;
+    int x = 0;
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
@@ -51,23 +49,24 @@ class _ProfileState extends State<Profile> {
       setState(() {
         dayor = Map<String, int>.from(jsonResponse);
         dayor?.forEach((key, value) {
-x+=value;
-couord=x;
-  });
+          x += value;
+          couord = x;
+        });
       });
     } else {
       print('Error fetching days data: ${response.statusCode}');
     }
   }
 
-   @override
+  @override
   void initState() {
     super.initState();
     getAllWorkers();
-       getAlluserss();
-       getorday();
- 
+    getAlluserss();
+    getorday();
+    scount = typecount.toString() + "-" + servcount.toString();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -115,10 +114,11 @@ couord=x;
             ],
           ),
           Divider(thickness: 0.5, color: Colors.grey),
-          employeeTasks(Icons.miscellaneous_services, "عددالخدمات", "10"),
+          employeeTasks(Icons.miscellaneous_services, "عددالخدمات", scount),
           employeeTasks(Icons.people, "عددالعُمال", workers.length),
-          employeeTasks(Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
-          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات",couord),
+          employeeTasks(
+              Icons.supervised_user_circle_sharp, "عددالزبائن", users.length),
+          employeeTasks(Icons.list_alt_sharp, "عدد الطلبات", couord),
         ],
       ),
     );

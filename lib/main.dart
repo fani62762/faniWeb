@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 List<Map<String, dynamic>> workers = [];
 Map<String, int>? dayor;
 Map<String, int>? dayorw;
-int couord=0;
+int couord = 0;
 List<Map<String, dynamic>> allordw = [];
 List<Map<String, dynamic>> orders = [];
 List<Map<String, dynamic>> users = [];
@@ -28,6 +28,8 @@ var gwm = 0;
 var gum = 0;
 var Admin;
 var WorW;
+int servcount = 0;
+int typecount = 0;
 final List<String> servicesList = [];
 final List<bool> hmf = [];
 List<dynamic> types = [];
@@ -83,9 +85,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   Future<void> getorday() async {
-    couord=0;
+    couord = 0;
     final response = await http
         .get(Uri.parse('https://fani-service.onrender.com/ord/getday'));
     if (response.statusCode == 200) {
@@ -94,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         dayor = Map<String, int>.from(jsonResponse);
         dayor?.forEach((key, value) {
-couord+=value;
-  });
+          couord += value;
+        });
       });
     } else {
       print('Error fetching days data: ${response.statusCode}');
@@ -174,6 +175,7 @@ couord+=value;
       setState(() {
         alltype = List<Map<String, dynamic>>.from(jsonResponse);
       });
+      typecount = alltype.length;
       print("aaaaaaaaaaaaaaaaaaaaaaatttttttttttttttt");
       print(alltype);
       print("aaaaaaaaaaaaaaaaaaaaaaaaattttttttttt");
@@ -191,6 +193,7 @@ couord+=value;
       setState(() {
         allserv = List<Map<String, dynamic>>.from(jsonResponse);
       });
+      servcount = allserv.length;
       print("aaaaaaaaaaaaaaaaaaaaaaasssssssssss");
       print(allserv);
       print("aaaaaaaaaaaaaaaaaaaaaaaaatttttttttttssssssssss");
@@ -259,7 +262,7 @@ couord+=value;
       print('Error fetching workers data: ${response.statusCode}');
     }
   }
- 
+
   @override
   void initState() {
     super.initState();
@@ -308,7 +311,6 @@ couord+=value;
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0),
                   child: Image.asset(
-                    
                     "images/aa.png",
                   )),
               Row(
