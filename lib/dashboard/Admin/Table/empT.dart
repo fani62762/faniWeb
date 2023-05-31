@@ -312,7 +312,7 @@ Future<void> deleteWorker(String name) async {
                           CircleAvatar(
                             backgroundImage: NetworkImage(worker['image']),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(width: 5),
                           Text(worker['name']),
                         ],
                       ),

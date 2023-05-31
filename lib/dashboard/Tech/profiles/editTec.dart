@@ -632,24 +632,30 @@ Widget builimg() {
         print('Failed to update worker image');
       }
     }
-  Future<void> uploadImage() async {
-      FileUploadInputElement input = FileUploadInputElement()
-        ..accept = 'image/*';
-      InputElement inputElement = input as InputElement;
-      FirebaseStorage fs = FirebaseStorage.instance;
-      inputElement.click();
-      inputElement.onChange.listen((event) {
-        final file = inputElement.files!.first;
-        final reader = FileReader();
-        reader.readAsDataUrl(file);
-        reader.onLoadEnd.listen((event) async {
-          var snapshot =
-              await fs.ref().child('imagesprofiles/worker').putBlob(file);
-          String downloadUrl = await snapshot.ref.getDownloadURL();
-          uploadImagemongo(downloadUrl, WorW['name']);
-        });
-      });
-    }
+Future<void> uploadImage() async {
+  FileUploadInputElement input = FileUploadInputElement()
+    ..accept = 'image/*';
+  InputElement inputElement = input as InputElement;
+  FirebaseStorage fs = FirebaseStorage.instance;
+  inputElement.click();
+  inputElement.onChange.listen((event) {
+    final file = inputElement.files!.first;
+    final reader = FileReader();
+    reader.readAsDataUrl(file);
+    reader.onLoadEnd.listen((event) async {
+      // Generate a unique filename for each uploaded image
+      String filename = DateTime.now().millisecondsSinceEpoch.toString() +
+          '_' +
+          file.name;
+      var snapshot =
+          await fs.ref().child('imagesprofiles/worker/$filename').putBlob(file);
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+      uploadImagemongo(downloadUrl, WorW['name']);
+    });
+  });
+}
+
+ 
  Widget mob() {
       return Directionality(
       textDirection: TextDirection.rtl,

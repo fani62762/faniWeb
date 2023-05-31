@@ -1,21 +1,60 @@
-import 'package:faniweb/app_responsive.dart';
+import 'dart:convert';
 import 'package:faniweb/main.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-
-class TableOfServData extends StatefulWidget {
+class tableserv extends StatefulWidget {
   @override
-  _TableOfServDataState createState() => _TableOfServDataState();
+  _tableservState createState() => _tableservState();
 }
+var sub;
+var newtype;
 
-class _TableOfServDataState extends State<TableOfServData> {
-  @override
-  void initState() {
-    super.initState();
-    // print(workers);
+class _tableservState extends State<tableserv> {
+
+
+ 
+ 
+  Future<void> getAlltypes() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/type/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        alltype = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      typecount = alltype.length;
+    } else {
+      print('Error fetching types data: ${response.statusCode}');
+    }
   }
 
-  @override
+  Future<void> getAlltypeserv() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/serv/4/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        allserv = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      servcount = allserv.length;
+    } else {
+      print('Error fetching services data: ${response.statusCode}');
+    }
+  }
+
+ 
+   @override
+  void initState() {
+    super.initState();
+    getAlltypeserv() ;
+    getAlltypes();
+ 
+ 
+  }
+
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -23,93 +62,101 @@ class _TableOfServDataState extends State<TableOfServData> {
         borderRadius: BorderRadius.circular(20),
       ),
       padding: EdgeInsets.all(20),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          columnSpacing: 12,
-          dataRowHeight: 60,
-          dividerThickness: 1,
-          columns: [
-            DataColumn(
-              label: Text('الإسم'),
-            ),
-            DataColumn(label: _verticalDivider),
-            DataColumn(
-              label: Text('الإيميل'),
-              numeric: true,
-            ),
-            DataColumn(label: _verticalDivider),
-            DataColumn(
-              label: Text('الهاتف'),
-              numeric: true,
-            ),
-            DataColumn(label: _verticalDivider),
-            if (AppResponsive.isDesktop(context))
-              DataColumn(
-                label: Text('الجنس'),
-              ),
-            if (AppResponsive.isDesktop(context))
-              DataColumn(label: _verticalDivider),
-            DataColumn(
-              label: Text('الأعمال'),
-            ),
-            DataColumn(label: _verticalDivider),
-            //if (!AppResponsive.isMobile(context))
-            DataColumn(
-              label: SizedBox(),
-              numeric: true,
-            ),
-          ],
-          rows: workers.map((worker) {
-            return DataRow(
-              cells: [
-                if (AppResponsive.isDesktop(context))
-                  DataCell(
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(worker['image']),
-                        ),
-                        SizedBox(width: 10),
-                        Text(worker['name']),
-                      ],
-                    ),
-                  ),
-                if (!AppResponsive.isDesktop(context))
-                  DataCell(Text(worker['name'])),
-                DataCell(_verticalDivider),
+         child: Column(
+        children: [
+          Text("جميع الخدمات لدى تطبيق فني ",style: TextStyle(fontSize: 20),),
+          SizedBox(height: 10,),
+          Column(
+  children:
+  
+   List.generate(alltype.length, (index) {
+    Map<String, dynamic> type = alltype[index];
+    List<Map<String, dynamic>> typeServices = allserv.where((service) {
+      final serviceType = service['type'];
+      final targetType = type['type'];
+      final areEqual = targetType == serviceType;
 
-                DataCell(Text(worker['email'])),
-                DataCell(_verticalDivider),
+     return areEqual;
+    }).toList();
 
-                DataCell(Text(worker['phone'])),
-                DataCell(_verticalDivider),
-
-                if (AppResponsive.isDesktop(context))
-                  DataCell(Text(worker['gender'])),
-                if (AppResponsive.isDesktop(context))
-                  DataCell(_verticalDivider),
-
-                DataCell(IconButton(
-                  icon: Icon(Icons.info_outline),
-                  onPressed: () {},
-                )),
-                DataCell(_verticalDivider),
-                // if (!AppResponsive.isMobile(context))
-                DataCell(IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {},
-                )),
-              ],
-            );
-          }).toList(),
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: BorderSide(
+          color: Colors.black, // Set the desired border color
+          width: 1, // Set the desired border width
         ),
       ),
+      child: ExpansionTile(
+        title: Text(type['type']),
+        children: [
+          Column(
+            children: List.generate(typeServices.length, (index) {
+              Map<String, dynamic> service = typeServices[index];
+              return ListTile(
+                title: Text(service['name']),
+                trailing: IconButton(
+     icon: Icon(Icons.camera),
+    onPressed: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Container(
+              width: 200,
+              height: 200,
+             child: Image.network(
+  service['avatar'],
+  width: 80,
+  height: 90,
+),
+            ),
+            actions: <Widget>[
+              
+              TextButton(
+                child: Center(child: Text('Close')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  ),
+);
+
+            }),
+            
+          ),
+
+      SizedBox(height: 10,),
+        ],
+      ),
+      
     );
+  }),
+),
+
+
+
+
+
+
+
+
+          SizedBox(height: 10,),
+       
+       
+
+   
+  
+        ],
+      ),
+   );
   }
 
-  Widget _verticalDivider = const VerticalDivider(
-    color: Colors.grey,
-    thickness: .5,
-  );
+
 }

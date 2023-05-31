@@ -1,4 +1,5 @@
 import 'package:faniweb/app_responsive.dart';
+import 'package:faniweb/dashboard/Tech/Table/ServT.dart';
 import 'package:faniweb/dashboard/Tech/Table/calcu.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgsTA.dart';
 import 'package:faniweb/dashboard/Tech/msgs/viewmsgsTW.dart';
@@ -139,7 +140,7 @@ class _DashbordTState extends State<DashbordT> {
       case 1:
         return TableOfUserData();
       case 2:
-        return Text("خدمات");
+        return tableserv();
       case 3:
         return TableOfordDataw();
       case 4:

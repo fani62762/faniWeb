@@ -1,9 +1,6 @@
-2023/05/31-02:59:55.310 5760 Reusing MANIFEST C:\Users\shahd\AppData\Local\Temp\flutter_tools.3494f115\flutter_tools_chrome_device.f22f9f21\Default\File System\Origins/MANIFEST-000001
-2023/05/31-02:59:55.310 5760 Recovering log #3
-2023/05/31-02:59:55.310 5760 Level-0 table #3: started
-2023/05/31-02:59:55.315 5760 Level-0 table #3: 208 bytes OK
-2023/05/31-02:59:55.315 5760 Recovering log #6
-2023/05/31-02:59:55.315 5760 Reusing old log C:\Users\shahd\AppData\Local\Temp\flutter_tools.3494f115\flutter_tools_chrome_device.f22f9f21\Default\File System\Origins/000006.log 
-2023/05/31-02:59:55.319 5760 Delete type=0 #3
-2023/05/31-02:59:55.319 5760 Delete type=2 #4
-2023/05/31-02:59:55.319 5760 Delete type=2 #6
+2023/05/31-20:01:48.215 17dc Reusing MANIFEST C:\Users\shahd\AppData\Local\Temp\flutter_tools.305a82f4\flutter_tools_chrome_device.164bdd4b\Default\File System\Origins/MANIFEST-000001
+2023/05/31-20:01:48.216 17dc Recovering log #6
+2023/05/31-20:01:48.216 17dc Reusing old log C:\Users\shahd\AppData\Local\Temp\flutter_tools.305a82f4\flutter_tools_chrome_device.164bdd4b\Default\File System\Origins/000006.log 
+2023/05/31-20:01:48.216 17dc Delete type=0 #3
+2023/05/31-20:01:48.216 17dc Delete type=2 #4
+2023/05/31-20:01:48.216 17dc Delete type=2 #6

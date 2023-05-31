@@ -57,12 +57,44 @@ class _ProfileState extends State<Profile> {
       print('Error fetching days data: ${response.statusCode}');
     }
   }
+ Future<void> getAlltypes() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/type/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
 
+      setState(() {
+        alltype = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      typecount = alltype.length;
+    } else {
+      print('Error fetching types data: ${response.statusCode}');
+    }
+  }
+
+  Future<void> getAlltypeserv() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/serv/4/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
+
+      setState(() {
+        allserv = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+      servcount = allserv.length;
+    } else {
+      print('Error fetching services data: ${response.statusCode}');
+    }
+  }
+
+ 
   @override
   void initState() {
     super.initState();
     getAllWorkers();
     getAlluserss();
+        getAlltypeserv() ;
+    getAlltypes();
     getorday();
     scount = typecount.toString() + "-" + servcount.toString();
   }

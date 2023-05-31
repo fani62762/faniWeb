@@ -141,9 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         users = List<Map<String, dynamic>>.from(jsonResponse);
       });
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      print(allord);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+     
     } else {
       print('Error fetching workers data: ${response.statusCode}');
     }
@@ -158,9 +156,9 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         allord = List<Map<String, dynamic>>.from(jsonResponse);
       });
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-      print(allord);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      // print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      // print(allord);
+      // print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     } else {
       print('Error fetching orders data: ${response.statusCode}');
     }
@@ -176,9 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
         alltype = List<Map<String, dynamic>>.from(jsonResponse);
       });
       typecount = alltype.length;
-      print("aaaaaaaaaaaaaaaaaaaaaaatttttttttttttttt");
-      print(alltype);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaattttttttttt");
     } else {
       print('Error fetching types data: ${response.statusCode}');
     }
@@ -194,9 +189,6 @@ class _MyHomePageState extends State<MyHomePage> {
         allserv = List<Map<String, dynamic>>.from(jsonResponse);
       });
       servcount = allserv.length;
-      print("aaaaaaaaaaaaaaaaaaaaaaasssssssssss");
-      print(allserv);
-      print("aaaaaaaaaaaaaaaaaaaaaaaaatttttttttttssssssssss");
     } else {
       print('Error fetching services data: ${response.statusCode}');
     }
