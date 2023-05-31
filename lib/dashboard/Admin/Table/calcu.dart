@@ -12,12 +12,12 @@ import 'dart:convert';
     "المُستخدمين":  users.length as double,
   };
     Map<String, double> dataMap2 = {
-    " الذكور": gwf as double,
-    " الإاناث":  gwm as double,
+    " الذكور": gwm as double,
+    " الإاناث":  gwf as double,
   };
     Map<String, double> dataMap3= {
-    " الذكور": guf as double,
-    " الإاناث":  gum as double,
+    " الذكور": gum as double,
+    " الإاناث":  guf as double,
   };
 List<BarChartModel> data1 = [
   BarChartModel(

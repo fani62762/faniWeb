@@ -581,6 +581,7 @@ class _editTechState extends State<editTech> {
       emmCon = TextEditingController(text: WorW['email']);
       mobbC = TextEditingController(text: WorW['phone']);
       pssCon = TextEditingController(text: WorW['password']);
+      bioController = TextEditingController(text: WorW['bio']);
      gg= WorW['gender'];
       bio = WorW['bio'];
         addr = WorW['address'];
