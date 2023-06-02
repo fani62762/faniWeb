@@ -15,8 +15,9 @@ class editTech extends StatefulWidget {
   final String TechName;
   State<editTech> createState() => _editTechState();
 }
-var gg,dat;
-String bio = "";String pt = "";
+var gg;
+String dat=WorW['date'];
+String bio = WorW['bio'];String pt =WorW['phone'];
 List<dynamic> servwork = [];
 List<dynamic> selecServv = [];
 List<String> timeSelecc = [];
@@ -72,6 +73,7 @@ class _editTechState extends State<editTech> {
 }
   Future<void> updateWorker(String name, String password, String email,
       String gender, String phone, String date, String address) async {
+          print("*****updateWorker************");
     final body = jsonEncode({
       'password': password,
       'email': email,
@@ -87,6 +89,18 @@ class _editTechState extends State<editTech> {
       body: body,
     );
     if (response.statusCode == 200) {
+ Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MultiProvider(
+                            providers: [
+                              ChangeNotifierProvider(
+                                  create: (context) => MenuControllerr())
+                            ],
+                            child: editTech(TechName: WorW['name']),
+                          ),
+                        ),
+                      );
     } else {
       print('Failed to update worker');
     }
@@ -101,6 +115,19 @@ class _editTechState extends State<editTech> {
       body: body,
     );
     if (response.statusCode == 200) {
+
+       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MultiProvider(
+                            providers: [
+                              ChangeNotifierProvider(
+                                  create: (context) => MenuControllerr())
+                            ],
+                            child: editTech(TechName: WorW['name']),
+                          ),
+                        ),
+                      );
     } else {
       print('Failed to update worker bio');
     }
@@ -530,8 +557,11 @@ class _editTechState extends State<editTech> {
        ), 
       SizedBox(height: 15.0),
       ElevatedButton(
+        
         onPressed: () async {
+         
           await updateWorker(
+
             naaCon.text.toString(),
             pssCon.text.toString(),
             emmCon.text.toString(),
@@ -541,18 +571,7 @@ class _editTechState extends State<editTech> {
             dat as String,
             addrcon.text.toString(),
           );
-          Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider(
-                                  create: (context) => MenuControllerr())
-                            ],
-                            child: editTech(TechName: WorW['name']),
-                          ),
-                        ),
-                      );
+         
         },
         child: Text(
           'تعديل المعلومات الشخصية',
@@ -794,18 +813,7 @@ Future<void> uploadImage() async {
                       onPressed: () async {
                         await updateWorkerbio(
                             widget.TechName, bioController.text.toString());
-                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider(
-                                  create: (context) => MenuControllerr())
-                            ],
-                            child: editTech(TechName: WorW['name']),
-                          ),
-                        ),
-                      );
+                   
                       },
                       icon: Icon(
                         Icons.done_outlined,
@@ -999,7 +1007,9 @@ Future<void> uploadImage() async {
                                    ),
                                    IconButton(
                                      onPressed: () async {
+                                
                                        await updateWorkerbio(
+
                                            widget.TechName, bioController.text.toString());
                                       Navigator.push(
                                        context,

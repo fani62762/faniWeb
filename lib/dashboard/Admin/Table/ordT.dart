@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:faniweb/app_responsive.dart';
 import 'package:faniweb/main.dart';
 import 'package:flutter/material.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
+import 'package:http/http.dart' as http;
 class TableOfordData extends StatefulWidget {
   @override
   _TableOfordDataState createState() => _TableOfordDataState();
@@ -31,6 +34,7 @@ class _TableOfordDataState extends State<TableOfordData> {
   void initState() {
     super.initState();
     orders = allord;
+        getAllord();
     columnNames = columnNames.toSet().toList();
     // print(workers);
   }
@@ -224,7 +228,22 @@ class _TableOfordDataState extends State<TableOfordData> {
       }).toList();
     });
   }
+  Future<void> getAllord() async {
+    final response =
+        await http.get(Uri.parse('https://fani-service.onrender.com/ord/'));
+    if (response.statusCode == 200) {
+      final jsonResponse = json.decode(response.body);
 
+      setState(() {
+        allord = List<Map<String, dynamic>>.from(jsonResponse);
+      });
+     
+    } else {
+      print('Error fetching orders data: ${response.statusCode}');
+    }
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Container(

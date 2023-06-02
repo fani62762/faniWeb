@@ -439,7 +439,8 @@ class _editAdminState extends State<editAdmin> {
                               width: 3.0,
                             ),
                             image: DecorationImage(
-                              image: NetworkImage(Admin['image']),
+                            
+                              image: NetworkImage(xm),
                               fit: BoxFit.cover,
                             ),
                           ),
