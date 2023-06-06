@@ -271,16 +271,16 @@ class _ApState extends State<Ap> {
               if (!AppResponsive.isDesktop(context)) ...{
                 builinfo(),
                 SizedBox(height: 20),
-                builinfo(),
-                SizedBox(height: 20),
+                // builinfo(),
+                // SizedBox(height: 20),
                 builcon(),
                 SizedBox(height: 20),
               } else ...{
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // SizedBox(width: 15),
-                    builinfo(),
+                    // builinfo(),
                     builcon(),
                     builinfo(),
                     // SizedBox(width: 15),
