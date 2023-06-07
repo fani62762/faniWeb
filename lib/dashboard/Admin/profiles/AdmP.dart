@@ -279,8 +279,8 @@ class _ApState extends State<Ap> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // SizedBox(width: 15),
-                    // builinfo(),
+                 
+            
                     builcon(),
                     builinfo(),
                     // SizedBox(width: 15),
